@@ -2,16 +2,17 @@ import Image from 'next/image'
 
 export default function Home() {
   return (
-    <main className="w-[375] h-[815] bg-cyan-100">
-      home
-      <p className="text-[34] font-bold">Large Title</p>
-      <p className="text-[23] font-semibold">Medium Title</p>
-      <p className="text-[18] font-semibold">small Title</p>
-      <p className="text-[15] font-semibold">subtitle</p>
-      <p className="text-[16] font-bold">button bold</p>
-      <p className="text-[12] font-semibold">button semibold</p>
-      <p className="text-[13] font-medium">label medium</p>
-      <p className="text-[10] font-normal">label regular</p>
+    <main className="w-[375px] h-[815px] bg-cyan-100">
+      <p className="title-l">Large Title</p>
+      <p className="title-m">Medium Title</p>
+      <p className="title-s">small Title</p>
+      <p className="headline">headline</p>
+      <p className="btn-bold">button bold</p>
+      <p className="btn-semi">button semibold</p>
+      <p className="label-semi">label semibold</p>
+      <p className="label-m">label medium</p>
+      <p className="label-nomal">label regular</p>
+      <p className="paragraph">paragraph</p>
     </main>
   )
 }
