@@ -6,11 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "commit": "cz"
+    "lint": "next lint"
   },
   "dependencies": {
-    "@radix-ui/react-slot": "^1.0.2",
+    "@radix-zui/react-slot": "^1.0.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "dotenv": "^16.3.1",
@@ -31,8 +30,6 @@
     "@typescript-eslint/eslint-plugin": "^6.4.1",
     "@typescript-eslint/parser": "^6.4.1",
     "autoprefixer": "^10",
-    "commitizen": "^4.3.0",
-    "cz-customizable": "^7.0.0",
     "eslint": "^8",
     "eslint-config-next": "13.5.4",
     "eslint-config-prettier": "^9.0.0",
@@ -42,10 +39,5 @@
     "prettier": "^3.0.3",
     "tailwindcss": "^3",
     "typescript": "^5"
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-customizable"
-    }
   }
 }
