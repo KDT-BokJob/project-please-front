@@ -24,7 +24,6 @@ module.exports = {
       'base-bright-light':'#FFFFFF',
       'base-bright-dark':'#DDDDDD',
     },
-
     container: {
       center: true,
       padding: '2rem',
