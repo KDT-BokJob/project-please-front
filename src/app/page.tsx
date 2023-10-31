@@ -1,18 +1,53 @@
-import Image from 'next/image'
+import { Button } from '@/components/ui/button'
+import Logo from '#/please-logo.svg'
+import Country from '@/components/country'
 
-export default function Home() {
+const languageArr = [
+  {
+    language: '한국어',
+    country: 'korea',
+  },
+  {
+    language: 'English',
+    country: 'global',
+  },
+  {
+    language: 'にほんご',
+    country: 'japan',
+  },
+  {
+    language: 'Tiếng Việt',
+    country: 'vietnam',
+  },
+  {
+    language: '中國語',
+    country: 'china',
+  },
+  {
+    language: 'नेपाली',
+    country: 'nepal',
+  },
+]
+
+export default function Entry() {
   return (
-    <main className="w-[375px] h-[815px] bg-cyan-100">
-      <p className="title-l">Large Title</p>
-      <p className="title-m">Medium Title</p>
-      <p className="title-s">small Title</p>
-      <p className="headline">headline</p>
-      <p className="btn-bold">button bold</p>
-      <p className="btn-semi">button semibold</p>
-      <p className="label-semi">label semibold</p>
-      <p className="label-m">label medium</p>
-      <p className="label-nomal">label regular</p>
-      <p className="paragraph">paragraph</p>
+    <main className="w-[23.4375rem] h-screen px-6 py-6 flex flex-col justify-around m-auto">
+      <Logo />
+      <section>
+        <h2 className="font-semibold text-2xl text-center">Select Language</h2>
+        <div className="grid grid-cols-2 gap-4 mt-10">
+          {languageArr.map((data, index) => (
+            <Button
+              key={data.language}
+              className={`w-[9.4375rem] h-[5.6875rem] rounded-lg text-xl text-black font-semibold justify-evenly bg-[#f5f5f5] shadow-xl hover:bg-[#DDDDDD]`}
+            >
+              <Country country={data.country} />
+              {data.language}
+            </Button>
+          ))}
+        </div>
+      </section>
+      <Button className="w-full h-12 rounded-full font-bold text-base text-white bg-[#3CB371] shadow-md">Start</Button>
     </main>
   )
 }
