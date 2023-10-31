@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-
+import Logo from '#/please-logo.svg'
 const languageArr = [
   {
     language: '한국어',
@@ -24,9 +24,9 @@ const languageArr = [
 export default function Entry() {
   return (
     <main className="w-[23.4375rem] h-screen px-6 py-6 flex flex-col justify-around m-auto">
-      <h1>Please</h1>
+      <Logo />
       <section>
-        <h2 className="font-semibold text-xl">Select Language</h2>
+        <h2 className="font-semibold text-xl text-center">Select Language</h2>
         <div className="grid grid-cols-2 gap-4 mt-4">
           {languageArr.map((data, index) => (
             <Button
