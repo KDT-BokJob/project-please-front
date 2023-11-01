@@ -1,17 +1,30 @@
-import { Button } from '@/components/ui/button'
-import Image from 'next/image'
+'use client'
+import PleaseLeft from '#/please-left.svg'
+import PleaseRight from '#/please-right.svg'
+import White from '#/white-handshake.svg'
+import Please from '#/please.svg'
 
-export default function Home() {
+import { useState } from 'react'
+
+export default function Landig() {
+  let [loading, setLoading] = useState(false)
+  setTimeout(() => setLoading(true), 2500)
+
   return (
-    <main className="w-[375px] h-[815px] bg-cyan-100">
-      <Button label={'hello'} />
-      <Button variant="primary" label={'hello'} />
-      <Button variant="secondary" label={'secondary'} />
-      <Button variant="outline" label={'outline'} />
-      <Button size="box" label={'box'} />
-
-      <Button className="box-border" size="mini" variant="outline" label={'mini'} />
-      <Button size="md" label={'hello'} />
-    </main>
+    <div className="w-[23.4375rem] h-screen bg-[#44CD81] px-6 py-6  flex flex-col justify-around m-auto">
+      <div className="relative group">
+        {!loading ? (
+          <div>
+            <PleaseLeft className="delay-500 animate-[handshake-right_2s_ease-in-out] fill-mode-both" />
+            <PleaseRight className="!absolute delay-500 right-0 top-0 animate-[handshake-left_2s_ease-in-out] fill-mode-both" />
+          </div>
+        ) : (
+          <div className="flex items-center justify-center gap-4">
+            <White />
+            <Please className="animate-[fade-in_0.5s_ease-in-out]" />
+          </div>
+        )}
+      </div>
+    </div>
   )
 }

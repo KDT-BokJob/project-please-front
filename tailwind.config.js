@@ -3,8 +3,7 @@ const plugin = require('tailwindcss/plugin')
 module.exports = {
   darkMode: ['class'],
   content: ['./pages/**/*.{ts,tsx}', './components/**/*.{ts,tsx}', './app/**/*.{ts,tsx}', './src/**/*.{ts,tsx}'],
-  theme: {
-    
+  theme: {    
     container: {
       center: true,
       padding: '2rem',
@@ -44,6 +43,20 @@ module.exports = {
         'accordion-up': {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: 0 },
+        },
+        'handshake-right': {
+          '0%': { transform: 'translateX(0px)' },
+          '50%': { transform: 'translateX(8rem)' },
+          '100%': { transform: 'translateX(3.5rem)' },
+        },
+        'handshake-left': {
+          '0%': { transform: 'translateX(0px)' },
+          '50%': { transform: 'translateX(-8rem)' },
+          '100%': { transform: 'translateX(-12.4rem)' },
+        },
+        'fade-in': {
+          from: { opacity: 0 },
+          to: { opacity: 1 },
         },
       },
     
