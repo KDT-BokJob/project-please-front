@@ -9,12 +9,9 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          'bg-brand-primary-normal text-base-bright-light  hover:bg-brand-primary-light drop-shadow-md',
-        primary:
-          'bg-brand-primary-normal text-base-bright-light  hover:bg-brand-primary-light drop-shadow-md',
-        secondary:
-          'rounded-lg font-medium bg-brand-primary-normal text-base-bright-light hover:bg-brand-primary-light',
+        default: 'bg-brand-primary-normal text-base-bright-light  hover:bg-brand-primary-light drop-shadow-md',
+        primary: 'bg-brand-primary-normal text-base-bright-light  hover:bg-brand-primary-light drop-shadow-md',
+        secondary: 'rounded-lg font-medium bg-brand-primary-normal text-base-bright-light hover:bg-brand-primary-light',
         outline:
           'outline outline-brand-primary-normal font-medium rounded-lg text-[16px] font-semibold bg-base-bright-normal text-base-primary-normal  hover:bg-base-bright-light outline-brand-primary-light',
       },
@@ -24,7 +21,7 @@ const buttonVariants = cva(
         sm: 'h-12 px-6 py-2 ',
         md: 'h-12 px-12 py-2',
         lg: 'w-full h-12 px-6',
-        box:'h-20 rounded-lg  px-8'
+        box: 'h-20 rounded-lg  px-8',
       },
     },
     defaultVariants: {
@@ -37,18 +34,13 @@ const buttonVariants = cva(
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
-  label?: string
-  children?: React.ReactElement
+  asChild?: boolean
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, children, label, ...props }, ref) => {
-    return (
-      <button className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props}>
-        {children && children}
-        {label && label}
-      </button>
-    )
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : 'button'
+    return <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />
   },
 )
 Button.displayName = 'Button'
