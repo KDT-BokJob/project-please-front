@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import Logo from '#/please-logo.svg'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -9,5 +10,10 @@ export const metadata: Metadata = {
 }
 
 export default function SelectLayout({ children }: { children: React.ReactNode }) {
-  return <div className={inter.className}>{children}</div>
+  return (
+    <div className={`${inter.className} w-[23.4375rem] h-screen px-6 py-6 flex flex-col justify-around m-auto`}>
+      <Logo />
+      {children}
+    </div>
+  )
 }

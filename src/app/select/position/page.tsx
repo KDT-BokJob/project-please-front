@@ -1,33 +1,30 @@
 import { AiOutlineUser } from 'react-icons/ai'
 import { MdSupervisorAccount } from 'react-icons/md'
 import { BiChevronRight } from 'react-icons/bi'
+import { Button } from '@/components/ui/button'
 
 export default function SelectPositionPage() {
   return (
-    <section className="bg-white h-[100vh] w-[100vw] relative mx-auto">
-      <div
-        className={
-          'absolute flex flex-col w-full  max-w-[375px] items-center left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2'
-        }
-      >
-        <h1 className="mb-8 text-[23px] font-semibold leading-normal text-zinc-800">Select your position</h1>
-        <div className="flex flex-col justify-center w-full items-center bg-[#F9F9F9] rounded-[2.25rem] shadow-lg mb-36">
-          <button className="flex items-center justify-between w-full px-4 py-12">
+    <>
+      <section>
+        <h1 className="font-semibold text-2xl text-center">Select your position</h1>
+        <div className="flex flex-col justify-center w-full items-center rounded-[2.25rem] bg-[#F9F9F9] shadow-xl mt-10">
+          <button className="flex items-center justify-between w-full px-4 py-12 rounded-t-[2.25rem] hover:bg-[#DDDDDD]">
             <AiOutlineUser size={'3rem'} />
             <span className="text-zinc-800 text-[23px] font-medium">Employee</span>
             <BiChevronRight className={''} />
           </button>
           <div className="w-full border border-neutral-400" />
-          <button className="flex items-center justify-between w-full px-4 py-12">
+          <button className="flex items-center justify-between w-full px-4 py-12 rounded-b-[2.25rem] hover:bg-[#DDDDDD]">
             <MdSupervisorAccount size={'3rem'} />
             <span className="text-zinc-800 text-[23px] font-medium">Employer</span>
             <BiChevronRight className={''} />
           </button>
         </div>
-        <button className="flex items-center justify-center w-full h-12 gap-2 px-8 py-3 bg-green-500 rounded-3xl">
-          <span className="text-base font-bold leading-normal text-center text-white">Back</span>
-        </button>
-      </div>
-    </section>
+      </section>
+      <Button className="w-full h-12 rounded-full font-bold text-base text-base-bright-light bg-[#3CB371] shadow-md">
+        Back
+      </Button>
+    </>
   )
 }
