@@ -11,10 +11,11 @@ import { HiOutlineBookmark } from 'react-icons/hi'
 import { HiBookmark } from 'react-icons/hi'
 import { Button } from '@/components/ui/button'
 import Logo from '#/please-logo.svg'
+import SlickSlider from '@/components/slider'
 
 function JobCard({ recruit }: { recruit: any }) {
   return (
-    <div className="relative flex flex-col gap-1 min-w-[327px] bg-base-bright-nomal p-5 rounded-xl shadow-md mt-5">
+    <div className="relative flex flex-col gap-1 bg-base-bright-nomal p-5 rounded-xl shadow-md mt-5">
       <HiOutlineBookmark className="absolute top-0 right-3" color="#3CB371" size="18" />
       <span className="flex items-center justify-between">
         <h2 className="font-semibold">{recruit.title}</h2>
@@ -152,21 +153,25 @@ export default function JobsPage() {
             <h1 className="font-semibold text-lg text-brand-primary-light">Recently viewed</h1>
             <p className="font-semibold text-lg text-base-secondary-nomal">Book Marked</p>
           </span>
-          <div className="flex gap-2">
+          <SlickSlider total={jobData.length}>
             {jobData.map((recruit) => (
-              <JobCard key={recruit.recruit_id} recruit={recruit} />
+              <div className="py-2" key={recruit.recruit_id}>
+                <JobCard recruit={recruit} />
+              </div>
             ))}
-          </div>
+          </SlickSlider>
         </div>
         <div>
           <span className="flex justify-between">
             <h1 className="font-semibold text-lg text-brand-primary-light">E9 VISA Recommended Job</h1>
           </span>
-          <div className="flex gap-2">
+          <SlickSlider total={jobData.length}>
             {jobData.map((recruit) => (
-              <JobCard key={recruit.recruit_id} recruit={recruit} />
+              <div className="py-2" key={recruit.recruit_id}>
+                <JobCard recruit={recruit} />
+              </div>
             ))}
-          </div>
+          </SlickSlider>
         </div>
       </section>
     </>
