@@ -13,7 +13,7 @@ const buttonVariants = cva(
         primary: 'bg-brand-primary-normal text-base-bright-light  hover:bg-brand-primary-light drop-shadow-md',
         secondary: 'rounded-lg font-medium bg-brand-primary-normal text-base-bright-light hover:bg-brand-primary-light',
         outline:
-          'outline outline-brand-primary-normal font-medium rounded-lg text-[16px] font-semibold bg-base-bright-normal text-base-primary-normal  hover:bg-base-bright-light outline-brand-primary-light',
+          'outline outline-brand-primary-normal  rounded-lg text-[16px] font-semibold bg-base-bright-normal text-base-primary-normal  hover:bg-base-bright-light hover:outline-brand-primary-light',
       },
       size: {
         default: 'h-12 px-6 py-2',
