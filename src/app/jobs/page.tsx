@@ -1,3 +1,4 @@
+'use client'
 import { Input } from '@/components/ui/input'
 import { FiSearch } from 'react-icons/fi'
 import { AiOutlineIdcard } from 'react-icons/ai'
@@ -12,11 +13,16 @@ import { HiBookmark } from 'react-icons/hi'
 import { Button } from '@/components/ui/button'
 import Logo from '#/please-logo.svg'
 import SlickSlider from '@/components/slider'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 function JobCard({ recruit }: { recruit: any }) {
   return (
-    <div className="relative flex flex-col gap-1 bg-base-bright-nomal p-5 rounded-xl shadow-md mt-5">
-      <HiOutlineBookmark className="absolute top-0 right-3" color="#3CB371" size="18" />
+    <div className="relative flex flex-col gap-1 bg-base-bright-nomal p-5 rounded-xl shadow-md">
+      {recruit.bookmark ? (
+        <HiBookmark className="absolute top-0 right-3" color="#3CB371" size="20" />
+      ) : (
+        <HiOutlineBookmark className="absolute top-0 right-3" color="#3CB371" size="18" />
+      )}
       <span className="flex items-center justify-between">
         <h2 className="font-semibold">{recruit.title}</h2>
         <PiFactoryLight size="40" />
@@ -52,7 +58,7 @@ const jobData = [
     recruit_id: 1,
     company_id: 123,
     job_code: 'a123',
-    title: '공고명',
+    title: '공고명1',
     content: '세부 내용',
     create_at: '작성 날짜',
     expired_at: '마감일',
@@ -64,12 +70,13 @@ const jobData = [
     work_days_week: '주총근무일수',
     work_start_hour: '근무시작시간',
     work_end_hour: '근무종료시간',
+    bookmark: false,
   },
   {
     recruit_id: 2,
     company_id: 124,
     job_code: 'a1231',
-    title: '공고명',
+    title: '공고명2',
     content: '세부 내용',
     create_at: '작성 날짜',
     expired_at: '마감일',
@@ -81,12 +88,13 @@ const jobData = [
     work_days_week: '주총근무일수',
     work_start_hour: '근무시작시간',
     work_end_hour: '근무종료시간',
+    bookmark: true,
   },
   {
     recruit_id: 3,
     company_id: 125,
     job_code: 'a1232',
-    title: '공고명',
+    title: '공고명3',
     content: '세부 내용',
     create_at: '작성 날짜',
     expired_at: '마감일',
@@ -98,12 +106,13 @@ const jobData = [
     work_days_week: '주총근무일수',
     work_start_hour: '근무시작시간',
     work_end_hour: '근무종료시간',
+    bookmark: false,
   },
   {
     recruit_id: 4,
     company_id: 126,
     job_code: 'a12334',
-    title: '공고명',
+    title: '공고명4',
     content: '세부 내용',
     create_at: '작성 날짜',
     expired_at: '마감일',
@@ -115,6 +124,7 @@ const jobData = [
     work_days_week: '주총근무일수',
     work_start_hour: '근무시작시간',
     work_end_hour: '근무종료시간',
+    bookmark: true,
   },
 ]
 
@@ -147,20 +157,34 @@ export default function JobsPage() {
           Search
         </Button>
       </section>
+
       <section className="px-6 flex flex-col gap-4 overflow-x-hidden pb-14">
-        <div>
-          <span className="flex justify-between">
-            <h1 className="font-semibold text-lg text-brand-primary-light">Recently viewed</h1>
-            <p className="font-semibold text-lg text-base-secondary-nomal">Book Marked</p>
-          </span>
-          <SlickSlider total={jobData.length}>
-            {jobData.map((recruit) => (
-              <div className="py-2" key={recruit.recruit_id}>
-                <JobCard recruit={recruit} />
-              </div>
-            ))}
-          </SlickSlider>
-        </div>
+        <Tabs defaultValue="recentlyView" className="w-full">
+          <TabsList>
+            <TabsTrigger value="recentlyView">Recently viewed</TabsTrigger>
+            <TabsTrigger value="bookmark">Book Marked</TabsTrigger>
+          </TabsList>
+          <TabsContent value="recentlyView">
+            <SlickSlider total={jobData.length}>
+              {jobData.map((recruit) => (
+                <div className="py-2" key={recruit.recruit_id}>
+                  <JobCard recruit={recruit} />
+                </div>
+              ))}
+            </SlickSlider>
+          </TabsContent>
+          <TabsContent value="bookmark">
+            <SlickSlider total={jobData.filter((recruit) => recruit.bookmark).length}>
+              {jobData
+                .filter((recruit) => recruit.bookmark)
+                .map((recruit) => (
+                  <div className="py-2" key={recruit.recruit_id}>
+                    <JobCard recruit={recruit} />
+                  </div>
+                ))}
+            </SlickSlider>
+          </TabsContent>
+        </Tabs>
         <div>
           <span className="flex justify-between">
             <h1 className="font-semibold text-lg text-brand-primary-light">E9 VISA Recommended Job</h1>
