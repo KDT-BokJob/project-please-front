@@ -14,6 +14,8 @@ import { Button } from '@/components/ui/button'
 import Logo from '#/please-logo.svg'
 import SlickSlider from '@/components/slider'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import SelectModal from '@/app/jobs/select-modal'
+import { useRef, useState } from 'react'
 
 function JobCard({ recruit }: { recruit: any }) {
   return (
@@ -129,8 +131,16 @@ const jobData = [
 ]
 
 export default function JobsPage() {
+  const modalRef = useRef<HTMLDialogElement>(null)
+  const [modalTitle, setModalTitle] = useState<string>('')
+  const openModal = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    setModalTitle(e.currentTarget.textContent as string)
+    modalRef.current?.showModal()
+  }
   return (
     <>
+      <SelectModal ref={modalRef} title={modalTitle} />
       {/* search */}
       <Logo className="ml-6" />
       <section className="px-6 pb-8 shadow-[0_15px_15px_-15px_rgba(0,0,0,0.3)]">
@@ -142,12 +152,18 @@ export default function JobsPage() {
           <FiSearch color="gray" size="24" />
         </div>
         <div className="flex my-4">
-          <button className="flex items-center justify-between w-1/2 mr-2  px-4 py-2 rounded-md border border-brand-primary-light hover:bg-[#DDDDDD]">
+          <button
+            className="flex items-center justify-between w-1/2 mr-2  px-4 py-2 rounded-md border border-brand-primary-light hover:bg-[#DDDDDD]"
+            onClick={openModal}
+          >
             <AiOutlineIdcard size="18" />
             <span className="text-sm font-semibold">Visa</span>
             <IoIosArrowDown />
           </button>
-          <button className="flex items-center justify-between w-1/2 px-4 py-2 rounded-md border border-brand-primary-light hover:bg-[#DDDDDD]">
+          <button
+            className="flex items-center justify-between w-1/2 px-4 py-2 rounded-md border border-brand-primary-light hover:bg-[#DDDDDD]"
+            onClick={openModal}
+          >
             <SlLocationPin size="18" />
             <span className="text-sm font-semibold">Location</span>
             <IoIosArrowDown />
@@ -157,7 +173,6 @@ export default function JobsPage() {
           Search
         </Button>
       </section>
-
       <section className="px-6 flex flex-col gap-4 overflow-x-hidden pb-14">
         <Tabs defaultValue="recentlyView" className="w-full">
           <TabsList>
