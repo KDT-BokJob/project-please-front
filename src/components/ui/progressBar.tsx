@@ -15,7 +15,7 @@ function progressBar({previous, current}:ProgressBarProps) {
     return () => clearTimeout(timer)
   }, [])
   return (
-    <Progress.Root className="relative w-full h-2 overflow-hidden bg-opacity-50 rounded-sm bg-base-primary-light" value={progress}>
+    <Progress.Root className="fixed top-0 left-0 w-full h-2 overflow-hidden rounded-sm bg-base-secondary-light" value={progress}>
       <Progress.Indicator className="w-full h-full bg-brand-primary-light [transition:transform_660ms_cubic-bezier(0.65,_0,_0.35,_1)]" style={{ transform: `translateX(-${100 - progress}%)` }} />
     </Progress.Root>
   )
