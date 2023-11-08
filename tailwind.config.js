@@ -3,27 +3,7 @@ const plugin = require('tailwindcss/plugin')
 module.exports = {
   darkMode: ['class'],
   content: ['./pages/**/*.{ts,tsx}', './components/**/*.{ts,tsx}', './app/**/*.{ts,tsx}', './src/**/*.{ts,tsx}'],
-  theme: {
-    colors: {
-      'brand-primary-nomal': '#3CB371',
-      'brand-primary-light': '#44CD81',
-      'brand-primary-dark': '#2C8F58',
-      'brand-secondary-nomal': '#86C56C',
-      'brand-secondary-light': '#C2D471',
-      'brand-secondary-dark': '#3A4A3F',
-      'brand-point-nomal': '#E18A1F',
-      'brand-point-nomal': '#FAA339',
-      'brand-point-nomal': '#D27C12',
-      'base-primary-nomal': '#333232',
-      'base-primary-light': '#555555',
-      'base-primary-dark': '#000000',
-      'base-secondary-nomal': '#7C7C7C',
-      'base-secondary-light': '#ABABAB',
-      'base-secondary-dark': '#505050',
-      'base-bright-nomal': '#F9F9F9',
-      'base-bright-light': '#FFFFFF',
-      'base-bright-dark': '#DDDDDD',
-    },
+  theme: {    
     container: {
       center: true,
       padding: '2rem',
@@ -32,6 +12,29 @@ module.exports = {
       },
     },
     extend: {
+      colors: {
+        'brand-primary-normal': '#3CB371',
+        'brand-primary-light': '#44CD81',
+        'brand-primary-dark': '#2C8F58',
+        'brand-secondary-normal':'#86C56C',
+        'brand-secondary-light':'#C2D471',
+        'brand-secondary-dark':'#3A4A3F',
+        'brand-point-normal':'#E18A1F',
+        'brand-point-normal':'#FAA339',
+        'brand-point-normal':'#D27C12',
+        'base-primary-normal':'#333232',
+        'base-primary-light':'#555555',
+        'base-primary-dark':'#000000',
+        'base-secondary-normal':'#7C7C7C',
+        'base-secondary-light':'#ABABAB',
+        'base-secondary-dark':'#505050',
+        'base-bright-normal':'#F9F9F9',
+        'base-bright-light':'#FFFFFF',
+        'base-bright-dark':'#DDDDDD',
+      },
+      styles:{
+
+      },
       keyframes: {
         'accordion-down': {
           from: { height: 0 },
@@ -56,6 +59,7 @@ module.exports = {
           to: { opacity: 1 },
         },
       },
+    
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',

@@ -7,7 +7,7 @@ export default function SelectPositionPage() {
   return (
     <>
       <section>
-        <h1 className="font-semibold text-2xl text-center">Select your position</h1>
+        <h1 className="text-2xl font-semibold text-center">Select your position</h1>
         <div className="flex flex-col justify-center w-full items-center rounded-[2.25rem] bg-[#F9F9F9] shadow-xl mt-10">
           <button className="flex items-center justify-between w-full px-4 py-12 rounded-t-[2.25rem] hover:bg-[#DDDDDD]">
             <AiOutlineUser size={'3rem'} />
