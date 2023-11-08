@@ -84,8 +84,8 @@ const SelectModal = forwardRef<HTMLDialogElement, ModalProps>(({ title }, ref) =
             </div>
           </div>
           <div className="flex justify-evenly mt-2">
-            <Button className="border border-brand-primary-nomal font-semibold w-20 h-8">Reset</Button>
-            <Button className="bg-brand-primary-nomal text-base-bright-light font-bold w-52 h-8">Complete</Button>
+            <Button className="border border-brand-primary-normal font-semibold w-20 h-8">Reset</Button>
+            <Button className="bg-brand-primary-normal text-base-bright-light font-bold w-52 h-8">Complete</Button>
           </div>
         </div>
       </div>
