@@ -1,7 +1,6 @@
 'use client'
-import ProgressBar from '@/components/ui/progressBar'
 import * as RadioGroup from '@radix-ui/react-radio-group'
-import { useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 
 const questions = [
   'I would be quite bored by a visit to an art gallery.',
@@ -30,20 +29,34 @@ const answers = [
 ]
 
 function page() {
-  const [progressStatus, setProgressStatus] = useState([0, 0])
+  const [scrollPercentage, setScrollPercentage] = useState(0)
 
-  useEffect(()=>{
-    const handleScroll = ()=>{
-      const windowHeight= window.innerHeight;
-      const documentHeight= document.documentElement.scrollHeight;
+  useEffect(() => {
+    const handleScroll = () => {
+      const windowHeight = window.innerHeight
+      const documentHeight = document.documentElement.scrollHeight
+      const scrollY = window.scrollY
+
+      const scrollPercent = scrollY / (documentHeight - windowHeight)
+      console.log(scrollPercent)
+      setScrollPercentage(scrollPercent)
     }
-    window.addEventListener("scroll", handleScroll)
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
   })
+
+  const progressBarStyle = {
+    width: `${scrollPercentage * 100}%`, 
+  };
 
   return (
     <>
       <article>
-        <ProgressBar previous={progressStatus[0]} current={progressStatus[1]} />
+        <div className="fixed top-0 left-0 right-0 w-full h-2 overflow-hidden rounded-sm bg-base-secondary-light">
+          <div className="h-full bg-brand-primary-light [transition:transform_660ms_cubic-bezier(0.65,_0,_0.35,_1)]" style={progressBarStyle}></div>
+        </div>
         {questions.map((question, index) => {
           return (
             <div className="pb-8" key={index}>
@@ -57,7 +70,6 @@ function page() {
                       outline outline-base-secondary-light focus:[box-shadow:0_0_0_2px_black]
                       "
                         value={answer.label}
-                        onClick={progressHandler}
                       >
                         <RadioGroup.Indicator className="after:content-[''] after:block  rounded-full relative  w-[75%] h-[75%] bg-brand-primary-normal "></RadioGroup.Indicator>
                       </RadioGroup.Item>
