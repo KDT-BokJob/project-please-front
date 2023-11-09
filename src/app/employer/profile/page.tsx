@@ -1,4 +1,4 @@
-import Header from '@/app/employer/Header'
+import Header from '@/components/ui/Header'
 import React from 'react'
 import Image from 'next/image'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
