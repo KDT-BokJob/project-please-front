@@ -1,6 +1,10 @@
 import { SlArrowLeft } from 'react-icons/sl'
 
-export default function Header({ headline }) {
+type HeaderProps={
+  headline: string
+}
+
+export default function Header({ headline }: HeaderProps) {
   return (
     <>
       <header className="fixed top-0 z-50 bg-white w-[23.4375rem] py-2 pl-2  h-auto shadow-sm ">
