@@ -74,11 +74,11 @@ module.exports = {
         },
         '.title-m': {
           fontSize: '28px',
-          fontWeight: '600',
+          fontWeight: '700',
         },
         '.title-s': {
-          fontSize: '22px',
-          fontWeight: '600',
+          fontSize: '20px',
+          fontWeight: '700',
         },
         '.headline': {
           fontSize: '17px',
@@ -93,11 +93,11 @@ module.exports = {
           fontWeight: '600',
         },
         '.label-semi': {
-          fontSize: '15px',
+          fontSize: '16px',
           fontWeight: '600',
         },
         '.label-m': {
-          fontSize: '13px',
+          fontSize: '14px',
           fontWeight: '500',
         },
         '.label-normal': {

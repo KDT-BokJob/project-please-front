@@ -40,7 +40,7 @@ const SelectModal = forwardRef<HTMLDialogElement, ModalProps>(({ title }, ref) =
     <dialog ref={ref} onClick={closeModal} className="w-[20.5rem] h-3/5 py-4 rounded-3xl">
       <div className="h-full">
         <div className="flex flex-col justify-between w-full h-full rounded-t-3xl bg-base-bright-light">
-          <span className="flex justify-between mb-2 px-4">
+          <span className="flex justify-between px-4 mb-2">
             <h1 className="font-semibold text-base-secondary-dark">Select {title}</h1>
             <button
               onClick={() => {
@@ -57,7 +57,7 @@ const SelectModal = forwardRef<HTMLDialogElement, ModalProps>(({ title }, ref) =
               {visaType.map((type) => (
                 <Button
                   key={type.visa}
-                  variant={selectVisa === type.visa ? 'nav' : 'default'}
+                  variant={selectVisa === type.visa ? 'default' : 'outline'}
                   className={`border-b block border-base-bright-dark w-20 py-3 text-center`}
                   onClick={() => {
                     setSelectVisa(type.visa)
@@ -83,9 +83,9 @@ const SelectModal = forwardRef<HTMLDialogElement, ModalProps>(({ title }, ref) =
               )}
             </div>
           </div>
-          <div className="flex justify-evenly mt-2">
-            <Button className="border border-brand-primary-normal font-semibold w-20 h-8">Reset</Button>
-            <Button className="bg-brand-primary-normal text-base-bright-light font-bold w-52 h-8">Complete</Button>
+          <div className="flex mt-2 justify-evenly">
+            <Button className="w-20 h-8 font-semibold border border-brand-primary-normal">Reset</Button>
+            <Button className="h-8 font-bold bg-brand-primary-normal text-base-bright-light w-52">Complete</Button>
           </div>
         </div>
       </div>
