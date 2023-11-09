@@ -20,39 +20,39 @@ function page() {
   return (
     <>
       <Header headline={'기업 프로필'} />
-      <div className="pt-20 px-6 flex flex-col w-full">
+      <div className="flex flex-col w-full px-6 pt-20">
         <AspectRatio ratio={16 / 9}>
           <Image
             src={profileData.profile_image}
             alt={profileData.name}
             fill
-            className="rounded-md object-cover shadow-lg"
+            className="object-cover rounded-md shadow-lg"
           />
         </AspectRatio>
         <article className="mt-6 mb-12">
           <ul className="flex flex-col gap-5">
             <li className="flex flex-col ">
-              <p className="label-semi mb-1">기업명 *</p>
+              <p className="mb-1 label-semi">기업명 *</p>
               <p>{profileData.name}</p>
             </li>
             <li className="flex flex-col ">
-              <p className="label-semi mb-1">이메일 *</p>
+              <p className="mb-1 label-semi">이메일 *</p>
               <p>{profileData.email}</p>
             </li>
             <li className="flex flex-col">
-              <p className="label-semi mb-1">연락처 *</p>
+              <p className="mb-1 label-semi">연락처 *</p>
               <p>{profileData.phone}</p>
             </li>
             <li className="flex flex-col">
-              <p className="label-semi mb-1">주소 *</p>
+              <p className="mb-1 label-semi">주소 *</p>
               <p>{profileData.address}</p>
             </li>
             <li className="flex flex-col">
-              <p className="label-semi mb-1">인력/ 외국인력</p>
+              <p className="mb-1 label-semi">인력/ 외국인력</p>
               <p>{profileData.employee_count}/{profileData.foreign_employee_count}</p>
             </li>
             <li className="flex flex-col">
-              <p className="label-semi mb-1">업종 *</p>
+              <p className="mb-1 label-semi">업종 *</p>
               <p>{profileData.category}</p>
             </li>
           </ul>

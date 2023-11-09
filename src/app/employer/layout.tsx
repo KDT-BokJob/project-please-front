@@ -3,5 +3,5 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Employerlayout({ children }: { children: React.ReactNode }) {
-  return <div className={`${inter.className} bg-gray-200 w-[23.4375rem] h-screen m-auto`}>{children}</div>
+  return <div className={`${inter.className}  w-[23.4375rem] h-full m-auto`}>{children}</div>
 }
