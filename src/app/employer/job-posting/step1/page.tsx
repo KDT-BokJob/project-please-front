@@ -1,8 +1,12 @@
+'use client'
 import Header from '@/components/ui/Header'
 import { Input } from '@/components/ui/input'
 import { Label } from '@radix-ui/react-label'
-import React from 'react'
-
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import * as z from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { jobPostingFormSchema } from '@/lib/zod-schema/jop-posting'
 
 const profileData = {
   company_id: 1234,
@@ -17,31 +21,20 @@ const profileData = {
   profile_image: '/test_img/company_profile_img.png',
 }
 
+const formSchema = jobPostingFormSchema
 
 function page() {
-  return (
-    <>
-      <Header headline={'채용공고 등록'} />
-      <form className="flex flex-col gap-5 mb-12 mt-14">
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="title">공고제목 *</Label>
-          <Input id="title" type="text" />
-        </div>
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="name">업체명 *</Label>
-          <Input id="name" type="text" value={profileData.name} />
-        </div>
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-            <Label htmlFor="phone">연락처 *</Label>
-            <div className="flex items-center gap-2">
-              <Input id="phone" type="tel" />-
-              <Input id="phone" type="tel" />-
-              <Input id="phone" type="tel" />
-            </div>
-          </div>
-      </form>
-    </>
-  )
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      title:"",
+      name:{profileData.name},
+
+      username: "",
+    },
+  })
+  return <></>
 }
 
 export default page
