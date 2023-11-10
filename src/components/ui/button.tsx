@@ -14,14 +14,17 @@ const buttonVariants = cva(
         secondary: 'font-medium bg-brand-primary-normal text-base-bright-light hover:bg-brand-primary-light',
         outline:
           'outline outline-brand-primary-normal font-medium rounded-lg text-[16px] font-semibold bg-base-bright-normal text-base-primary-normal  hover:bg-base-bright-light outline-brand-primary-light',
+        profile: 'bg-base-secondary-dark',
       },
       size: {
         default: 'h-12 px-6 py-2',
         mini: 'h-6 px-4 text-[12px] font-medium ',
+        xs: 'h-6 rounded-full p-1',
         sm: 'h-12 px-6 py-2 ',
         md: 'h-12 px-12 py-2',
         lg: 'w-full h-12 px-6',
         box: 'h-20 rounded-lg  px-8',
+        icon: 'h-10 w-1',
       },
     },
     defaultVariants: {
