@@ -19,7 +19,7 @@ import { useRef, useState } from 'react'
 
 function JobCard({ recruit }: { recruit: any }) {
   return (
-    <div className="relative flex flex-col gap-1 bg-base-bright-nomal p-5 rounded-xl shadow-md">
+    <div className="relative flex flex-col gap-1 bg-base-bright-normal p-5 rounded-xl shadow-md">
       {recruit.bookmark ? (
         <HiBookmark className="absolute top-0 right-3" color="#3CB371" size="20" />
       ) : (
@@ -147,7 +147,7 @@ export default function JobsPage() {
         <div className="flex items-center bg-[#F1F1F1] px-4 rounded-lg">
           <Input
             placeholder="Search job titles or keywords"
-            className="border-none bg-[#F1F1F1] text-base-secondary-nomal outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
+            className="border-none bg-[#F1F1F1] text-base-secondary-normal outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
           />
           <FiSearch color="gray" size="24" />
         </div>

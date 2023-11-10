@@ -100,7 +100,7 @@ module.exports = {
           fontSize: '14px',
           fontWeight: '500',
         },
-        '.label-nomal': {
+        '.label-normal': {
           fontSize: '12px',
           fontWeight: '400',
         },

@@ -72,22 +72,22 @@ export default function JobsDetail() {
           <Detail type="Pay" value={`${jobData.salary.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}/month`} />
         </div>
         <div className="flex flex-col">
-          <h2 className="font-bold text-lg text-base-primary-nomal">Job Description</h2>
+          <h2 className="font-bold text-lg text-base-primary-normal">Job Description</h2>
           <p>{jobData.content}</p>
         </div>
         <span className="flex justify-center gap-2">
           {jobData.bookmark ? (
-            <Button className="w-full h-12 rounded-full font-bold text-base border border-brand-primary-nomal text-brand-primary-nomal bg-base-bright-light shadow-md">
+            <Button className="w-full h-12 rounded-full font-bold text-base border border-brand-primary-normal text-brand-primary-normal bg-base-bright-light shadow-md">
               <HiBookmark size="18" />
               Marked
             </Button>
           ) : (
-            <Button className="w-full h-12 rounded-full font-bold text-base border border-brand-primary-nomal text-brand-primary-nomal bg-base-bright-light shadow-md">
+            <Button className="w-full h-12 rounded-full font-bold text-base border border-brand-primary-normal text-brand-primary-normal bg-base-bright-light shadow-md">
               <HiOutlineBookmark size="18" />
               Mark
             </Button>
           )}
-          <Button className="w-full h-12 rounded-full font-bold text-base text-base-bright-light bg-brand-primary-nomal shadow-md">
+          <Button className="w-full h-12 rounded-full font-bold text-base text-base-bright-light bg-brand-primary-normal shadow-md">
             Apply
           </Button>
         </span>

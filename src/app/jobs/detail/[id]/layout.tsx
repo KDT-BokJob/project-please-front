@@ -13,7 +13,7 @@ export default function JobsLayout({ children }: { children: React.ReactNode }) 
   return (
     <div className={`${inter.className} w-[23.4375rem] py-6 flex flex-col justify-around m-auto`}>
       {children}
-      <Footer />
+      <Footer home />
     </div>
   )
 }
