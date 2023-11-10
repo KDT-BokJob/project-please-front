@@ -11,6 +11,8 @@ const buttonVariants = cva(
       variant: {
         default:
           'bg-slate-900 text-slate-50 hover:bg-slate-900/90 dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-50/90',
+        primary:
+          'bg-brand-primary-light text-base-bright-normal hover:text-base-bright-normal hover:bg-brand-primary-normal',
         destructive:
           'bg-red-500 text-slate-50 hover:bg-red-500/90 dark:bg-red-900 dark:text-slate-50 dark:hover:bg-red-900/90',
         outline:
@@ -21,9 +23,11 @@ const buttonVariants = cva(
         link: 'text-slate-900 underline-offset-4 hover:underline dark:text-slate-50',
         select: 'bg-brand-primary-nomal text-base-bright-light',
         nav: 'text-brand-primary-nomal',
+        profile: 'bg-base-secondary-dark',
       },
       size: {
         default: 'h-10 px-4 py-2',
+        xs: 'h-6 rounded-full p-1',
         sm: 'h-9 rounded-md px-3',
         lg: 'h-11 rounded-md px-8',
         icon: 'h-10 w-1',
