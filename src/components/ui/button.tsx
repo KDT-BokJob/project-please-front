@@ -13,8 +13,9 @@ const buttonVariants = cva(
         primary: 'bg-brand-primary-normal text-base-bright-light  hover:bg-brand-primary-light drop-shadow-md',
         secondary: 'font-medium bg-brand-primary-normal text-base-bright-light hover:bg-brand-primary-light',
         outline:
-          'outline outline-brand-primary-normal font-medium rounded-lg text-[16px] font-semibold bg-base-bright-normal text-base-primary-normal  hover:bg-base-bright-light outline-brand-primary-light',
+          'outline outline-brand-primary-normal font-medium rounded-lg text-[16px] font-semibold bg-base-bright-normal text-base-primary-normal  hover:bg-base-bright-light hover:outline-brand-primary-light',
         profile: 'bg-base-secondary-dark',
+        ghost: 'hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-50',
       },
       size: {
         default: 'h-12 px-6 py-2',
