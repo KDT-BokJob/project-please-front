@@ -59,4 +59,3 @@ export const resumeProfileFormSchema = z.object({
   address: addressSchema(),
   disability: disabilitySchema(),
 })
-
