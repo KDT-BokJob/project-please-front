@@ -7,7 +7,6 @@ import { jobPostingFormSchema } from '@/lib/zod-schema/jop-posting'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { IoTerminalSharp } from 'react-icons/io5'
 import { Checkbox } from '@/components/ui/checkbox'
 
 const profileData = {

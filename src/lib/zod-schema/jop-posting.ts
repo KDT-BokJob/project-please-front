@@ -19,6 +19,7 @@ const genderSchema = () => {
     }),
   )
 }
+
 export const jobPostingFormSchema = z.object({
   title: z.string().min(7).max(60),
   name: z.string().min(2).max(40),
@@ -26,4 +27,15 @@ export const jobPostingFormSchema = z.object({
   gender: genderSchema(),
   availableVisa: availableVisaSchema(),
   isVisaTransform: z.boolean({ required_error: '비자전환 가능 여부를 체크해주세요.' }),
+})
+
+export const jobPostingFormSchema2 = z.object({
+  prefered_nationality: z.string({ required_error: '희망하는 국적을 선택해주세요.' }),
+  count: z.number({ required_error: '모집인원 수를 작성해주세요.' }).nonnegative(),
+  salary_type: z.string({ required_error: '급여 종류를 선택해주세요.' }),
+  salary: z.number({ required_error: '급여를 입력해주세요.' }),
+  work_type: z.string({ required_error: '근무 형태를 선택해주세요.' }),
+  work_period: z.number({ required_error: '근무 기간을 입력해주세요.' }),
+  work_start_hour: z.string({ required_error: '근로 시작 시간을 선택해주세요.' }),
+  work_end_hour: z.string({ required_error: '근로 마감 시간을 선택해주세요.' }),
 })
