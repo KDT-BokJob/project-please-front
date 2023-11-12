@@ -109,7 +109,7 @@ export default function page() {
               <FormItem className="space-y-3">
                 <FormLabel>Gender *</FormLabel>
                 <FormControl>
-                  <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex flex gap-4">
+                  <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex gap-4">
                     <FormItem className="flex items-center space-x-3 space-y-0 ">
                       <FormControl>
                         <RadioGroupItem value="male" className="" />
@@ -146,7 +146,7 @@ export default function page() {
                         )}
                       >
                         {field.value ? format(field.value, 'yyyy.MM.dd') : <span>Pick a date</span>}
-                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50 " />
+                        <CalendarIcon className="w-4 h-4 ml-auto opacity-50 " />
                       </Button>
                     </FormControl>
                   </PopoverTrigger>
@@ -213,7 +213,7 @@ export default function page() {
               <FormItem className="space-y-3">
                 <FormLabel>Have a disability? *</FormLabel>
                 <FormControl>
-                  <RadioGroup onValueChange={field.onChange} className="flex flex gap-4">
+                  <RadioGroup onValueChange={field.onChange} className="flex gap-4">
                     <FormItem className="flex items-center space-x-3 space-y-0 ">
                       <FormControl>
                         <RadioGroupItem value="true" className="" />

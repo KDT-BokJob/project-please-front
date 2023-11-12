@@ -12,7 +12,7 @@ export default function Footer({ ...props }) {
         <GoHome size="18" color={props.home ? '#3CB371' : ''} />
         <p className={`text-xs ${props.home ? 'text-[#3CB371]' : ''}`}>Home</p>
       </Link>
-      <Link href={'/jobs/recommendation'} className="flex flex-col justify-center items-center">
+      <Link href={'/recommendation'} className="flex flex-col justify-center items-center">
         <FaRegCompass size="18" color={props.recommendation ? '#3CB371' : ''} />
         <p className={`text-xs ${props.recommendation ? 'text-[#3CB371]' : ''}`}>Recommendation</p>
       </Link>

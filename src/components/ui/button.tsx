@@ -11,9 +11,10 @@ const buttonVariants = cva(
       variant: {
         default: 'bg-brand-primary-normal text-base-bright-light  hover:bg-brand-primary-light drop-shadow-md',
         primary: 'bg-brand-primary-normal text-base-bright-light  hover:bg-brand-primary-light drop-shadow-md',
-        secondary: 'font-medium bg-brand-primary-normal text-base-bright-light hover:bg-brand-primary-light',
+        secondary:
+          'bg-base-bright-light text-base-primary-dark border border-brand-primary-normal hover:bg-brand-primary-light hover:text-base-bright-normal',
         outline:
-          'outline outline-brand-primary-normal font-medium rounded-lg text-[16px] font-semibold bg-base-bright-normal text-base-primary-normal  hover:bg-base-bright-light hover:outline-brand-primary-light',
+          'shadow-[inset_0_0_0_2px_#3CB371] font-medium rounded-lg text-[16px] font-semibold bg-base-bright-normal text-base-primary-normal  hover:bg-base-bright-light hover:outline-brand-primary-light',
         profile: 'bg-base-secondary-dark',
         ghost: 'hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-50',
       },
