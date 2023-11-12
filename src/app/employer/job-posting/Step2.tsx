@@ -1,6 +1,5 @@
 'use client'
 import { Button } from '@/components/ui/button'
-import React from 'react'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { useForm } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
@@ -9,11 +8,16 @@ import { jobPostingFormSchema2 } from '@/lib/zod-schema/jop-posting'
 import * as z from 'zod'
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from '@/components/ui/command'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { UpdownIcon } from '@/lib/icons'
+import { CalendarIcon, UpdownIcon } from '@/lib/icons'
 import { Check } from '@/lib/icons'
 import { cn } from '@/lib/utils'
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select'
 import { Checkbox } from '@/components/ui/checkbox'
+import { useState } from 'react'
+import { DateRange } from 'react-day-picker'
+import React from 'react'
+import { addDays, format, startOfDay } from 'date-fns'
+import { Calendar } from '@/components/ui/calendar'
 
 const generateTimeOptions = () => {
   const timeOptions = []
@@ -27,6 +31,16 @@ const generateTimeOptions = () => {
   }
   return timeOptions
 }
+
+const Weekdays = [
+  { id: 'mon', label: '월' },
+  { id: 'tue', label: '화' },
+  { id: 'wed', label: '수' },
+  { id: 'thu', label: '목' },
+  { id: 'fri', label: '금' },
+  { id: 'sat', label: '토' },
+  { id: 'sun', label: '일' },
+]
 const timeOptions = generateTimeOptions()
 const prefered_nationality = [
   { label: '해당없음', value: 'any' },
@@ -42,11 +56,20 @@ const prefered_nationality = [
   { label: 'Cambodia', value: 'KH' },
 ]
 const formSchema = jobPostingFormSchema2
+const today = startOfDay(new Date())
 
 function Step2() {
+  const [isRegularWorker, setIsRegularWorker] = useState(false)
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {},
+    defaultValues: {
+      work_period: {
+        from: today,
+        to: addDays(today, 7),
+      },
+      work_days: [],
+    },
   })
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
@@ -128,16 +151,22 @@ function Step2() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="font-semibold ">근무 형태 *</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <Select
+                  onValueChange={(value) => {
+                    field.onChange(value)
+                    setIsRegularWorker(value === 'regular_worker')
+                  }}
+                  defaultValue={field.value}
+                >
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="근무 형태" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="hour">정규직</SelectItem>
-                    <SelectItem value="week">계약직</SelectItem>
-                    <SelectItem value="month">파트타임</SelectItem>
+                    <SelectItem value="regular_worker">정규직</SelectItem>
+                    <SelectItem value="contract_worker">계약직</SelectItem>
+                    <SelectItem value="parttime_worker">파트타임</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />
@@ -188,7 +217,7 @@ function Step2() {
             </div>
           </div>
           <div className="flex flex-col">
-            <p className="mb-3 text-sm font-semibold">근무시간</p>
+            <p className="mb-3 text-sm font-semibold">근무 시간</p>
             <div className="flex items-center gap-3">
               <p className="text-sm font-semibold ">시작</p>
               <FormField
@@ -239,8 +268,119 @@ function Step2() {
                 )}
               />
             </div>
+            <FormField
+              control={form.control}
+              name="is_worktime_flexible"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-end gap-2">
+                  <FormControl>
+                    <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                  </FormControl>
+                  <div className="space-y-2 leading-none">
+                    <FormLabel>근무시간 협의 가능</FormLabel>
+                  </div>
+                </FormItem>
+              )}
+            />
+          </div>
+          <div>
+            <FormField
+              control={form.control}
+              name="work_period"
+              render={({ field }) => (
+                <FormItem className="flex flex-col">
+                  <FormLabel className="font-semibold">근무 기간</FormLabel>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button
+                          disabled={isRegularWorker}
+                          variant={'outline'}
+                          className={cn('w-full font-normal h-10', !field.value && 'text-muted-foreground')}
+                        >
+                          <CalendarIcon className="w-4 h-4 mr-2 opacity-50" />
+                          {field.value.from ? (
+                            field.value.to ? (
+                              <>
+                                {format(field.value.from, 'LLL dd y')} - {format(field.value.to, 'LLL dd, y')}
+                              </>
+                            ) : (
+                              format(field.value.from, 'LLL dd y')
+                            )
+                          ) : (
+                            <span>기간을 선택하세요</span>
+                          )}
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        mode="range"
+                        selected={field.value}
+                        onSelect={field.onChange}
+                        defaultMonth={field.value.from}
+                        numberOfMonths={1}
+                        disabled={(date) => date < new Date()}
+                      />
+                    </PopoverContent>
+                  </Popover>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="is_workperiod_flexible"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-end gap-2">
+                  <FormControl>
+                    <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                  </FormControl>
+                  <div className="space-y-2 leading-none">
+                    <FormLabel>근무기간 협의 가능</FormLabel>
+                  </div>
+                </FormItem>
+              )}
+            />
           </div>
 
+          <FormField
+            control={form.control}
+            name="work_days"
+            render={() => (
+              <FormItem>
+                <div className="mb-4">
+                  <FormLabel className="font-semibold ">근무 요일</FormLabel>
+                  <FormDescription>근무 요일을 선택해주세요.</FormDescription>
+                </div>
+                {Weekdays.map((item) => (
+                  <FormField
+                    key={item.id}
+                    control={form.control}
+                    name="work_days"
+                    render={({ field }) => {
+                      return (
+                        <FormItem key={item.id} className="flex flex-row items-start space-x-3 space-y-0">
+                          <FormControl>
+                            <Checkbox
+                              checked={field.value?.includes(item.id)}
+                              onCheckedChange={(checked) => {
+                                return checked
+                                  ? field.onChange([...field.value, item.id])
+                                  : field.onChange(field.value?.filter((value) => value !== item.id))
+                              }}
+                            />
+                          </FormControl>
+                          <FormLabel className="font-normal">{item.label}</FormLabel>
+                        </FormItem>
+                      )
+                    }}
+                  />
+                ))}
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <div className="flex justify-between">
             <Button className="w-2/6">이전</Button>
             <Button type="submit" className="w-3/5">
