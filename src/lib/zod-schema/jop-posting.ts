@@ -1,8 +1,8 @@
 import * as z from 'zod'
 
-const genderSchema = () => {
-  return z.string().refine((val) => val === 'male' || val === 'female' || val === 'none', {
-    message: '모집 성별을 선택해주세요.',
+const availableVisaSchema = () => {
+  return z.array(z.string()).refine((val) => val.some((availableVisa) => availableVisa), {
+    message: '지원가능 비자를 하나 이상 선택해주세요.',
   })
 }
 const phoneNumberSchema = () => {
@@ -12,10 +12,12 @@ const phoneNumberSchema = () => {
   })
 }
 
-const availableVisaSchema = () => {
-  return z.array(z.enum(['c4', 'e4', 'e7', 'f4'])).refine((val) => val.length > 0, {
-    message: '지원 가능 비자 유형을 하나 이상 선택해주세요.',
-  })
+const genderSchema = () => {
+  return z.array(
+    z.enum(['male', 'female', 'any'], {
+      required_error: '모집 성별을 선택해주세요.',
+    }),
+  )
 }
 export const jobPostingFormSchema = z.object({
   title: z.string().min(7).max(60),
