@@ -1,7 +1,7 @@
 import Header from '@/components/ui/Header'
 import JobCard from '@/components/job-card'
 import { Button } from '@/components/ui/button'
-import { BsPencil } from 'react-icons/bs'
+import { PencilIcon } from '@/lib/icons'
 
 const jobData = [
   {
@@ -88,7 +88,7 @@ export default function ApplicationPage() {
             <JobCard recruit={recruit}>
               <Button className="absolute right-1 bottom-5 rounded-full text-xs px-0 font-normal h-7 w-20 gap-1">
                 Review
-                <BsPencil />
+                <PencilIcon />
               </Button>
             </JobCard>
           </div>

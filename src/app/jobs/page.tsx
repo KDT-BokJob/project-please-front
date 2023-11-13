@@ -1,9 +1,6 @@
 'use client'
+import { SearchIcon, VisaIcon, LocationtIcon, ChevronDown } from '@/lib/icons'
 import { Input } from '@/components/ui/input'
-import { FiSearch } from 'react-icons/fi'
-import { AiOutlineIdcard } from 'react-icons/ai'
-import { SlLocationPin } from 'react-icons/sl'
-import { IoIosArrowDown } from 'react-icons/io'
 import { Button } from '@/components/ui/button'
 import Logo from '#/please-logo.svg'
 import SlickSlider from '@/components/slider'
@@ -106,24 +103,24 @@ export default function JobsPage() {
             placeholder="Search job titles or keywords"
             className="border-none bg-[#F1F1F1] text-base-secondary-normal outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
           />
-          <FiSearch color="gray" size="24" />
+          <SearchIcon color="gray" size="24" />
         </div>
         <div className="flex my-4">
           <button
             className="flex items-center justify-between w-1/2 mr-2  px-4 py-2 rounded-md border border-brand-primary-light hover:bg-[#DDDDDD]"
             onClick={openModal}
           >
-            <AiOutlineIdcard size="18" />
+            <VisaIcon size="18" />
             <span className="text-sm font-semibold">Visa</span>
-            <IoIosArrowDown />
+            <ChevronDown />
           </button>
           <button
             className="flex items-center justify-between w-1/2 px-4 py-2 rounded-md border border-brand-primary-light hover:bg-[#DDDDDD]"
             onClick={openModal}
           >
-            <SlLocationPin size="18" />
+            <LocationtIcon size="18" />
             <span className="text-sm font-semibold">Location</span>
-            <IoIosArrowDown />
+            <ChevronDown />
           </button>
         </div>
         <Button className="w-full h-10 rounded-full font-bold text-base text-base-bright-light bg-[#3CB371] shadow-md">
