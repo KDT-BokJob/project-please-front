@@ -41,6 +41,7 @@ const Weekdays = [
   { id: 'fri', label: '금' },
   { id: 'sat', label: '토' },
   { id: 'sun', label: '일' },
+  {id:'undecided', label:'미정'},
 ]
 const timeOptions = generateTimeOptions()
 const prefered_nationality = [

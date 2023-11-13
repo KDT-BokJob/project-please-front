@@ -19,3 +19,12 @@
 body {
   color: rgb(var(--foreground-rgb));
 }
+
+input[type='file']::file-selector-button {
+  width: 100px;
+  height: 23px;
+  background: #44CD81;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #fff;
+}

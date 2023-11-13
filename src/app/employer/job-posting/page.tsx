@@ -10,8 +10,7 @@ function page() {
     <>
       <Header headline={'채용공고 등록'} />
       <main className="mt-20">
-        <Step2 />
-        <CustomCheckbox>월</CustomCheckbox>
+        <Step3 />
       </main>
     </>
   )

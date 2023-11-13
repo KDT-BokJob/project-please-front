@@ -53,8 +53,6 @@ export const jobPostingFormSchema2 = z.object({
 })
 
 export const jobPostingFormSchema3 = z.object({
-  work_description: z
-    .string()
-    .min(10, { message: '최소 10자 이상 작성해주세요.' })
-    .max(1500, { message: '최대 1500자까지 작성가능합니다.' }),
+  work_description: z.string().max(1500, { message: '최대 1500자까지 작성가능합니다.' }),
+  work_description_file: z.any(),
 })

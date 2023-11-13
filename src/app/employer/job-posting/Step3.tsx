@@ -1,6 +1,5 @@
 'use client'
-import React, 
-{ useRef } from 'react'
+import React, { useRef } from 'react'
 import * as z from 'zod'
 import { jobPostingFormSchema3 } from '@/lib/zod-schema/jop-posting'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -8,6 +7,8 @@ import { useForm } from 'react-hook-form'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { cn } from '@/lib/utils'
 
 const formSchema = jobPostingFormSchema3
 
@@ -31,7 +32,9 @@ function Step3() {
               <FormItem>
                 <div className="flex items-center justify-between">
                   <FormLabel className="font-semibold">기업 상세정보</FormLabel>
-                  <p className="text-sm text-base-primary-normal">{textAreaRef? (textAreaRef.current?.value.length):('0')}/1,500</p>
+                  <p className="text-sm text-base-primary-normal">
+                    {textAreaRef ? textAreaRef.current?.value.length : '0'}/1,500
+                  </p>
                 </div>
                 <FormControl>
                   <Textarea
@@ -45,8 +48,27 @@ function Step3() {
               </FormItem>
             )}
           />
-          
-          <Button type="submit" size="lg">등록하기</Button>
+          <FormField
+            control={form.control}
+            name="work_description_file"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="font-semibold ">상세정보 파일</FormLabel>
+                <FormControl>
+                  <Input
+                    className={cn('hover:cursor-pointer hover:border hover:border-brand-primary-light')}
+                    type="file"
+                    {...field}
+                  />
+                </FormControl>
+                <FormDescription>상세공고에 보여줄 내용을 업로드해주세요.</FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button type="submit" size="lg">
+            등록하기
+          </Button>
         </form>
       </Form>
     </section>
