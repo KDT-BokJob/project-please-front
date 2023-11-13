@@ -54,3 +54,8 @@ body {
 .dots_custom li.slick-active button {
   background-color: #3cb371;
 }
+
+/* 스크롤바 제거 chrom, edge, safari */
+*::-webkit-scrollbar {
+  display: none;
+}
