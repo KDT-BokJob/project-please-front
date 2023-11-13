@@ -15,6 +15,7 @@ import { Calendar } from '@/components/ui/calendar'
 import { resumeProfileFormSchema } from '@/lib/zod-schema/resume/resume-profile'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Label } from '@/components/ui/label'
+import { Checkbox } from '@/components/ui/checkbox'
 
 const formSchema = resumeProfileFormSchema
 
@@ -45,7 +46,7 @@ export default function page() {
             <DefaultProfile className="text-brand-primary-normal" size={'125px'} />
             <FormField
               control={form.control}
-              name="lastname"
+              name="avatar"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
@@ -81,7 +82,7 @@ export default function page() {
               <FormItem>
                 <FormLabel>Last name *</FormLabel>
                 <FormControl>
-                  <Input placeholder="last name" {...field} />
+                  <Input type="text" placeholder="last name" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -211,22 +212,13 @@ export default function page() {
             name="disability"
             render={({ field }) => (
               <FormItem className="space-y-3">
-                <FormLabel>Have a disability? *</FormLabel>
                 <FormControl>
-                  <RadioGroup onValueChange={field.onChange} className="flex gap-4">
-                    <FormItem className="flex items-center space-x-3 space-y-0 ">
-                      <FormControl>
-                        <RadioGroupItem value="true" className="" />
-                      </FormControl>
-                      <FormLabel className="font-normal">Y</FormLabel>
-                    </FormItem>
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="false" />
-                      </FormControl>
-                      <FormLabel className="font-normal">N</FormLabel>
-                    </FormItem>
-                  </RadioGroup>
+                  <FormItem className="flex items-center space-x-3 space-y-0 ">
+                    <FormControl>
+                      <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                    </FormControl>
+                    <FormLabel>Have a disability? *</FormLabel>
+                  </FormItem>
                 </FormControl>
                 <FormMessage />
               </FormItem>

@@ -82,8 +82,8 @@ export default function page() {
           </div>
 
           <div className="flex flex-col gap-2 divide-y-2 divide-base-secondary-light">
-            {topikStatus.map((field) => (
-              <div className="flex justify-between pt-2">
+            {topikStatus.map((field, index: number) => (
+              <div key={`${field.label_name}_${index}`} className="flex justify-between pt-2">
                 <span>{field.label_name}</span>
                 <span>{field.value}</span>
               </div>

@@ -2,6 +2,7 @@ import * as z from 'zod'
 
 const topikBlockSchema = z
   .string()
+  .trim()
   .max(4, {
     message: '4-digit',
   })
@@ -13,7 +14,7 @@ const topikBlockSchema = z
   )
 
 const selfDiagnosis = () => {
-  return z.string()
+  return z.string().trim().min(1)
 }
 
 export const resumeKoreanSkillFormSchema = z
