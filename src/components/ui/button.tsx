@@ -16,6 +16,7 @@ const buttonVariants = cva(
         outline:
           'shadow-[inset_0_0_0_2px_#3CB371] font-medium rounded-lg text-[16px] font-semibold bg-base-bright-normal text-base-primary-normal  hover:bg-base-bright-light hover:outline-brand-primary-light',
         profile: 'bg-base-secondary-dark',
+        append: 'border-dotted border-2 border-brand-primary-normal text-brand-primary-normal',
         ghost: 'hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-50',
       },
       size: {

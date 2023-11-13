@@ -1,7 +1,7 @@
-import { BiChevronLeft } from 'react-icons/bi'
+import { BiChevronLeft, BiPlus } from 'react-icons/bi'
 import { IconType } from 'react-icons'
 import { VscAccount, VscCalendar } from 'react-icons/vsc'
-import { MdOutlineCameraAlt } from 'react-icons/md'
+import { MdDelete, MdOutlineCameraAlt } from 'react-icons/md'
 
 // 뒤로가기
 export const ChevronLeft: IconType = ({ ...props }) => {
@@ -19,7 +19,17 @@ export const Camera: IconType = ({ ...props }) => {
   return <MdOutlineCameraAlt {...props} />
 }
 
-//달력
+// 달력
 export const CalendarIcon: IconType = ({ ...props }) => {
   return <VscCalendar {...props} />
+}
+
+// 플러스
+export const PlusIcon: IconType = ({ ...props }) => {
+  return <BiPlus {...props} />
+}
+
+// 플러스
+export const DeleteIcon: IconType = ({ ...props }) => {
+  return <MdDelete {...props} />
 }

@@ -2,13 +2,14 @@
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { resumeWorkExperienceFormSchema } from '@/lib/zod-schema/resume/work-experience'
+import { normalizeBoolean } from '@/lib/utils'
+import { resumeWorkExperienceCheckFormSchema } from '@/lib/zod-schema/resume/work-experience'
 import { zodResolver } from '@hookform/resolvers/zod'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-const formSchema = resumeWorkExperienceFormSchema
+const formSchema = resumeWorkExperienceCheckFormSchema
 
 export default function page() {
   const form = useForm<z.infer<typeof formSchema>>({
@@ -16,6 +17,7 @@ export default function page() {
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(normalizeBoolean(values.isExperienced))
     console.log(values)
   }
   return (
@@ -33,12 +35,7 @@ export default function page() {
                   <RadioGroup onValueChange={field.onChange} className="flex flex-col gap-4">
                     <FormItem className="px-2 group flex items-center align-middle space-x-3 space-y-0 ring-2 ring-brand-primary-light rounded-md h-11 hover:bg-brand-primary-normal [&:has(input[checked])]:bg-brand-primary-normal ">
                       <FormControl>
-                        <RadioGroupItem
-                          value={'true'}
-                          className="text-base-bright-normal border-base-bright-normal"
-                          checked={field.value === 'true'}
-                          onChange={() => field.onChange(true)}
-                        />
+                        <RadioGroupItem value={'true'} className="text-base-bright-normal border-base-bright-normal" />
                       </FormControl>
                       <FormLabel className="label-m w-full h-full leading-[44px] group-hover:text-base-bright-normal group-[&:has(input[checked])]:text-base-bright-normal">
                         Yes, I do 💪🏻
@@ -46,12 +43,7 @@ export default function page() {
                     </FormItem>
                     <FormItem className="px-2 group flex items-center align-middle space-x-3 space-y-0 ring-2 ring-brand-primary-light rounded-md h-11 hover:bg-brand-primary-normal [&:has(input[checked])]:bg-brand-primary-normal ">
                       <FormControl>
-                        <RadioGroupItem
-                          value={'false'}
-                          className="text-base-bright-normal border-base-bright-normal"
-                          checked={field.value === 'false'}
-                          onChange={() => field.onChange(false)}
-                        />
+                        <RadioGroupItem value={'false'} className="text-base-bright-normal border-base-bright-normal" />
                       </FormControl>
                       <FormLabel className="label-m w-full h-full leading-[44px] group-hover:text-base-bright-normal group-[&:has(input[checked])]:text-base-bright-normal">
                         No, I’m a newcomer 😄
