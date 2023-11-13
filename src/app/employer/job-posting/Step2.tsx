@@ -8,7 +8,7 @@ import { jobPostingFormSchema2 } from '@/lib/zod-schema/jop-posting'
 import * as z from 'zod'
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from '@/components/ui/command'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { CalendarIcon, UpdownIcon } from '@/lib/icons'
+import { CalendarIcon, Search, UpdownIcon } from '@/lib/icons'
 import { Check } from '@/lib/icons'
 import { cn } from '@/lib/utils'
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select'
@@ -18,6 +18,7 @@ import { DateRange } from 'react-day-picker'
 import React from 'react'
 import { addDays, format, startOfDay } from 'date-fns'
 import { Calendar } from '@/components/ui/calendar'
+import { CustomCheckbox } from '@/app/employer/job-posting/CustomCheckbox'
 
 const generateTimeOptions = () => {
   const timeOptions = []
@@ -353,30 +354,48 @@ function Step2() {
                   <FormLabel className="font-semibold ">근무 요일</FormLabel>
                   <FormDescription>근무 요일을 선택해주세요.</FormDescription>
                 </div>
-                {Weekdays.map((item) => (
-                  <FormField
-                    key={item.id}
-                    control={form.control}
-                    name="work_days"
-                    render={({ field }) => {
-                      return (
-                        <FormItem key={item.id} className="flex flex-row items-start space-x-3 space-y-0">
-                          <FormControl>
-                            <Checkbox
-                              checked={field.value?.includes(item.id)}
-                              onCheckedChange={(checked) => {
-                                return checked
-                                  ? field.onChange([...field.value, item.id])
-                                  : field.onChange(field.value?.filter((value) => value !== item.id))
-                              }}
-                            />
-                          </FormControl>
-                          <FormLabel className="font-normal">{item.label}</FormLabel>
-                        </FormItem>
-                      )
-                    }}
-                  />
-                ))}
+                <div className="flex justify-center gap-1">
+                  {Weekdays.map((item) => (
+                    <FormField
+                      key={item.id}
+                      control={form.control}
+                      name="work_days"
+                      render={({ field }) => {
+                        return (
+                          <FormItem key={item.id} className="flex flex-row items-start space-x-3 space-y-0">
+                            <FormControl>
+                              <CustomCheckbox
+                                checked={field.value?.includes(item.id)}
+                                onCheckedChange={(checked) => {
+                                  return checked
+                                    ? field.onChange([...field.value, item.id])
+                                    : field.onChange(field.value?.filter((value) => value !== item.id))
+                                }}
+                              >
+                                {item.label}
+                              </CustomCheckbox>
+                            </FormControl>
+                          </FormItem>
+                        )
+                      }}
+                    />
+                  ))}
+                </div>
+
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="work_location"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="font-semibold ">근무 장소 *</FormLabel>
+                <FormControl>
+                  <Input placeholder="지번, 도로명, 건물명을 입력해주세요." {...field} />
+                </FormControl>
+
                 <FormMessage />
               </FormItem>
             )}

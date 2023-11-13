@@ -43,9 +43,18 @@ export const jobPostingFormSchema2 = z.object({
     from: z.date({ required_error: '시작일을 선택해주세요.' }),
     to: z.date({ required_error: '종료일을 선택해주세요.' }),
   }),
+
   work_days: availableWorkDaysSchema(),
   work_start_hour: z.string({ required_error: '근로 시작 시간을 선택해주세요.' }),
   work_end_hour: z.string({ required_error: '근로 마감 시간을 선택해주세요.' }),
   is_worktime_flexible: z.boolean(),
   is_workperiod_flexible: z.boolean(),
+  work_location: z.string({ required_error: '근무 장소를 입력해주세요.' }),
+})
+
+export const jobPostingFormSchema3 = z.object({
+  work_description: z
+    .string()
+    .min(10, { message: '최소 10자 이상 작성해주세요.' })
+    .max(1500, { message: '최대 1500자까지 작성가능합니다.' }),
 })

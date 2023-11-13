@@ -4,6 +4,7 @@ import { VscAccount, VscCalendar } from 'react-icons/vsc'
 import { MdOutlineCameraAlt } from 'react-icons/md'
 import { HiChevronUpDown } from 'react-icons/hi2'
 import { BiCheck } from 'react-icons/bi'
+import {BiSearch} from 'react-icons/bi'
 // 뒤로가기
 export const ChevronLeft: IconType = ({ ...props }) => {
   return <BiChevronLeft {...props} />
@@ -32,4 +33,8 @@ export const UpdownIcon: IconType = ({ ...props }) => {
 
 export const Check: IconType = ({ ...props }) => {
   return <BiCheck {...props} />
+}
+
+export const Search: IconType = ({ ...props }) => {
+  return <BiSearch {...props} />
 }
