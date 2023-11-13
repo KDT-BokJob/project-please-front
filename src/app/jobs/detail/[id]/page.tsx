@@ -1,11 +1,8 @@
-import { SlArrowLeft } from 'react-icons/sl'
 import Image from 'next/image'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Button } from '@/components/ui/button'
-import { HiOutlineBookmark } from 'react-icons/hi'
-import { HiBookmark } from 'react-icons/hi'
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTrigger } from '@/components/ui/dialog'
-import { BsCheckCircle } from 'react-icons/bs'
+import { ChevronLeft, CheckedBookmarkIcon, OutlineBookmarkIcon, CheckCircleIcon } from '@/lib/icons'
 
 const jobData = {
   recruit_id: 1,
@@ -39,7 +36,7 @@ export default function JobsDetail() {
   return (
     <>
       <div className="px-2 mb-2">
-        <SlArrowLeft size="20" />
+        <ChevronLeft size="2rem" />
       </div>
       <div className="w-full mb-4">
         <AspectRatio ratio={16 / 9}>
@@ -80,12 +77,12 @@ export default function JobsDetail() {
         <span className="flex justify-center gap-2">
           {jobData.bookmark ? (
             <Button className="w-full h-12 rounded-full font-bold text-base border border-brand-primary-normal text-brand-primary-normal bg-base-bright-light shadow-md">
-              <HiBookmark size="18" />
+              <CheckedBookmarkIcon size="18" />
               Marked
             </Button>
           ) : (
             <Button className="w-full h-12 rounded-full font-bold text-base border border-brand-primary-normal text-brand-primary-normal bg-base-bright-light shadow-md">
-              <HiOutlineBookmark size="18" />
+              <OutlineBookmarkIcon size="18" />
               Mark
             </Button>
           )}
@@ -99,7 +96,7 @@ export default function JobsDetail() {
             <DialogContent>
               <DialogHeader className="items-center">
                 <span className="w-14 h-14 flex justify-center items-center rounded-lg bg-[#F5F5F5]">
-                  <BsCheckCircle size="30" />
+                  <CheckCircleIcon size="30" />
                 </span>
               </DialogHeader>
               <p className="text-center text-xl font-semibold">Sure you want to appy without Resume?</p>
