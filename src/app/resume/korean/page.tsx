@@ -124,7 +124,7 @@ export default function page() {
       </Form>
       {/* Submit button */}
       <div className="flex justify-between gap-4 mt-auto">
-        <Button variant={'outline'} size={'lg'}>
+        <Button variant={'innerLine'} size={'lg'}>
           Back
         </Button>
         <Button type="submit" variant={'primary'} size={'lg'} onClick={form.handleSubmit(onSubmit)}>

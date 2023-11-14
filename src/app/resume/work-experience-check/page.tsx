@@ -2,7 +2,6 @@
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { normalizeBoolean } from '@/lib/utils'
 import { resumeWorkExperienceCheckFormSchema } from '@/lib/zod-schema/resume/work-experience'
 import { zodResolver } from '@hookform/resolvers/zod'
 import React from 'react'
@@ -17,7 +16,6 @@ export default function page() {
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(normalizeBoolean(values.isExperienced))
     console.log(values)
   }
   return (
@@ -58,16 +56,10 @@ export default function page() {
         </form>
       </Form>
       <div className="flex justify-between gap-4 mt-auto">
-        <Button
-          variant={'primary'}
-          size={'md'}
-          className={
-            'text-base-secondary-dark bg-base-bright-normal ring-2 ring-brand-primary-normal hover:text-base-bright-normal'
-          }
-        >
+        <Button variant={'innerLine'} size={'lg'}>
           Back
         </Button>
-        <Button type="submit" variant={'primary'} size={'md'} onClick={form.handleSubmit(onSubmit)}>
+        <Button type="submit" variant={'primary'} size={'lg'} onClick={form.handleSubmit(onSubmit)}>
           Next
         </Button>
       </div>

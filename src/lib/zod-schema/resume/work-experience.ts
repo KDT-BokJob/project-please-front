@@ -1,3 +1,4 @@
+import { format } from 'date-fns'
 import { z } from 'zod'
 
 const isExperienced = () => {
@@ -26,11 +27,11 @@ const entryDate = () => {
     .max(new Date(), { message: 'Please select a date other than today' })
     .refine(
       (value) => {
-        const regex = /^\d{4}\/\d{2}$/
-        return regex.test(value.toString())
+        const regex = /^\d{4}\/(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])$/
+        return regex.test(format(value, 'yyyy/MM/dd'))
       },
       {
-        message: 'Invalid date format. Please use "YYYY/MM".',
+        message: 'Invalid date format.',
       },
     )
 }
@@ -42,11 +43,11 @@ const leavingDate = () => {
     .max(new Date(), { message: 'Please select a date other than today' })
     .refine(
       (value) => {
-        const regex = /^\d{4}\/\d{2}$/
-        return regex.test(value.toString())
+        const regex = /^\d{4}\/(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])$/
+        return regex.test(format(value, 'yyyy/MM/dd'))
       },
       {
-        message: 'Invalid date format. Please use "YYYY/MM".',
+        message: 'Invalid date format.',
       },
     )
 }

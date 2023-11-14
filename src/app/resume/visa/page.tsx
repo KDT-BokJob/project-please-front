@@ -56,16 +56,10 @@ export default function page() {
           />
           {/* Submit button */}
           <div className="flex justify-between gap-4 mt-auto">
-            <Button
-              variant={'primary'}
-              size={'md'}
-              className={
-                'text-base-secondary-dark bg-base-bright-normal ring-2 ring-brand-primary-normal hover:text-base-bright-normal'
-              }
-            >
+            <Button variant={'innerLine'} size={'lg'}>
               Back
             </Button>
-            <Button type="submit" variant={'primary'} size={'md'}>
+            <Button type="submit" variant={'primary'} size={'lg'}>
               Next
             </Button>
           </div>

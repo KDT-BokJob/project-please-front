@@ -1,7 +1,7 @@
 import { BiChevronLeft, BiPlus } from 'react-icons/bi'
 import { IconType } from 'react-icons'
 import { VscAccount, VscCalendar } from 'react-icons/vsc'
-import { MdDelete, MdOutlineCameraAlt } from 'react-icons/md'
+import { MdDeleteForever, MdOutlineCameraAlt, MdOutlineClose } from 'react-icons/md'
 
 // 뒤로가기
 export const ChevronLeft: IconType = ({ ...props }) => {
@@ -29,7 +29,7 @@ export const PlusIcon: IconType = ({ ...props }) => {
   return <BiPlus {...props} />
 }
 
-// 플러스
-export const DeleteIcon: IconType = ({ ...props }) => {
-  return <MdDelete {...props} />
+// 클로즈 X
+export const CloseIcon: IconType = ({ ...props }) => {
+  return <MdOutlineClose {...props} />
 }
