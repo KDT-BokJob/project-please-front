@@ -1,9 +1,8 @@
-import { SlArrowLeft } from 'react-icons/sl'
 import Image from 'next/image'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Button } from '@/components/ui/button'
-import { HiOutlineBookmark } from 'react-icons/hi'
-import { HiBookmark } from 'react-icons/hi'
+import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTrigger } from '@/components/ui/dialog'
+import { ChevronLeft, CheckedBookmarkIcon, OutlineBookmarkIcon, CheckCircleIcon } from '@/lib/icons'
 
 const jobData = {
   recruit_id: 1,
@@ -37,7 +36,7 @@ export default function JobsDetail() {
   return (
     <>
       <div className="px-2 mb-2">
-        <SlArrowLeft size="20" />
+        <ChevronLeft size="2rem" />
       </div>
       <div className="w-full mb-4">
         <AspectRatio ratio={16 / 9}>
@@ -78,18 +77,44 @@ export default function JobsDetail() {
         <span className="flex justify-center gap-2">
           {jobData.bookmark ? (
             <Button className="w-full h-12 rounded-full font-bold text-base border border-brand-primary-normal text-brand-primary-normal bg-base-bright-light shadow-md">
-              <HiBookmark size="18" />
+              <CheckedBookmarkIcon size="18" />
               Marked
             </Button>
           ) : (
             <Button className="w-full h-12 rounded-full font-bold text-base border border-brand-primary-normal text-brand-primary-normal bg-base-bright-light shadow-md">
-              <HiOutlineBookmark size="18" />
+              <OutlineBookmarkIcon size="18" />
               Mark
             </Button>
           )}
-          <Button className="w-full h-12 rounded-full font-bold text-base text-base-bright-light bg-brand-primary-normal shadow-md">
-            Apply
-          </Button>
+          {/* Apply 버튼 클릭 시 모달 창 띄우기 (나중에 이력서 여부에 따라 변경하게 해야함) */}
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button className="w-full h-12 rounded-full font-bold text-base text-base-bright-light bg-brand-primary-normal shadow-md">
+                Apply
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader className="items-center">
+                <span className="w-14 h-14 flex justify-center items-center rounded-lg bg-[#F5F5F5]">
+                  <CheckCircleIcon size="30" />
+                </span>
+              </DialogHeader>
+              <p className="text-center text-xl font-semibold">Sure you want to appy without Resume?</p>
+              <p className="text-center text-xs">Writing resume makes your chances of passing higher</p>
+              <DialogFooter className="flex flex-row justify-center sm:justify-center gap-8">
+                <DialogClose asChild>
+                  <Button className=" h-12 rounded-lg font-bold text-base border border-brand-primary-normal text-brand-primary-normal bg-base-bright-light shadow-md">
+                    Go Edit
+                  </Button>
+                </DialogClose>
+                <DialogClose asChild>
+                  <Button className=" h-12 rounded-lg font-bold text-base text-base-bright-light bg-brand-primary-normal shadow-md">
+                    Yes, Confirm
+                  </Button>
+                </DialogClose>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </span>
       </div>
     </>
