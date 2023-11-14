@@ -6,6 +6,7 @@ import { DefaultProfile } from '@/lib/icons'
 import { Camera } from '@/lib/icons'
 import { cn } from '@/lib/utils'
 import { NextIcon } from '@/lib/icons'
+import EmployerFooter from '@/components/employer-footer'
 
 function page() {
   return (
@@ -27,11 +28,12 @@ function page() {
           <NextIcon className="ml-4" size={'30'} />
         </Card>
         <JobPostingManage className="mt-6" />
-        <div className="flex flex-col gap-2 px-6 py-4 font-medium bg-base-bright-normal text-base-primary-light">
+        <div className="flex flex-col gap-2 px-6 py-4 pb-6 mb-16 font-medium bg-base-bright-normal text-base-primary-light">
           <p>고객센터</p>
           <p>로그아웃</p>
         </div>
       </div>
+      <EmployerFooter profile/>
     </>
   )
 }
