@@ -36,7 +36,7 @@ const visas = [
 
 const formSchema = jobPostingFormSchema
 
-export default function Step1() {
+export default function Step1(props) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -47,6 +47,7 @@ export default function Step1() {
   })
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
+    props.setFormState(2)
   }
 
   return (
@@ -188,7 +189,9 @@ export default function Step1() {
               </FormItem>
             )}
           />
-          <Button type="submit" size="lg">다음</Button>
+          <Button type="submit" size="lg">
+            다음
+          </Button>
         </form>
       </Form>
     </section>

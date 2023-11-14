@@ -13,11 +13,9 @@ const phoneNumberSchema = () => {
 }
 
 const genderSchema = () => {
-  return z.array(
-    z.enum(['male', 'female', 'any'], {
-      required_error: '모집 성별을 선택해주세요.',
-    }),
-  )
+  return z.string({
+    required_error: '모집 성별을 선택해주세요.',
+  })
 }
 const availableWorkDaysSchema = () => {
   return z.array(z.string()).refine((val) => val.some((work_days) => work_days), {

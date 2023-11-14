@@ -18,7 +18,7 @@ import { DateRange } from 'react-day-picker'
 import React from 'react'
 import { addDays, format, startOfDay } from 'date-fns'
 import { Calendar } from '@/components/ui/calendar'
-import { CustomCheckbox } from '@/app/employer/job-posting/CustomCheckbox'
+import { CustomCheckbox } from '@/app/employer/job-posting/create/CustomCheckbox'
 
 const generateTimeOptions = () => {
   const timeOptions = []
@@ -41,7 +41,7 @@ const Weekdays = [
   { id: 'fri', label: '금' },
   { id: 'sat', label: '토' },
   { id: 'sun', label: '일' },
-  {id:'undecided', label:'미정'},
+  { id: 'undecided', label: '미정' },
 ]
 const timeOptions = generateTimeOptions()
 const prefered_nationality = [
@@ -402,7 +402,9 @@ function Step2() {
             )}
           />
           <div className="flex justify-between">
-            <Button className="w-2/6">이전</Button>
+            <Button variant={'outline'} className="w-2/6">
+              이전
+            </Button>
             <Button type="submit" className="w-3/5">
               다음
             </Button>

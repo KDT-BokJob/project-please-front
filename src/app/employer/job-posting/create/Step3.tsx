@@ -12,7 +12,7 @@ import { cn } from '@/lib/utils'
 
 const formSchema = jobPostingFormSchema3
 
-function Step3() {
+function Step3(props) {
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -66,7 +66,10 @@ function Step3() {
               </FormItem>
             )}
           />
-          <Button type="submit" size="lg">
+          <Button onClick={() => props.setFormStep(2)} variant={'outline'} className="w-2/6">
+            이전
+          </Button>
+          <Button className="w-3/5" type="submit" size="lg">
             등록하기
           </Button>
         </form>
