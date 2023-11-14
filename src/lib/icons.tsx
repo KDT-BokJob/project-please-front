@@ -4,7 +4,7 @@ import { VscAccount, VscCalendar } from 'react-icons/vsc'
 import { MdOutlineCameraAlt } from 'react-icons/md'
 import { HiChevronUpDown } from 'react-icons/hi2'
 import { BiCheck } from 'react-icons/bi'
-import {BiSearch} from 'react-icons/bi'
+import { BiSearch } from 'react-icons/bi'
 import { AiOutlineUser } from 'react-icons/ai'
 import { MdSupervisorAccount } from 'react-icons/md'
 import { BiChevronRight } from 'react-icons/bi'
@@ -27,6 +27,7 @@ import { RiFilePaper2Line } from 'react-icons/ri'
 import { FaRegCompass } from 'react-icons/fa'
 import { IoReload } from 'react-icons/io5'
 import { BsPencil } from 'react-icons/bs'
+import { FaPercentage } from 'react-icons/fa'
 
 // 뒤로가기
 export const ChevronLeft: IconType = ({ ...props }) => {
@@ -166,7 +167,12 @@ export const ReloadIcon: IconType = ({ ...props }) => {
   return <IoReload {...props} />
 }
 
-// 새로고침
+// 연필
 export const PencilIcon: IconType = ({ ...props }) => {
   return <BsPencil {...props} />
+}
+
+// 비율
+export const PercentIcon: IconType = ({ ...props }) => {
+  return <FaPercentage {...props} />
 }
