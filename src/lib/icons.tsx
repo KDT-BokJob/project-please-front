@@ -4,7 +4,7 @@ import { VscAccount, VscCalendar } from 'react-icons/vsc'
 import { MdOutlineCameraAlt } from 'react-icons/md'
 import { HiChevronUpDown } from 'react-icons/hi2'
 import { BiCheck } from 'react-icons/bi'
-import {BiSearch} from 'react-icons/bi'
+import { BiSearch } from 'react-icons/bi'
 import { AiOutlineUser } from 'react-icons/ai'
 import { MdSupervisorAccount } from 'react-icons/md'
 import { BiChevronRight } from 'react-icons/bi'
@@ -27,6 +27,8 @@ import { RiFilePaper2Line } from 'react-icons/ri'
 import { FaRegCompass } from 'react-icons/fa'
 import { IoReload } from 'react-icons/io5'
 import { BsPencil } from 'react-icons/bs'
+import { GrFormNext } from 'react-icons/gr'
+import { FaCircle } from "react-icons/fa";
 
 // 뒤로가기
 export const ChevronLeft: IconType = ({ ...props }) => {
@@ -169,4 +171,11 @@ export const ReloadIcon: IconType = ({ ...props }) => {
 // 새로고침
 export const PencilIcon: IconType = ({ ...props }) => {
   return <BsPencil {...props} />
+}
+
+export const NextIcon: IconType = ({ ...props }) => {
+  return <GrFormNext {...props} />
+}
+export const AlarmDot: IconType = ({ ...props }) => {
+  return <FaCircle {...props} />
 }
