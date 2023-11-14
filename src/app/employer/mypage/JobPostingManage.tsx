@@ -1,6 +1,5 @@
 import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardHeader, CardTitle } from '@/components/ui/card'
 import { NextIcon } from '@/lib/icons'
 import { AlarmDot } from '@/lib/icons'
 
@@ -9,9 +8,9 @@ const jobPosting = [
   { title: '복잡한코딩 프론트엔드 개발자 모집', deadline: 12 },
 ]
 const resumes = [
-  { title: '복잡한코딩 프론트엔드 개발자 모집', name: '웤어', age: '28', nation: 'korea' },
-  { title: '복잡한코딩 프론트엔드 개발자 모집', name: '먀', age: '28', nation: 'korea' },
-  { title: '복잡한코딩 프론트엔드 개발자 모집', name: '톤이', age: '24', nation: 'korea' },
+  { title: '복잡한코딩 프론트엔드 개발자 모집', name: '웤어', visa: 'E9', nation: 'korea' },
+  { title: '복잡한코딩 프론트엔드 개발자 모집', name: '먀', visa: 'E9', nation: 'korea' },
+  { title: '복잡한코딩 프론트엔드 개발자 모집', name: '톤이', visa: 'E9', nation: 'korea' },
 ]
 
 type CardProps = React.ComponentProps<typeof Card>
@@ -25,7 +24,7 @@ export function JobPostingManage({ className, ...props }: CardProps) {
           <NextIcon />
         </button>
       </CardHeader>
-      <div className="">
+      <div className="mb-4">
         <p className="mt-2 font-bold">진행중인 공고</p>
         {jobPosting.map((post) => {
           return (
@@ -37,15 +36,15 @@ export function JobPostingManage({ className, ...props }: CardProps) {
         })}
       </div>
       <div className="">
-        <p className="mt-2 font-bold">최근 신청된 이력서</p>
+        <p className="mt-2 font-bold">최근 신청자 이력서</p>
         {resumes.map((resume) => {
           return (
             <button className="flex flex-col w-full p-2 mt-2 border rounded-md ring-1 ring-offset-1 ring-white hover:ring-offset-brand-primary-light">
-              <AlarmDot className="absolute translate-x-[16.5rem] text-brand-point-light" size={"8"}/>
+              <AlarmDot className="absolute translate-x-[16.5rem] text-brand-point-light" size={'8'} />
               <p className="text-sm font-semibold text-base-primary-light">{resume.title}</p>
               <div className="flex">
                 <p className="text-sm font-semibold">{resume.name}/ </p>
-                <p className="ml-1 text-sm font-semibold">({resume.age}세)/</p>
+                <p className="ml-1 text-sm font-semibold">h{resume.visa}/</p>
                 <p className="ml-1 text-sm font-semibold">{resume.nation}</p>
               </div>
             </button>
