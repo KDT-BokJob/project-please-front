@@ -14,7 +14,7 @@ const buttonVariants = cva(
         secondary:
           'bg-base-bright-light text-base-primary-dark border border-brand-primary-normal hover:bg-brand-primary-light hover:text-base-bright-normal',
         outline:
-          'shadow-[inset_0_0_0_2px_#3CB371] font-medium rounded-lg text-[16px] font-semibold bg-base-bright-normal text-base-primary-normal  hover:bg-base-bright-light hover:outline-brand-primary-light',
+          'border border-brand-primary-normal font-medium rounded-lg text-[16px] font-semibold bg-base-bright-normal text-base-primary-normal  hover:bg-base-bright-light border-brand-primary-light',
         innerLine:
           'shadow-[inset_0_0_0_2px_#3CB371] font-medium rounded-lg text-[16px] font-semibold bg-base-bright-normal text-base-primary-normal  hover:bg-base-bright-light hover:outline-brand-primary-light',
         profile: 'bg-base-secondary-dark',

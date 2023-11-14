@@ -29,10 +29,6 @@ export default function page() {
     idx !== -1 && fieldArray.remove(idx)
   }
 
-  // certificateName: z.ZodString
-  // certificationAuthority: z.ZodString
-  // AcquisitionDate: z.ZodEffects < z.ZodDate, D
-
   const createWorkExperience = () => {
     fieldArray.append({
       certificateName: '',
