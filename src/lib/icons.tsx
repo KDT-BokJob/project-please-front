@@ -2,6 +2,9 @@ import { BiChevronLeft } from 'react-icons/bi'
 import { IconType } from 'react-icons'
 import { VscAccount, VscCalendar } from 'react-icons/vsc'
 import { MdOutlineCameraAlt } from 'react-icons/md'
+import { HiChevronUpDown } from 'react-icons/hi2'
+import { BiCheck } from 'react-icons/bi'
+import {BiSearch} from 'react-icons/bi'
 import { AiOutlineUser } from 'react-icons/ai'
 import { MdSupervisorAccount } from 'react-icons/md'
 import { BiChevronRight } from 'react-icons/bi'
@@ -61,6 +64,18 @@ export const CalendarIcon: IconType = ({ ...props }) => {
   return <VscCalendar {...props} />
 }
 
+//선택창 클릭아이콘
+export const UpdownIcon: IconType = ({ ...props }) => {
+  return <HiChevronUpDown {...props} />
+}
+
+export const Check: IconType = ({ ...props }) => {
+  return <BiCheck {...props} />
+}
+
+export const Search: IconType = ({ ...props }) => {
+  return <BiSearch {...props} />
+}
 // 구직자
 export const EmployeeIcon: IconType = ({ ...props }) => {
   return <AiOutlineUser {...props} />

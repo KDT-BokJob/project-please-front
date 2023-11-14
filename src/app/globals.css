@@ -20,7 +20,14 @@ body {
   color: rgb(var(--foreground-rgb));
 }
 
-/* slick dot custom */
+input[type='file']::file-selector-button {
+  width: 100px;
+  height: 23px;
+  background: #44cd81;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #fff;
+}
 .dots_custom {
   display: block;
   width: 100%;
