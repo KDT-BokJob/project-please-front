@@ -7,7 +7,6 @@ import { jobPostingFormSchema } from '@/lib/zod-schema/jop-posting'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { IoTerminalSharp } from 'react-icons/io5'
 import { Checkbox } from '@/components/ui/checkbox'
 
 const profileData = {
@@ -37,7 +36,7 @@ const visas = [
 
 const formSchema = jobPostingFormSchema
 
-export default function Step1() {
+export default function Step1(props) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -48,6 +47,7 @@ export default function Step1() {
   })
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
+    props.setFormState(2)
   }
 
   return (
@@ -189,7 +189,9 @@ export default function Step1() {
               </FormItem>
             )}
           />
-          <Button type="submit" size="lg">다음</Button>
+          <Button type="submit" size="lg">
+            다음
+          </Button>
         </form>
       </Form>
     </section>
