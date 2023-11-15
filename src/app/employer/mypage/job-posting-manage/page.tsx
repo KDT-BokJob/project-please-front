@@ -4,6 +4,8 @@ import { Button } from '@/components/ui/button'
 import { useState } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import JobPostingCard from '@/components/job-posting-card'
+import { CreateIcon } from '@/lib/icons'
+import Link from 'next/link'
 
 const recruits = [
   {
@@ -55,7 +57,9 @@ function page() {
         <hr />
         <div className="flex flex-col mt-3">
           <Button
-            className={`self-end mb-2 ${activateDeleteBtn ? 'bg-base-primary-normal hover:bg-base-secondary-normal' : ''} `}
+            className={`self-end mb-2 ${
+              activateDeleteBtn ? 'bg-base-primary-normal hover:bg-base-secondary-normal' : ''
+            } `}
             size={'mini'}
             onClick={() => setActivateDeleteBtn(!activateDeleteBtn)}
           >
@@ -71,6 +75,13 @@ function page() {
           <TabsContent value="closed"></TabsContent>
         </div>
       </Tabs>
+      <Link href="/employer/job-posting/create">
+        <CreateIcon
+          size={'50'}
+          className="hover:text-brand-primary-light w-[23.4375rem] fixed bottom-6 right-[26rem] text-brand-primary-normal"
+        />
+      </Link>
+
       <main className="mt-20"></main>
     </>
   )
