@@ -1,7 +1,7 @@
-import { BiChevronLeft } from 'react-icons/bi'
+import { BiChevronLeft, BiPlus } from 'react-icons/bi'
 import { IconType } from 'react-icons'
 import { VscAccount, VscCalendar } from 'react-icons/vsc'
-import { MdOutlineCameraAlt } from 'react-icons/md'
+import { MdOutlineCameraAlt, MdOutlineClose } from 'react-icons/md'
 import { HiChevronUpDown } from 'react-icons/hi2'
 import { BiCheck } from 'react-icons/bi'
 import { BiSearch } from 'react-icons/bi'
@@ -30,6 +30,8 @@ import { BsPencil } from 'react-icons/bs'
 import { GrFormNext } from 'react-icons/gr'
 import { FaCircle } from 'react-icons/fa'
 import { HiMiniXMark } from 'react-icons/hi2'
+import { FaPercentage } from 'react-icons/fa'
+
 // 뒤로가기
 export const ChevronLeft: IconType = ({ ...props }) => {
   return <BiChevronLeft {...props} />
@@ -64,6 +66,16 @@ export const Camera: IconType = ({ ...props }) => {
 // 달력
 export const CalendarIcon: IconType = ({ ...props }) => {
   return <VscCalendar {...props} />
+}
+
+// 플러스
+export const PlusIcon: IconType = ({ ...props }) => {
+  return <BiPlus {...props} />
+}
+
+// 클로즈 X
+export const CloseIcon: IconType = ({ ...props }) => {
+  return <MdOutlineClose {...props} />
 }
 
 //선택창 클릭아이콘
@@ -168,10 +180,11 @@ export const ReloadIcon: IconType = ({ ...props }) => {
   return <IoReload {...props} />
 }
 
-// 새로고침
+// 연필
 export const PencilIcon: IconType = ({ ...props }) => {
   return <BsPencil {...props} />
 }
+<<<<<<< HEAD
 //다음버튼
 export const NextIcon: IconType = ({ ...props }) => {
   return <GrFormNext {...props} />
@@ -183,4 +196,10 @@ export const AlarmDot: IconType = ({ ...props }) => {
 //x버튼
 export const Xmark: IconType = ({ ...props }) => {
   return <HiMiniXMark {...props} />
+=======
+
+// 비율
+export const PercentIcon: IconType = ({ ...props }) => {
+  return <FaPercentage {...props} />
+>>>>>>> e2eef6dc0995abc1d8e6bbe8ce819ee525048273
 }
