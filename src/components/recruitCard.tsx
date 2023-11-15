@@ -21,8 +21,10 @@ function RecruitCard({ recruit }: { recruit: any }) {
             ({recruit.gender},{getAge(recruit.birth)})
           </p>
         </div>
-        <div className="flex gap-2 mt-1 text-sm">
-          <p>{recruit.nationality}</p>
+        <div className="flex items-center mt-1 text-sm">
+          <p className="mr-1 px-[0.5rem] py-[0.1rem] text-xs border-2 rounded-full border-brand-primary-normal">국적</p>
+          <p className="">{recruit.nationality}</p>
+          <p className="mr-1 ml-2 px-[0.5rem] py-[0.1rem] text-xs border-2 rounded-full border-brand-primary-normal">비자</p>
           <p> {recruit.visa_type}</p>
         </div>
       </div>
