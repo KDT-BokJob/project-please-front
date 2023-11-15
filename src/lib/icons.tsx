@@ -196,6 +196,7 @@ export const AlarmDot: IconType = ({ ...props }) => {
 export const Xmark: IconType = ({ ...props }) => {
   return <HiMiniXMark {...props} />
 }
+
 // 비율
 export const PercentIcon: IconType = ({ ...props }) => {
   return <FaPercentage {...props} />
