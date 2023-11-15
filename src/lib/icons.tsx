@@ -184,7 +184,6 @@ export const ReloadIcon: IconType = ({ ...props }) => {
 export const PencilIcon: IconType = ({ ...props }) => {
   return <BsPencil {...props} />
 }
-<<<<<<< HEAD
 //다음버튼
 export const NextIcon: IconType = ({ ...props }) => {
   return <GrFormNext {...props} />
@@ -196,10 +195,8 @@ export const AlarmDot: IconType = ({ ...props }) => {
 //x버튼
 export const Xmark: IconType = ({ ...props }) => {
   return <HiMiniXMark {...props} />
-=======
 
 // 비율
 export const PercentIcon: IconType = ({ ...props }) => {
   return <FaPercentage {...props} />
->>>>>>> e2eef6dc0995abc1d8e6bbe8ce819ee525048273
 }
