@@ -52,16 +52,14 @@ function page({ params }: { params: { id: string } }) {
               }
             })}
           </TabsContent>
-          <div className="flex flex-col mt-3">
-            <TabsContent className="space-y-4" value="unexamined">
-              {recruits.map((recruit) => {
-                return <RecruitCard recruit={recruit} />
-                {
-                  /*이력서 상세페이지 link */
-                }
-              })}
-            </TabsContent>
-          </div>
+          <TabsContent className="space-y-4" value="unexamined">
+            {recruits.map((recruit) => {
+              return <RecruitCard recruit={recruit} />
+              {
+                /*이력서 상세페이지 link */
+              }
+            })}
+          </TabsContent>
         </div>
       </Tabs>
     </>
