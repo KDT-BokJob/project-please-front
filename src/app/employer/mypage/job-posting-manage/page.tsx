@@ -1,3 +1,4 @@
+'use client'
 import Header from '@/components/ui/Header'
 import { Button } from '@/components/ui/button'
 import { useState } from 'react'
@@ -35,6 +36,7 @@ const recruits = [
   },
 ]
 function page() {
+  const [activateDeleteBtn, setActivateDeleteBtn] = useState(false)
   return (
     <>
       <Header headline={'채용공고 관리'} />
@@ -52,11 +54,17 @@ function page() {
         </TabsList>
         <hr />
         <div className="flex flex-col mt-3">
-        <Button className="self-end mb-2" size={"mini"}>편집</Button>
+          <Button
+            className={`self-end mb-2 ${activateDeleteBtn ? 'bg-base-primary-normal hover:bg-base-secondary-normal' : ''} `}
+            size={'mini'}
+            onClick={() => setActivateDeleteBtn(!activateDeleteBtn)}
+          >
+            {activateDeleteBtn ? '완료' : '편집'}
+          </Button>
 
           <TabsContent className="space-y-4" value="all">
             {recruits.map((recruit) => {
-              return <JobPostingCard recruit={recruit} />
+              return <JobPostingCard recruit={recruit} activateDelete={activateDeleteBtn} />
             })}
           </TabsContent>
           <TabsContent value="ongoing"></TabsContent>

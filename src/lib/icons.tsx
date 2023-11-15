@@ -28,8 +28,8 @@ import { FaRegCompass } from 'react-icons/fa'
 import { IoReload } from 'react-icons/io5'
 import { BsPencil } from 'react-icons/bs'
 import { GrFormNext } from 'react-icons/gr'
-import { FaCircle } from "react-icons/fa";
-
+import { FaCircle } from 'react-icons/fa'
+import { HiMiniXMark } from 'react-icons/hi2'
 // 뒤로가기
 export const ChevronLeft: IconType = ({ ...props }) => {
   return <BiChevronLeft {...props} />
@@ -172,10 +172,15 @@ export const ReloadIcon: IconType = ({ ...props }) => {
 export const PencilIcon: IconType = ({ ...props }) => {
   return <BsPencil {...props} />
 }
-
+//다음버튼
 export const NextIcon: IconType = ({ ...props }) => {
   return <GrFormNext {...props} />
 }
+//알람표시버튼 색상은 brand-point-light
 export const AlarmDot: IconType = ({ ...props }) => {
   return <FaCircle {...props} />
+}
+//x버튼
+export const Xmark: IconType = ({ ...props }) => {
+  return <HiMiniXMark {...props} />
 }
