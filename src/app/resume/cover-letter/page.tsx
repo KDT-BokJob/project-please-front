@@ -55,7 +55,7 @@ export default function page() {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Textarea placeholder="자기소개를 작성해주세요." className=" resize-none h-36" {...field} />
+                  <Textarea placeholder="자기소개를 작성해주세요." className=" resize-none h-32" {...field} />
                 </FormControl>
                 <FormDescription className="float-right">
                   {form.watch('coverLetter') ? `${form.watch('coverLetter').length}/1000` : '0/1000'}
@@ -67,12 +67,12 @@ export default function page() {
         </form>
       </Form>
       <div className="flex flex-col space-y-2">
-        <h2 className="">Tip</h2>
+        <h2 className="text-base text-base-secondary-normal">Tip</h2>
         <ul className="space-y-2 list-disc ml-6">
           {tips.map((tip) => (
             <li key={tip.id} className="tracking-tighter">
-              <span className="label-semi">{`[${tip.keyword}] `}</span>
-              <span className="text-base">{tip.content}</span>
+              <span className="label-semi text-base-secondary-dark">{`[${tip.keyword}] `}</span>
+              <span className="text-base text-base-secondary-normal">{tip.content}</span>
             </li>
           ))}
         </ul>
@@ -82,7 +82,7 @@ export default function page() {
           Back
         </Button>
         <Button type="submit" variant={'primary'} size={'lg'} onClick={form.handleSubmit(onSubmit)}>
-          Next
+          Submit
         </Button>
       </div>
     </>
