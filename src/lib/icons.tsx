@@ -1,7 +1,7 @@
-import { BiChevronLeft } from 'react-icons/bi'
+import { BiChevronLeft, BiPlus } from 'react-icons/bi'
 import { IconType } from 'react-icons'
 import { VscAccount, VscCalendar } from 'react-icons/vsc'
-import { MdOutlineCameraAlt } from 'react-icons/md'
+import { MdOutlineCameraAlt, MdOutlineClose } from 'react-icons/md'
 import { HiChevronUpDown } from 'react-icons/hi2'
 import { BiCheck } from 'react-icons/bi'
 import { BiSearch } from 'react-icons/bi'
@@ -63,6 +63,16 @@ export const Camera: IconType = ({ ...props }) => {
 // 달력
 export const CalendarIcon: IconType = ({ ...props }) => {
   return <VscCalendar {...props} />
+}
+
+// 플러스
+export const PlusIcon: IconType = ({ ...props }) => {
+  return <BiPlus {...props} />
+}
+
+// 클로즈 X
+export const CloseIcon: IconType = ({ ...props }) => {
+  return <MdOutlineClose {...props} />
 }
 
 //선택창 클릭아이콘

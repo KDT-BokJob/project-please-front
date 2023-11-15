@@ -11,8 +11,9 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from '@/components/ui/input'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Calendar } from '@/components/ui/calendar'
-import { resumeProfileFormSchema } from '@/lib/zod-schema/resume-profile'
+import { resumeProfileFormSchema } from '@/lib/zod-schema/resume/resume-profile'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { Checkbox } from '@/components/ui/checkbox'
 
 const formSchema = resumeProfileFormSchema
 
@@ -37,14 +38,26 @@ export default function page() {
   }
   return (
     <>
-      <div className="relative w-32 mx-auto">
-        <DefaultProfile className="text-brand-primary-normal" size={'125px'} />
-        <Button className="absolute bottom-0 right-0" variant={'profile'} size={'xs'}>
-          <Camera size={'1rem'} className={cn(' bg-transparent text-base-bright-light ')} />
-        </Button>
-      </div>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <div className="relative w-32 mx-auto">
+            <DefaultProfile className="text-brand-primary-normal" size={'125px'} />
+            <FormField
+              control={form.control}
+              name="avatar"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Input type={'file'} className="file:bg-red-400" placeholder="" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button className="absolute right-0 bottom-0" variant={'profile'} size={'xs'}>
+              <Camera size={'1rem'} className={cn(' bg-transparent text-base-bright-light ')} />
+            </Button>
+          </div>
           {/* First Name */}
           <FormField
             control={form.control}
@@ -67,7 +80,7 @@ export default function page() {
               <FormItem>
                 <FormLabel>Last name *</FormLabel>
                 <FormControl>
-                  <Input placeholder="last name" {...field} />
+                  <Input type="text" placeholder="last name" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -127,8 +140,8 @@ export default function page() {
                       <Button
                         variant={'outline'}
                         className={cn(
-                          'w-[240px] pl-3 text-left font-normal w-full',
-                          !field.value && 'text-muted-foreground',
+                          'outline-transparent border ring-slate-200 pl-3 text-left font-normal w-full hover:outline-transparent focus-visible:ring-brand-primary-light',
+                          !field.value && 'text-muted-foreground ',
                         )}
                       >
                         {field.value ? format(field.value, 'yyyy.MM.dd') : <span>Pick a date</span>}
@@ -197,22 +210,13 @@ export default function page() {
             name="disability"
             render={({ field }) => (
               <FormItem className="space-y-3">
-                <FormLabel>Have a disability? *</FormLabel>
                 <FormControl>
-                  <RadioGroup onValueChange={field.onChange} className="flex gap-4">
-                    <FormItem className="flex items-center space-x-3 space-y-0 ">
-                      <FormControl>
-                        <RadioGroupItem value="true" className="" />
-                      </FormControl>
-                      <FormLabel className="font-normal">Y</FormLabel>
-                    </FormItem>
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="false" />
-                      </FormControl>
-                      <FormLabel className="font-normal">N</FormLabel>
-                    </FormItem>
-                  </RadioGroup>
+                  <FormItem className="flex items-center space-x-3 space-y-0 ">
+                    <FormControl>
+                      <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                    </FormControl>
+                    <FormLabel>Have a disability? *</FormLabel>
+                  </FormItem>
                 </FormControl>
                 <FormMessage />
               </FormItem>

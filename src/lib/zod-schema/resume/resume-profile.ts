@@ -2,6 +2,22 @@ import * as z from 'zod'
 
 const dateFormatRegex = /^\d{4}-\d{2}-\d{2} (0\d|1\d|2[0-3]):(00):([0-5][0-9])$/
 
+const MAX_FILE_SIZE = 1024 * 1024 * 5
+const ACCEPTED_IMAGE_MIME_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp']
+const ACCEPTED_IMAGE_TYPES = ['jpeg', 'jpg', 'png', 'webp']
+
+const avatarSchema = () => {
+  return z
+    .any()
+    .refine((files) => {
+      return files?.[0]?.size <= MAX_FILE_SIZE
+    }, `Max image size is 5MB.`)
+    .refine(
+      (files) => ACCEPTED_IMAGE_MIME_TYPES.includes(files?.[0]?.type),
+      'Only .jpg, .jpeg, .png and .webp formats are supported.',
+    )
+}
+
 const nameWithMinSchema = (min: number, name: string) => {
   return z.string().min(min, {
     message: `${name} must be at least ${min} characters.`,
@@ -47,8 +63,12 @@ const disabilitySchema = () => {
   return z.boolean({
     required_error: 'disability field must be required',
   })
+  // return z.boolean({
+  //   required_error: 'disability field must be required',
+  // })
 }
 export const resumeProfileFormSchema = z.object({
+  avatar: avatarSchema(),
   firstname: nameWithMinSchema(2, 'firstname'),
   lastname: nameWithMinSchema(2, 'lastname'),
   nationality: nameWithMinSchema(2, 'nationality'),
@@ -59,4 +79,3 @@ export const resumeProfileFormSchema = z.object({
   address: addressSchema(),
   disability: disabilitySchema(),
 })
-

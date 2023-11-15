@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function layout({ children }: { children: React.ReactNode }) {
   return (
-    <section className={`w-[23.4375rem] min-h-screen px-6 py-6 flex flex-col justify-between m-auto`}>
+    <section className={`w-[23.4375rem] min-h-screen px-6 py-6 flex flex-col justify-start m-auto`}>
       <ChevronLeft size={'2rem'} />
       {children}
     </section>
