@@ -16,6 +16,7 @@ import { resumeCertificationFormSchema } from '@/lib/zod-schema/resume/certifica
 
 const formSchema = resumeCertificationFormSchema
 const currentYear = new Date().getFullYear()
+
 export default function page() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
