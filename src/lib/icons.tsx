@@ -31,6 +31,7 @@ import { GrFormNext } from 'react-icons/gr'
 import { FaCircle } from 'react-icons/fa'
 import { HiMiniXMark } from 'react-icons/hi2'
 import { FaPercentage } from 'react-icons/fa'
+import { AiFillPlusCircle } from 'react-icons/ai'
 
 // 뒤로가기
 export const ChevronLeft: IconType = ({ ...props }) => {
@@ -200,4 +201,9 @@ export const Xmark: IconType = ({ ...props }) => {
 // 비율
 export const PercentIcon: IconType = ({ ...props }) => {
   return <FaPercentage {...props} />
+}
+
+//글생성버튼
+export const CreateIcon: IconType = ({ ...props }) => {
+  return <AiFillPlusCircle {...props} />
 }
