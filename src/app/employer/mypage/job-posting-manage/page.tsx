@@ -40,8 +40,8 @@ function page() {
   return (
     <>
       <Header headline={'채용공고 관리'} />
-      <Tabs defaultValue="all" className="w-full mt-20">
-        <TabsList>
+      <Tabs defaultValue="all" className="w-full mt-20 ">
+        <TabsList className="px-6">
           <TabsTrigger className="text-md hover:text-brand-primary-normal" value="all">
             전체
           </TabsTrigger>
