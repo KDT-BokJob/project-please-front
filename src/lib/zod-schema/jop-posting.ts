@@ -60,7 +60,7 @@ export const jobPostingFormSchema = z.object({
 export const jobPostingFormSchema2 = z.object({
   prefered_nationality: z.string({ required_error: '희망하는 국적을 선택해주세요.' }),
   count: countSchema(),
-  salary_type: z.string({ required_error: '급여 종류를 선택해주세요.' }), //수정필요
+  salary_type: z.string({ required_error: '필수선택' }), //수정필요
   salary: SalarySchema(),
   work_type: z.string({ required_error: '근무 형태를 선택해주세요.' }),
   work_period: z.object({
