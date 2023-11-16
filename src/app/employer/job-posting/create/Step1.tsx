@@ -36,7 +36,7 @@ const visas = [
 
 const formSchema = jobPostingFormSchema
 
-export default function Step1({...props}) {
+export default function Step1({ ...props }) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {

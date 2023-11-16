@@ -12,7 +12,7 @@ import { cn } from '@/lib/utils'
 
 const formSchema = jobPostingFormSchema3
 
-function Step3(props) {
+function Step3({ ...props }) {
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
