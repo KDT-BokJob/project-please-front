@@ -36,7 +36,7 @@ const visas = [
 
 const formSchema = jobPostingFormSchema
 
-export default function Step1({...props}) {
+export default function Step1({ ...props }) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -173,13 +173,13 @@ export default function Step1({...props}) {
                   <RadioGroup onValueChange={field.onChange} className="flex items-center gap-4">
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value={true} />
+                        <RadioGroupItem value={'possible'} />
                       </FormControl>
                       <FormLabel className="font-normal">지원</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value={false} />
+                        <RadioGroupItem value={'impossible'} />
                       </FormControl>
                       <FormLabel className="font-normal">미지원</FormLabel>
                     </FormItem>
