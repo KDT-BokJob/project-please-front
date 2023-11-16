@@ -14,7 +14,6 @@ const formSchema = resumeWorkExperienceFileFormSchema
 
 export default function page() {
   const [pdfUrl, setPdfUrl] = useState<string>('')
-  const [fileName, setFileName] = useState<string>('')
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
       readyMadeResume: undefined,
@@ -26,7 +25,6 @@ export default function page() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.files?.[0]) {
       const file = e.currentTarget.files[0]
-      setFileName(file.name)
       const fileReader = new FileReader()
       fileReader.readAsDataURL(file)
       fileReader.onloadend = (e) => {
@@ -46,7 +44,9 @@ export default function page() {
         Do you have your own resume?
         <br /> If so, just upload it
       </h1>
-      {pdfUrl && <span className="my-2 text-base-secondary-light">{fileName}</span>}
+      {form.getValues('readyMadeResume') && (
+        <span className="my-2 text-base-secondary-light">{form.getValues('readyMadeResume')[0].name}</span>
+      )}
       <ResumePreview src={pdfUrl} />
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6 my-4">
@@ -63,15 +63,7 @@ export default function page() {
                   add work experience
                 </FormLabel>
                 <FormControl>
-                  <Input
-                    id={'input-file'}
-                    className="hidden"
-                    type={'file'}
-                    accept="application/pdf"
-                    // {...field}
-                    // onChange={handleChange}
-                    {...fileRef}
-                  />
+                  <Input id={'input-file'} className="hidden" type={'file'} accept="application/pdf" {...fileRef} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
