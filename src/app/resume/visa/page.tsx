@@ -7,16 +7,20 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+import { useRouter } from 'next/navigation'
 
 const formSchema = resumeVisaFormSchema
 const VISA_LIST = ['E7', 'E9', 'D2', 'H2']
 export default function page() {
+const router = useRouter()
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+    console.log(values.visa)
+    router.push(`/resume/desired-job/${values.visa}`)
   }
   return (
     <>
