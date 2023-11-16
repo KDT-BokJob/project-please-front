@@ -2,7 +2,7 @@
 import { Button } from '@/components/ui/button'
 import { CalendarIcon, Camera, DefaultProfile } from '@/lib/icons'
 import { cn } from '@/lib/utils'
-import React from 'react'
+import React, { useState } from 'react'
 import { format } from 'date-fns'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -11,52 +11,89 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from '@/components/ui/input'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Calendar } from '@/components/ui/calendar'
-import { resumeProfileFormSchema } from '@/lib/zod-schema/resume/resume-profile'
+import { resumeProfileFormSchema } from '@/lib/zod-schema/resume/profile'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Checkbox } from '@/components/ui/checkbox'
+import Image from 'next/image'
 
 const formSchema = resumeProfileFormSchema
 
 export default function page() {
-  // 1. Define your form.
+  const [avatarUrl, setAvatarUrl] = useState<string>('')
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      avatar: undefined,
       firstname: '',
       lastname: '',
       nationality: '',
       gender: '',
       email: 'loginTimeEmail@gmail.com',
     },
+    mode: 'onChange',
   })
 
-  // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
     console.log(values)
   }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.currentTarget.files?.[0]) {
+      const file = e.currentTarget.files[0]
+      const fileReader = new FileReader()
+      fileReader.readAsDataURL(file)
+      fileReader.onloadend = (e) => {
+        setAvatarUrl((prev) => e.target?.result as string)
+      }
+    }
+  }
+  const fileRef = form.register('avatar', { required: true, onChange: handleChange })
+
   return (
     <>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <div className="relative w-32 mx-auto">
-            <DefaultProfile className="text-brand-primary-normal" size={'125px'} />
+          <div className="relative w-32 mx-auto ">
+            {form.getValues('avatar') ? (
+              <figure
+                className={
+                  'relative w-[125px] h-[125px] rounded-full overflow-hidden border border-4 border-brand-primary-normal'
+                }
+              >
+                <Image src={avatarUrl} fill alt={`${form.getValues('avatar')[0].name}`} className={''} />
+              </figure>
+            ) : (
+              <DefaultProfile className="text-brand-primary-normal" size={'125px'} />
+            )}
+            {form.getValues('avatar') && (
+              <span className={'text-base-secondary-normal'}>{form.getValues('avatar')[0].name}</span>
+            )}
             <FormField
               control={form.control}
               name="avatar"
               render={({ field }) => (
                 <FormItem>
+                  <FormLabel
+                    htmlFor="avatar-image-file"
+                    className="inline-block absolute right-0 bottom-0 bg-base-secondary-dark h-6 rounded-full p-1 cursor-pointer"
+                  >
+                    <Camera size={'1rem'} className={cn('text-base-bright-light ')} />
+                  </FormLabel>
                   <FormControl>
-                    <Input type={'file'} className="file:bg-red-400" placeholder="" {...field} />
+                    <Input
+                      id={'avatar-image-file'}
+                      type={'file'}
+                      className="hidden"
+                      accept={'image/jpeg, image/jpg, image/png, image/webp'}
+                      // {...field}
+                      {...fileRef}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button className="absolute right-0 bottom-0" variant={'profile'} size={'xs'}>
-              <Camera size={'1rem'} className={cn(' bg-transparent text-base-bright-light ')} />
-            </Button>
           </div>
           {/* First Name */}
           <FormField

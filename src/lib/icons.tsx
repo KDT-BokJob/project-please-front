@@ -27,7 +27,11 @@ import { RiFilePaper2Line } from 'react-icons/ri'
 import { FaRegCompass } from 'react-icons/fa'
 import { IoReload } from 'react-icons/io5'
 import { BsPencil } from 'react-icons/bs'
+import { GrFormNext } from 'react-icons/gr'
+import { FaCircle } from 'react-icons/fa'
+import { HiMiniXMark } from 'react-icons/hi2'
 import { FaPercentage } from 'react-icons/fa'
+import { AiFillPlusCircle } from 'react-icons/ai'
 
 // 뒤로가기
 export const ChevronLeft: IconType = ({ ...props }) => {
@@ -181,8 +185,25 @@ export const ReloadIcon: IconType = ({ ...props }) => {
 export const PencilIcon: IconType = ({ ...props }) => {
   return <BsPencil {...props} />
 }
+//다음버튼
+export const NextIcon: IconType = ({ ...props }) => {
+  return <GrFormNext {...props} />
+}
+//알람표시버튼 색상은 brand-point-light
+export const AlarmDot: IconType = ({ ...props }) => {
+  return <FaCircle {...props} />
+}
+//x버튼
+export const Xmark: IconType = ({ ...props }) => {
+  return <HiMiniXMark {...props} />
+}
 
 // 비율
 export const PercentIcon: IconType = ({ ...props }) => {
   return <FaPercentage {...props} />
+}
+
+//글생성버튼
+export const CreateIcon: IconType = ({ ...props }) => {
+  return <AiFillPlusCircle {...props} />
 }
