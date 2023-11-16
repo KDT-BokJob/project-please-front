@@ -66,7 +66,7 @@ function Step3({ ...props }) {
               </FormItem>
             )}
           />
-          <Button onClick={() => props.setFormStep(2)} variant={'outline'} className="w-2/6">
+          <Button onClick={() => props.setFormState(2)} variant={'outline'} className="w-2/6">
             이전
           </Button>
           <Button className="w-3/5" type="submit" size="lg">

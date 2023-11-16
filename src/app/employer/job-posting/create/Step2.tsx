@@ -60,7 +60,7 @@ const prefered_nationality = [
 const formSchema = jobPostingFormSchema2
 const today = startOfDay(new Date())
 
-function Step2() {
+function Step2({ ...props }) {
   const [isRegularWorker, setIsRegularWorker] = useState(false)
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -71,10 +71,13 @@ function Step2() {
         to: addDays(today, 7),
       },
       work_days: [],
+      is_worktime_flexible: false,
+      is_workperiod_flexible: false,
     },
   })
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
+    props.setFormState(3)
   }
   return (
     <section>
@@ -137,15 +140,18 @@ function Step2() {
           <FormField
             control={form.control}
             name="count"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="font-semibold ">모집인원 수 *</FormLabel>
-                <FormControl>
-                  <Input placeholder="모집인원 수를 입력해주세요." {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+            render={({ field }) => {
+              console.log(typeof field.value)
+              return (
+                <FormItem>
+                  <FormLabel className="font-semibold ">모집인원 수 *</FormLabel>
+                  <FormControl>
+                    <Input type="number" placeholder="모집인원 수를 입력해주세요." {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )
+            }}
           />
           <FormField
             control={form.control}
@@ -206,14 +212,17 @@ function Step2() {
               <FormField
                 control={form.control}
                 name="salary"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
+                render={({ field }) => {
+                  console.log(field.value)
+                  return (
+                    <FormItem>
+                      <FormControl>
+                        <Input type="number" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )
+                }}
               />
               원
             </div>
@@ -402,7 +411,7 @@ function Step2() {
             )}
           />
           <div className="flex justify-between">
-            <Button variant={'outline'} className="w-2/6">
+            <Button variant={'outline'} onClick={() => props.setFormState(1)} className="w-2/6">
               이전
             </Button>
             <Button type="submit" className="w-3/5">

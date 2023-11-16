@@ -9,13 +9,13 @@ import { Button } from '@/components/ui/button'
 import { useState } from 'react'
 
 function page() {
-  const [formState, setFormState] = useState(2)
+  const [formState, setFormState] = useState(1)
   return (
     <>
       <Header headline={'채용공고 등록'} />
       <main className="mt-20">
         {formState === 1 && <Step1 setFormState={setFormState} />}
-        {formState === 2 && <Step2 />}
+        {formState === 2 && <Step2 setFormState={setFormState} />}
         {formState === 3 && <Step3 setFormState={setFormState} />}
       </main>
     </>
