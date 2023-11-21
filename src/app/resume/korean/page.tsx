@@ -98,7 +98,6 @@ export default function page() {
         const res = await fetch(`http://localhost:3000/api/topik?topik=${topik}`)
         topikResult.current = await res.json()
         if (topikResult.current?.status === 'ok') setIsTopik(true)
-        console.log(topikResult.current)
       }
       getData(searchIssuDocNo)
     } else {
