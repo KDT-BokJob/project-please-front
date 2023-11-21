@@ -23,7 +23,7 @@ export const resumeKoreanSkillFormSchema = z
     block2: topikBlockSchema,
     block3: topikBlockSchema,
     block4: topikBlockSchema,
-    selfDiagnosis: selfDiagnosis(),
+    // selfDiagnosis: z.optional(selfDiagnosis()),
   })
   .refine(
     (value) => {
@@ -31,4 +31,9 @@ export const resumeKoreanSkillFormSchema = z
       return fullTopikNumber.length === 16 && /^[0-9]+$/.test(fullTopikNumber)
     },
     { message: 'Invalid topik document number' },
+  )
+  .or(
+    z.object({
+      selfDiagnosis: selfDiagnosis(),
+    }),
   )
