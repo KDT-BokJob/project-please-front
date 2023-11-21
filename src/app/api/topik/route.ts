@@ -18,7 +18,6 @@ export async function GET(request: NextRequest) {
       body: formData,
     })
     const data = await res.json()
-    console.log(data)
     if (+data.TOTAL_COUNT) {
       return NextResponse.json({ data: data, status: 'ok' })
     } else {
@@ -26,6 +25,6 @@ export async function GET(request: NextRequest) {
     }
   } catch (error) {
     console.log(error)
-    return NextResponse.error
+    return NextResponse.error()
   }
 }

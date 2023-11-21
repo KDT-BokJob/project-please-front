@@ -38,7 +38,8 @@ export default function SlickSlider({
     },
     options,
   )
-  const slickRef = useRef(null)
+
+  const slickRef = useRef<Slider>(null)
   const next = useCallback(() => {
     slickRef?.current?.slickNext()
   }, [])
