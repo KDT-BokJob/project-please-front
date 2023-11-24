@@ -3,12 +3,6 @@
 import * as React from 'react'
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group'
 import { Circle } from 'lucide-react'
-// interface RadioGroupItemProps extends Omit<OriginalRadioGroupItemProps, 'onCheck' | 'name' | 'value'> {
-//   value: string | boolean
-// }
-
-// let Item: React.ForwardRefExoticComponent<RadioGroupItemProps & React.RefAttributes<HTMLButtonElement>>
-
 import { cn } from '@/lib/utils'
 
 const RadioGroup = React.forwardRef<

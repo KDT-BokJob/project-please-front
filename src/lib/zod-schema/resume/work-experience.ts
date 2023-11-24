@@ -1,6 +1,10 @@
 import { format } from 'date-fns'
 import { z } from 'zod'
 
+const FILE_SIZE_OFFSET = 5
+const MAX_FILE_SIZE = 1024 * 1024 * FILE_SIZE_OFFSET
+const ACCEPTED_PDF_MIME_TYPES = 'application/pdf'
+
 const isExperienced = () => {
   return z.enum(['true', 'false'])
   // return z.boolean({
@@ -70,4 +74,12 @@ export const resumeWorkExperienceFormSchema = z.object({
         { message: 'Invalid Date' },
       ),
   ),
+})
+
+export const resumeWorkExperienceFileFormSchema = z.object({
+  readyMadeResume: z
+    .any()
+    .refine((file) => file?.length == 1, 'File is required.')
+    .refine((file) => file[0]?.type === ACCEPTED_PDF_MIME_TYPES, 'Must be a PDF.')
+    .refine((file) => file[0]?.size <= MAX_FILE_SIZE, `Max file size is ${FILE_SIZE_OFFSET}MB.`),
 })

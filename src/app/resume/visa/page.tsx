@@ -2,7 +2,7 @@
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { resumeVisaFormSchema } from '@/lib/zod-schema/resume/resume-visa'
+import { resumeVisaFormSchema } from '@/lib/zod-schema/resume/visa'
 import { zodResolver } from '@hookform/resolvers/zod'
 import React from 'react'
 import { useForm } from 'react-hook-form'

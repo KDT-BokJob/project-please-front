@@ -174,28 +174,26 @@ export default function Step1({ ...props }) {
             control={form.control}
             name="isVisaTransform"
             render={({ field }) => (
-              <div className="h-[110px]">
-                <FormItem className="space-y-3">
-                  <FormLabel className="font-semibold ">비자 취득 및 전환 지원 여부</FormLabel>
-                  <FormControl>
-                    <RadioGroup onValueChange={field.onChange} className="flex items-center gap-4">
-                      <FormItem className="flex items-center space-x-3 space-y-0">
-                        <FormControl>
-                          <RadioGroupItem value={true} />
-                        </FormControl>
-                        <FormLabel className="font-normal">지원</FormLabel>
-                      </FormItem>
-                      <FormItem className="flex items-center space-x-3 space-y-0">
-                        <FormControl>
-                          <RadioGroupItem value={false} />
-                        </FormControl>
-                        <FormLabel className="font-normal">미지원</FormLabel>
-                      </FormItem>
-                    </RadioGroup>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              </div>
+              <FormItem className="space-y-3">
+                <FormLabel className="font-semibold ">비자 취득 및 전환 지원 여부</FormLabel>
+                <FormControl>
+                  <RadioGroup onValueChange={field.onChange} className="flex items-center gap-4">
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value={'possible'} />
+                      </FormControl>
+                      <FormLabel className="font-normal">지원</FormLabel>
+                    </FormItem>
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value={'impossible'} />
+                      </FormControl>
+                      <FormLabel className="font-normal">미지원</FormLabel>
+                    </FormItem>
+                  </RadioGroup>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
             )}
           />
           <Button type="submit" size="lg">

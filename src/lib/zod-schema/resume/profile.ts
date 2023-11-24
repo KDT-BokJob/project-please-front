@@ -17,7 +17,9 @@ const avatarSchema = () => {
       'Only .jpg, .jpeg, .png and .webp formats are supported.',
     )
 }
-
+// .refine((file) => file?.length == 1, 'File is required.')
+//     .refine((file) => file[0]?.type === ACCEPTED_PDF_MIME_TYPES, 'Must be a PDF.')
+//     .refine((file) => file[0]?.size <= MAX_FILE_SIZE, `Max file size is ${FILE_SIZE_OFFSET}MB.`),
 const nameWithMinSchema = (min: number, name: string) => {
   return z.string().min(min, {
     message: `${name} must be at least ${min} characters.`,
