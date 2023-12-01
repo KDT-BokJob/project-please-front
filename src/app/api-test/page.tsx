@@ -16,7 +16,7 @@ function Page() {
         { Text: JSON.stringify(response.data) },
       ]
       console.log(beforeTranslate)
-      const targetLanguage = 'vi'
+      const targetLanguage = 'en'
       const translatedText = await getTranslation(beforeTranslate, targetLanguage)
       translatedText.forEach((translation: any) => {
         console.log('번역결과:', translation.translations[0].text)
