@@ -1,7 +1,8 @@
 import Image from 'next/image'
+
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Button } from '@/components/ui/button'
-import { ChevronLeft, PercentIcon, KRWIcon, BriefcaseIcon, VisaIcon, ReloadIcon } from '@/lib/icons'
+import { BriefcaseIcon, ChevronLeft, KRWIcon, PercentIcon, ReloadIcon, VisaIcon } from '@/lib/icons'
 
 const jobData = {
   recruit_id: 1,

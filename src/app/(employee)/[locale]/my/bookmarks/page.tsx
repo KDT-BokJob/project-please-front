@@ -1,5 +1,5 @@
-import Header from '@/components/ui/Header'
 import JobCard from '@/components/job-card'
+import Header from '@/components/ui/Header'
 
 const jobData = [
   {

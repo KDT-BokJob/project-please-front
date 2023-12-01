@@ -1,19 +1,20 @@
 import Image from 'next/image'
+
+import initTranslations from '@/app/i18n'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTrigger } from '@/components/ui/dialog'
 import {
-  ChevronLeft,
-  PercentIcon,
-  KRWIcon,
   BriefcaseIcon,
-  VisaIcon,
-  ReloadIcon,
   CheckCircleIcon,
   CheckedBookmarkIcon,
+  ChevronLeft,
+  KRWIcon,
   OutlineBookmarkIcon,
+  PercentIcon,
+  ReloadIcon,
+  VisaIcon,
 } from '@/lib/icons'
-import initTranslations from '@/app/i18n'
 
 const jobData = {
   recruit_id: 1,

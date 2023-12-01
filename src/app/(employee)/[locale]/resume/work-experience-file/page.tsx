@@ -1,16 +1,17 @@
 'use client'
-import { Button } from '@/components/ui/button'
-import { PlusIcon } from '@/lib/icons'
-import { resumeWorkExperienceFileFormSchema } from '@/lib/zod-schema/resume/work-experience'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { TFunction } from 'i18next'
 import React, { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+
+import initTranslations from '@/app/i18n'
+import ResumePreview from '@/components/resumePreview'
+import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import ResumePreview from '@/components/resumePreview'
-import initTranslations from '@/app/i18n'
-import { TFunction } from 'i18next'
+import { PlusIcon } from '@/lib/icons'
+import { resumeWorkExperienceFileFormSchema } from '@/lib/zod-schema/resume/work-experience'
 
 const formSchema = resumeWorkExperienceFileFormSchema
 

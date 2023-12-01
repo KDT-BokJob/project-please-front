@@ -1,6 +1,6 @@
-import Header from '@/components/ui/Header'
 import JobCard from '@/components/job-card'
 import { Button } from '@/components/ui/button'
+import Header from '@/components/ui/Header'
 import { PencilIcon } from '@/lib/icons'
 
 const jobData = [

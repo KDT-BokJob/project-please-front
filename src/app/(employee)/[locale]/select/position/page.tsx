@@ -1,6 +1,6 @@
-import { EmployeeIcon, EmployerIcon, ChevronRight } from '@/lib/icons'
-import { Button } from '@/components/ui/button'
 import initTranslations from '@/app/i18n'
+import { Button } from '@/components/ui/button'
+import { ChevronRight, EmployeeIcon, EmployerIcon } from '@/lib/icons'
 
 export default async function SelectPositionPage({ params: { locale } }: { params: { locale: string } }) {
   const { t } = await initTranslations(locale, ['selectPosition'])

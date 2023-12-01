@@ -1,6 +1,7 @@
 'use client'
-import { HomeIcon, FilePaperIcon, CompassIcon, DefaultProfile } from '@/lib/icons'
 import Link from 'next/link'
+
+import { CompassIcon, DefaultProfile, FilePaperIcon, HomeIcon } from '@/lib/icons'
 
 export default function EmployerFooter({ ...props }) {
   return (

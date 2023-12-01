@@ -1,10 +1,10 @@
 'use client'
+import { useState } from 'react'
+
+import Please from '#/please.svg'
 import PleaseLeft from '#/please-left.svg'
 import PleaseRight from '#/please-right.svg'
 import White from '#/white-handshake.svg'
-import Please from '#/please.svg'
-
-import { useState } from 'react'
 
 export default function Landig() {
   let [loading, setLoading] = useState(false)

@@ -1,7 +1,7 @@
 'use client'
-import Header from '@/components/ui/Header'
 import JobCard from '@/components/job-card'
 import SlickSlider from '@/components/slider'
+import Header from '@/components/ui/Header'
 
 const jobData = [
   {

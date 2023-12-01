@@ -1,13 +1,14 @@
 'use client'
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { jobPostingFormSchema } from '@/lib/zod-schema/jop-posting'
-import { Input } from '@/components/ui/input'
+import * as z from 'zod'
+
 import { Button } from '@/components/ui/button'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Checkbox } from '@/components/ui/checkbox'
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { jobPostingFormSchema } from '@/lib/zod-schema/jop-posting'
 
 const profileData = {
   company_id: 1234,

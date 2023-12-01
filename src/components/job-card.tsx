@@ -1,4 +1,4 @@
-import { KRWIcon, CheckedBookmarkIcon, OutlineBookmarkIcon, MapIcon, BriefcaseIcon, JobFactoryIcon } from '@/lib/icons'
+import { BriefcaseIcon, CheckedBookmarkIcon, JobFactoryIcon, KRWIcon, MapIcon, OutlineBookmarkIcon } from '@/lib/icons'
 
 export default function JobCard({ recruit, children }: { recruit: any; children?: React.ReactNode }) {
   return (

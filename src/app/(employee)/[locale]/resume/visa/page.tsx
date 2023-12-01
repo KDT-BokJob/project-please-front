@@ -1,14 +1,15 @@
 'use client'
-import initTranslations from '@/app/i18n'
-import { Button } from '@/components/ui/button'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { resumeVisaFormSchema } from '@/lib/zod-schema/resume/visa'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { TFunction } from 'i18next'
 import React, { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+
+import initTranslations from '@/app/i18n'
+import { Button } from '@/components/ui/button'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { resumeVisaFormSchema } from '@/lib/zod-schema/resume/visa'
 
 const formSchema = resumeVisaFormSchema
 const VISA_LIST = ['E7', 'E9', 'D2', 'H2']

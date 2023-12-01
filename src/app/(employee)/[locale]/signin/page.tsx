@@ -1,7 +1,7 @@
-import White from '#/white-handshake.svg'
-import Please from '#/please.svg'
-import Google from '#/google.svg'
 import initTranslations from '@/app/i18n'
+import Google from '#/google.svg'
+import Please from '#/please.svg'
+import White from '#/white-handshake.svg'
 
 export default async function SigninPage({ params: { locale } }: { params: { locale: string } }) {
   const { t } = await initTranslations(locale, ['signIn'])

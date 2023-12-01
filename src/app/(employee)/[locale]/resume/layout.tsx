@@ -1,6 +1,7 @@
-import { ChevronLeft } from '@/lib/icons'
 import { Metadata } from 'next'
 import React from 'react'
+
+import { ChevronLeft } from '@/lib/icons'
 
 export const metadata: Metadata = {
   title: 'please',

@@ -1,8 +1,9 @@
-import Header from '@/components/ui/Header'
-import React from 'react'
 import Image from 'next/image'
+import React from 'react'
+
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Button } from '@/components/ui/button'
+import Header from '@/components/ui/Header'
 const profileData = {
   company_id: 1234,
   user_id: 12345,
@@ -49,7 +50,9 @@ function page() {
             </li>
             <li className="flex flex-col">
               <p className="mb-1 label-semi">인력/ 외국인력</p>
-              <p>{profileData.employee_count}/{profileData.foreign_employee_count}</p>
+              <p>
+                {profileData.employee_count}/{profileData.foreign_employee_count}
+              </p>
             </li>
             <li className="flex flex-col">
               <p className="mb-1 label-semi">업종 *</p>

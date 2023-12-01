@@ -1,6 +1,6 @@
-import { Button } from '@/components/ui/button'
-import Country from '@/components/country'
 import initTranslations from '@/app/i18n'
+import Country from '@/components/country'
+import { Button } from '@/components/ui/button'
 const languageArr = [
   {
     language: '한국어',

@@ -1,10 +1,11 @@
-import { DefaultProfile, FilledProfile, OutlineBookmarkIcon, OutlineBellIcon, LanguageIcon } from '@/lib/icons'
-import { Button } from '@/components/ui/button'
-import Header from '@/components/ui/Header'
 import Link from 'next/link'
-import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTrigger } from '@/components/ui/dialog'
-import Country from '@/components/country'
+
 import initTranslations from '@/app/i18n'
+import Country from '@/components/country'
+import { Button } from '@/components/ui/button'
+import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTrigger } from '@/components/ui/dialog'
+import Header from '@/components/ui/Header'
+import { DefaultProfile, FilledProfile, LanguageIcon, OutlineBellIcon, OutlineBookmarkIcon } from '@/lib/icons'
 
 const languageArr = [
   {
