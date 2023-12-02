@@ -1,3 +1,4 @@
+/* eslint-disable react/function-component-definition */
 import { IconType } from 'react-icons'
 import { AiOutlineUser } from 'react-icons/ai'
 import { AiOutlineIdcard } from 'react-icons/ai'
