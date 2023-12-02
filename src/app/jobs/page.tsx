@@ -1,15 +1,14 @@
 'use client'
-import { useState } from 'react'
-
-import JobCard from '@/components/job-card'
-import SlickSlider from '@/components/slider'
-import { Button } from '@/components/ui/button'
-import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTrigger } from '@/components/ui/dialog'
+import { SearchIcon, VisaIcon, LocationtIcon, ChevronDown } from '@/lib/icons'
 import { Input } from '@/components/ui/input'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { ChevronDown, LocationtIcon, SearchIcon, VisaIcon } from '@/lib/icons'
-import location from '#/location.json'
+import { Button } from '@/components/ui/button'
 import Logo from '#/please-logo.svg'
+import SlickSlider from '@/components/slider'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { useRef, useState } from 'react'
+import JobCard from '@/components/job-card'
+import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTrigger } from '@/components/ui/dialog'
+import location from '#/location.json'
 
 const jobData = [
   {
@@ -206,14 +205,14 @@ export default function JobsPage() {
                   )}
                 </div>
               </div>
-              <DialogFooter className="flex flex-row justify-center gap-8 pl-6 sm:justify-center">
+              <DialogFooter className="flex flex-row justify-center sm:justify-center gap-8 pl-6">
                 <DialogClose asChild>
-                  <Button className="h-12 text-base font-bold border rounded-lg shadow-md border-brand-primary-normal text-brand-primary-normal bg-base-bright-light">
+                  <Button className="h-12 rounded-lg font-bold text-base border border-brand-primary-normal text-brand-primary-normal bg-base-bright-light shadow-md">
                     Reset
                   </Button>
                 </DialogClose>
                 <DialogClose asChild>
-                  <Button className="h-12 px-16 text-base font-bold rounded-lg shadow-md text-base-bright-light bg-brand-primary-normal">
+                  <Button className="h-12 px-16 rounded-lg font-bold text-base text-base-bright-light bg-brand-primary-normal shadow-md">
                     Complete
                   </Button>
                 </DialogClose>
@@ -265,14 +264,14 @@ export default function JobsPage() {
                   )}
                 </div>
               </div>
-              <DialogFooter className="flex flex-row justify-center gap-8 pl-6 sm:justify-center">
+              <DialogFooter className="flex flex-row justify-center sm:justify-center gap-8 pl-6">
                 <DialogClose asChild>
-                  <Button className="h-12 text-base font-bold border rounded-lg shadow-md border-brand-primary-normal text-brand-primary-normal bg-base-bright-light">
+                  <Button className="h-12 rounded-lg font-bold text-base border border-brand-primary-normal text-brand-primary-normal bg-base-bright-light shadow-md">
                     Reset
                   </Button>
                 </DialogClose>
                 <DialogClose asChild>
-                  <Button className="h-12 px-16 text-base font-bold rounded-lg shadow-md text-base-bright-light bg-brand-primary-normal">
+                  <Button className="h-12 px-16 rounded-lg font-bold text-base text-base-bright-light bg-brand-primary-normal shadow-md">
                     Complete
                   </Button>
                 </DialogClose>
@@ -284,7 +283,7 @@ export default function JobsPage() {
           Search
         </Button>
       </section>
-      <section className="flex flex-col gap-4 px-6 overflow-x-hidden pb-14">
+      <section className="px-6 flex flex-col gap-4 overflow-x-hidden pb-14">
         <Tabs defaultValue="recentlyView" className="w-full">
           <TabsList>
             <TabsTrigger value="recentlyView">Recently viewed</TabsTrigger>
@@ -313,7 +312,7 @@ export default function JobsPage() {
         </Tabs>
         <div>
           <span className="flex justify-between">
-            <h1 className="text-lg font-semibold text-brand-primary-light">E9 VISA Recommended Job</h1>
+            <h1 className="font-semibold text-lg text-brand-primary-light">E9 VISA Recommended Job</h1>
           </span>
           <SlickSlider total={jobData.length}>
             {jobData.map((recruit) => (

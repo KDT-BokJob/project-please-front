@@ -1,12 +1,12 @@
 import { JobPostingManage } from '@/app/employer/mypage/JobPostingManage'
-import EmployerFooter from '@/components/employer-footer'
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
 import Header from '@/components/ui/Header'
+import { Button } from '@/components/ui/button'
+import { Card, CardHeader, CardTitle } from '@/components/ui/card'
 import { DefaultProfile } from '@/lib/icons'
 import { Camera } from '@/lib/icons'
-import { NextIcon } from '@/lib/icons'
 import { cn } from '@/lib/utils'
+import { NextIcon } from '@/lib/icons'
+import EmployerFooter from '@/components/employer-footer'
 
 function page() {
   return (
@@ -33,7 +33,7 @@ function page() {
           <p>로그아웃</p>
         </div>
       </div>
-      <EmployerFooter profile />
+      <EmployerFooter profile/>
     </>
   )
 }
