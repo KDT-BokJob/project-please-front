@@ -1,5 +1,6 @@
-import Footer from '@/components/footer'
 import type { Metadata } from 'next'
+
+import Footer from '@/components/footer'
 
 export const metadata: Metadata = {
   title: 'please - 추천 공고',

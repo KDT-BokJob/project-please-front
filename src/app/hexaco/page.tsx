@@ -1,6 +1,6 @@
 'use client'
 import * as RadioGroup from '@radix-ui/react-radio-group'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 const questions = [
   'I would be quite bored by a visit to an art gallery.',
@@ -48,14 +48,17 @@ function page() {
   })
 
   const progressBarStyle = {
-    width: `${scrollPercentage * 100}%`, 
-  };
+    width: `${scrollPercentage * 100}%`,
+  }
 
   return (
     <>
       <article>
         <div className="fixed top-0 left-0 right-0 w-full h-2 overflow-hidden rounded-sm bg-base-secondary-light">
-          <div className="h-full bg-brand-primary-light [transition:transform_660ms_cubic-bezier(0.65,_0,_0.35,_1)]" style={progressBarStyle}></div>
+          <div
+            className="h-full bg-brand-primary-light [transition:transform_660ms_cubic-bezier(0.65,_0,_0.35,_1)]"
+            style={progressBarStyle}
+          ></div>
         </div>
         {questions.map((question, index) => {
           return (

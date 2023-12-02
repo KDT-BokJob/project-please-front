@@ -49,7 +49,10 @@ const SalarySchema = () => {
   )
 }
 export const jobPostingFormSchema = z.object({
-  title: z.string({required_error:"필수입력"}).min(10,{message:"10자 이상 입력해주세요."}).max(60,{message:"60자 이하로 작성해주세요."}),
+  title: z
+    .string({ required_error: '필수입력' })
+    .min(10, { message: '10자 이상 입력해주세요.' })
+    .max(60, { message: '60자 이하로 작성해주세요.' }),
   name: z.string().min(2).max(40),
   phone: phoneNumberSchema(),
   gender: genderSchema(),

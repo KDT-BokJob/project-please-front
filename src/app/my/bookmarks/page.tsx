@@ -1,5 +1,5 @@
-import Header from '@/components/ui/Header'
 import JobCard from '@/components/job-card'
+import Header from '@/components/ui/Header'
 
 const jobData = [
   {
@@ -80,7 +80,7 @@ export default function MyBookmarksPage() {
   return (
     <>
       <Header headline="Bookmarks" />
-      <div className="flex flex-col justify-center gap-4 mt-14 mb-20 px-8 pb-20">
+      <div className="flex flex-col justify-center gap-4 px-8 pb-20 mb-20 mt-14">
         {jobData
           .filter((recruit) => recruit.bookmark)
           .map((recruit) => (

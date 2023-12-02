@@ -1,14 +1,13 @@
 'use client'
-import { Button } from '@/components/ui/button'
-import { CheckboxButton } from '@/components/ui/checkboxButton'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { resumeDesiredJobFormSchema } from '@/lib/zod-schema/resume/resume-desiredJob'
-import { resumeVisaFormSchema } from '@/lib/zod-schema/resume/resume-visa'
 import { zodResolver } from '@hookform/resolvers/zod'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+
+import { Button } from '@/components/ui/button'
+import { CheckboxButton } from '@/components/ui/checkboxButton'
+import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
+import { resumeDesiredJobFormSchema } from '@/lib/zod-schema/resume/resume-desiredJob'
 
 const visaType = [
   {
