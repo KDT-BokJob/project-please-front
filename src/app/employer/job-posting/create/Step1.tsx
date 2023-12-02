@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Checkbox } from '@/components/ui/checkbox'
+import { cn } from '@/lib/utils'
 
 const profileData = {
   company_id: 1234,
@@ -53,114 +54,120 @@ export default function Step1({ ...props }) {
   return (
     <section>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
             control={form.control}
             name="title"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel className="font-semibold ">공고 제목 *</FormLabel>
-                <FormControl>
-                  <Input placeholder="공고 제목을 입력해주세요." {...field} />
-                </FormControl>
-                <FormDescription>10자 이상 입력해주세요.</FormDescription>
-                <FormMessage />
-              </FormItem>
+              <div className="h-28">
+                <FormItem>
+                  <FormLabel className="font-semibold ">공고 제목 *</FormLabel>
+                  <FormControl>
+                    <Input placeholder="공고 제목을 입력해주세요." {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              </div>
             )}
           />
           <FormField
             control={form.control}
             name="name"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel className="font-semibold ">기업명 *</FormLabel>
-                <FormControl>
-                  <Input placeholder="기업명을 입력해주세요." {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
+              <div className="h-[108px]">
+                <FormItem>
+                  <FormLabel className="font-semibold ">기업명 *</FormLabel>
+                  <FormControl>
+                    <Input placeholder="기업명을 입력해주세요." {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              </div>
             )}
           />
           <FormField
             control={form.control}
             name="phone"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel className="font-semibold ">연락처 *</FormLabel>
-                <FormControl>
-                  <Input placeholder="연락처를 입력해주세요." {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
+              <div className="h-[108px]">
+                <FormItem>
+                  <FormLabel className="font-semibold ">연락처 *</FormLabel>
+                  <FormControl>
+                    <Input placeholder="연락처를 입력해주세요." {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              </div>
             )}
           />
           <FormField
             control={form.control}
             name="gender"
             render={({ field }) => (
-              <FormItem className="space-y-3">
-                <FormLabel className="font-semibold ">채용 성별</FormLabel>
-                <FormControl>
-                  <RadioGroup onValueChange={field.onChange} className="flex items-center gap-4">
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="male" />
-                      </FormControl>
-                      <FormLabel className="font-normal">남자</FormLabel>
-                    </FormItem>
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="female" />
-                      </FormControl>
-                      <FormLabel className="font-normal">여자</FormLabel>
-                    </FormItem>
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="any" />
-                      </FormControl>
-                      <FormLabel className="font-normal">성별무관</FormLabel>
-                    </FormItem>
-                  </RadioGroup>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
+              <div className="h-[84px] mb-2">
+                <FormItem className="space-y-3">
+                  <FormLabel className="font-semibold ">채용 성별</FormLabel>
+                  <FormControl>
+                    <RadioGroup onValueChange={field.onChange} className="flex items-center gap-4">
+                      <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value="male" />
+                        </FormControl>
+                        <FormLabel className="font-normal">남자</FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value="female" />
+                        </FormControl>
+                        <FormLabel className="font-normal">여자</FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value="any" />
+                        </FormControl>
+                        <FormLabel className="font-normal">성별무관</FormLabel>
+                      </FormItem>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              </div>
             )}
           />
           <FormField
             control={form.control}
             name="availableVisa"
             render={() => (
-              <FormItem>
-                <div className="mb-4">
+              <div className="h-[176px]">
+                <FormItem>
                   <FormLabel className="font-semibold ">지원가능 비자</FormLabel>
-                  <FormDescription>지원 가능 비자를 한 개 이상 선택해주세요.</FormDescription>
-                </div>
-                {visas.map((item) => (
-                  <FormField
-                    key={item.id}
-                    control={form.control}
-                    name="availableVisa"
-                    render={({ field }) => {
-                      return (
-                        <FormItem key={item.id} className="flex flex-row items-start space-x-3 space-y-0">
-                          <FormControl>
-                            <Checkbox
-                              checked={field.value?.includes(item.id)}
-                              onCheckedChange={(checked) => {
-                                return checked
-                                  ? field.onChange([...field.value, item.id])
-                                  : field.onChange(field.value?.filter((value) => value !== item.id))
-                              }}
-                            />
-                          </FormControl>
-                          <FormLabel className="font-normal">{item.label}</FormLabel>
-                        </FormItem>
-                      )
-                    }}
-                  />
-                ))}
-                <FormMessage />
-              </FormItem>
+                  {visas.map((item) => (
+                    <FormField
+                      key={item.id}
+                      control={form.control}
+                      name="availableVisa"
+                      render={({ field }) => {
+                        return (
+                          <FormItem key={item.id} className="flex flex-row items-start space-x-3 space-y-0">
+                            <FormControl>
+                              <Checkbox
+                                checked={field.value?.includes(item.id)}
+                                onCheckedChange={(checked) => {
+                                  return checked
+                                    ? field.onChange([...field.value, item.id])
+                                    : field.onChange(field.value?.filter((value) => value !== item.id))
+                                }}
+                              />
+                            </FormControl>
+                            <FormLabel className="font-normal">{item.label}</FormLabel>
+                          </FormItem>
+                        )
+                      }}
+                    />
+                  ))}
+                  <FormMessage />
+                </FormItem>
+              </div>
             )}
           />
           <FormField

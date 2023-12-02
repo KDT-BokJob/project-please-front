@@ -1,11 +1,12 @@
 'use client'
-import Header from '@/components/ui/Header'
-import { Button } from '@/components/ui/button'
-import { useState } from 'react'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import JobPostingCard from '@/components/job-posting-card'
-import { CreateIcon } from '@/lib/icons'
 import Link from 'next/link'
+import { useState } from 'react'
+
+import JobPostingCard from '@/components/job-posting-card'
+import { Button } from '@/components/ui/button'
+import Header from '@/components/ui/Header'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { CreateIcon } from '@/lib/icons'
 
 const recruits = [
   {
@@ -68,7 +69,7 @@ function page() {
 
           <TabsContent className="space-y-4" value="all">
             {recruits.map((recruit) => {
-              return <JobPostingCard recruit={recruit} activateDelete={activateDeleteBtn} />
+              return <JobPostingCard key={recruit.title} recruit={recruit} activateDelete={activateDeleteBtn} />
             })}
           </TabsContent>
           <TabsContent value="ongoing"></TabsContent>
