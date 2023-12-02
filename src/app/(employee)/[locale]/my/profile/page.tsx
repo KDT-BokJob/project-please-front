@@ -52,16 +52,16 @@ export default async function MyProfile({ params: { locale } }: { params: { loca
           {/* 이력서 */}
           <Link
             href="/resume/profile"
-            className="block w-full rounded-none p-0 h-auto border-b border-base-secondary-normal cursor-pointer hover:text-brand-primary-normal"
+            className="block w-full h-auto p-0 border-b rounded-none cursor-pointer border-base-secondary-normal hover:text-brand-primary-normal"
           >
-            <span className="flex ml-10 py-3 items-center gap-9">
+            <span className="flex items-center py-3 ml-10 gap-9">
               <DefaultProfile size="30" />
               <p>{t('Resume')}</p>
             </span>
           </Link>
           {/* 푸쉬 알람 */}
-          <div className="block w-full rounded-none p-0 h-auto border-b border-base-secondary-normal cursor-pointer hover:text-brand-primary-normal">
-            <span className="flex ml-10 py-3 items-center gap-9">
+          <div className="block w-full h-auto p-0 border-b rounded-none cursor-pointer border-base-secondary-normal hover:text-brand-primary-normal">
+            <span className="flex items-center py-3 ml-10 gap-9">
               <OutlineBellIcon size="30" />
               <p>{t('Push Notifications')}</p>
             </span>
@@ -69,9 +69,9 @@ export default async function MyProfile({ params: { locale } }: { params: { loca
           {/* 북마크 */}
           <Link
             href="bookmarks"
-            className="block w-full rounded-none p-0 h-auto border-b border-base-secondary-normal cursor-pointer hover:text-brand-primary-normal"
+            className="block w-full h-auto p-0 border-b rounded-none cursor-pointer border-base-secondary-normal hover:text-brand-primary-normal"
           >
-            <span className="flex ml-10 py-3 items-center gap-9">
+            <span className="flex items-center py-3 ml-10 gap-9">
               <OutlineBookmarkIcon size="30" />
               <p>{t('Bookmarks')}</p>
             </span>
@@ -79,8 +79,8 @@ export default async function MyProfile({ params: { locale } }: { params: { loca
           {/* 언어 선택 */}
           <Dialog>
             <DialogTrigger asChild>
-              <div className="block w-full rounded-none p-0 h-auto border-b border-base-secondary-normal cursor-pointer hover:text-brand-primary-normal">
-                <span className="flex ml-10 py-3 items-center gap-9">
+              <div className="block w-full h-auto p-0 border-b rounded-none cursor-pointer border-base-secondary-normal hover:text-brand-primary-normal">
+                <span className="flex items-center py-3 ml-10 gap-9">
                   <LanguageIcon size="30" />
                   <p>{t('Language')}</p>
                 </span>
@@ -103,7 +103,7 @@ export default async function MyProfile({ params: { locale } }: { params: { loca
                   </p>
                 ))}
               </div>
-              <DialogFooter className="flex flex-row justify-center sm:justify-center gap-8">
+              <DialogFooter className="flex flex-row justify-center gap-8 sm:justify-center">
                 <DialogClose asChild>
                   <Button className="w-24 h-12 rounded-lg font-bold text-base border border-brand-primary-normal text-brand-primary-normal bg-base-bright-light shadow-md">
                     {t('Cancle')}

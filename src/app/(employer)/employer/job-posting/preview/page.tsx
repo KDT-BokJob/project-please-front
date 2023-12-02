@@ -36,7 +36,7 @@ const jobData = {
 
 function Detail({ type, value, className }: { type: string; value: any; className?: string }) {
   return (
-    <span className="flex w-full justify-between">
+    <span className="flex justify-between w-full">
       <p className={`font-semibold text-sm ${className}`}>{type}</p>
       <p className="text-sm text-base-secondary-dark">{value}</p>
     </span>
@@ -55,13 +55,13 @@ export default function EmpoyerJobPostingPreviewPage() {
             src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"
             alt="Photo by Drew Beamer"
             fill
-            className="rounded-md object-cover shadow-lg"
+            className="object-cover rounded-md shadow-lg"
           />
         </AspectRatio>
       </div>
-      <div className="px-6 flex flex-col gap-8 mb-8">
+      <div className="flex flex-col gap-8 px-6 mb-8">
         <div>
-          <h1 className="font-bold text-xl">{jobData.title}</h1>
+          <h1 className="text-xl font-bold">{jobData.title}</h1>
           <Detail className="text-base-secondary-light" type="복잡한 코딩" value={`~${jobData.expired_at}`} />
         </div>
         <div className="flex flex-col gap-2">
@@ -108,7 +108,7 @@ export default function EmpoyerJobPostingPreviewPage() {
           <hr />
           <Detail className="text-brand-primary-normal" type="요일" value={jobData.work_days_week} />
           {jobData.is_work_week_agreement ? (
-            <p className="text-xs text-base-secondary-light text-right">*협의 가능</p>
+            <p className="text-xs text-right text-base-secondary-light">*협의 가능</p>
           ) : (
             <></>
           )}
@@ -119,7 +119,7 @@ export default function EmpoyerJobPostingPreviewPage() {
             value={`${jobData.work_start_hour} - ${jobData.work_end_hour}`}
           />
           {jobData.is_work_time_agreement ? (
-            <p className="text-xs text-base-secondary-light text-right">*협의 가능</p>
+            <p className="text-xs text-right text-base-secondary-light">*협의 가능</p>
           ) : (
             <></>
           )}
@@ -134,11 +134,11 @@ export default function EmpoyerJobPostingPreviewPage() {
           <hr />
         </div>
         <div className="flex flex-col">
-          <h2 className="font-bold text-lg text-base-primary-normal">Job Description</h2>
+          <h2 className="text-lg font-bold text-base-primary-normal">Job Description</h2>
           <p>{jobData.content}</p>
         </div>
         <span className="flex justify-center gap-2">
-          <Button className="w-2/3 h-12 rounded-lg font-bold text-base text-base-bright-light bg-brand-primary-normal shadow-md">
+          <Button className="w-2/3 h-12 text-base font-bold rounded-lg shadow-md text-base-bright-light bg-brand-primary-normal">
             수정하기
           </Button>
         </span>

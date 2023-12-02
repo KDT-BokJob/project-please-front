@@ -68,7 +68,7 @@ export default function page({ params: { locale } }: { params: { locale: string 
               <Button
                 variant={'delete'}
                 size={'mini'}
-                className="absolute right-0 top-0"
+                className="absolute top-0 right-0"
                 onClick={() => removeWorkExperience(field)}
               >
                 <CloseIcon size={'1.25rem'} />

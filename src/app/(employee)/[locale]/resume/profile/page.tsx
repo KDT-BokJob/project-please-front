@@ -90,7 +90,7 @@ export default function page({ params: { locale } }: { params: { locale: string 
                 <FormItem>
                   <FormLabel
                     htmlFor="avatar-image-file"
-                    className="inline-block absolute right-0 bottom-0 bg-base-secondary-dark h-6 rounded-full p-1 cursor-pointer"
+                    className="absolute bottom-0 right-0 inline-block h-6 p-1 rounded-full cursor-pointer bg-base-secondary-dark"
                   >
                     <Camera size={'1rem'} className={cn('text-base-bright-light ')} />
                   </FormLabel>

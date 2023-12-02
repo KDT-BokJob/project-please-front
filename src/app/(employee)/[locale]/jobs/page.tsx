@@ -218,7 +218,7 @@ export default function JobsPage({ params: { locale } }: { params: { locale: str
                   )}
                 </div>
               </div>
-              <DialogFooter className="flex flex-row justify-center sm:justify-center gap-8 pl-6">
+              <DialogFooter className="flex flex-row justify-center gap-8 pl-6 sm:justify-center">
                 <DialogClose asChild>
                   <Button className="h-12 rounded-lg font-bold text-base border border-brand-primary-normal text-brand-primary-normal bg-base-bright-light shadow-md">
                     {tl.current('Reset')}
@@ -277,7 +277,7 @@ export default function JobsPage({ params: { locale } }: { params: { locale: str
                   )}
                 </div>
               </div>
-              <DialogFooter className="flex flex-row justify-center sm:justify-center gap-8 pl-6">
+              <DialogFooter className="flex flex-row justify-center gap-8 pl-6 sm:justify-center">
                 <DialogClose asChild>
                   <Button className="h-12 rounded-lg font-bold text-base border border-brand-primary-normal text-brand-primary-normal bg-base-bright-light shadow-md">
                     {tl.current('Reset')}
@@ -296,7 +296,7 @@ export default function JobsPage({ params: { locale } }: { params: { locale: str
           {tl.current('Search')}
         </Button>
       </section>
-      <section className="px-6 flex flex-col gap-4 overflow-x-hidden pb-14">
+      <section className="flex flex-col gap-4 px-6 overflow-x-hidden pb-14">
         <Tabs defaultValue="recentlyView" className="w-full">
           <TabsList>
             <TabsTrigger value="recentlyView">{tl.current('Recently viewed')}</TabsTrigger>

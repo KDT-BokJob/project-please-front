@@ -22,8 +22,37 @@ const availableWorkDaysSchema = () => {
     message: '근무 요일을 하루 이상 선택해주세요.',
   })
 }
+const countSchema = () => {
+  return z.coerce.number({ required_error: '모집인원을 입력해주세요.' }).refine(
+    (value) => {
+      if (typeof value !== 'number') {
+        throw new Error('숫자를 입력해주세요')
+      }
+      return true
+    },
+    {
+      message: '숫자를 입력해주세요',
+    },
+  )
+}
+const SalarySchema = () => {
+  return z.coerce.number({ required_error: '급여를 입력해주세요.' }).refine(
+    (value) => {
+      if (typeof value !== 'number') {
+        throw new Error('숫자를 입력해주세요')
+      }
+      return true
+    },
+    {
+      message: '숫자를 입력해주세요',
+    },
+  )
+}
 export const jobPostingFormSchema = z.object({
-  title: z.string().min(7).max(60),
+  title: z
+    .string({ required_error: '필수입력' })
+    .min(10, { message: '10자 이상 입력해주세요.' })
+    .max(60, { message: '60자 이하로 작성해주세요.' }),
   name: z.string().min(2).max(40),
   phone: phoneNumberSchema(),
   gender: genderSchema(),
@@ -33,9 +62,9 @@ export const jobPostingFormSchema = z.object({
 
 export const jobPostingFormSchema2 = z.object({
   prefered_nationality: z.string({ required_error: '희망하는 국적을 선택해주세요.' }),
-  count: z.number({ required_error: '모집인원 수를 작성해주세요.' }).nonnegative(),  //수정필요
-  salary_type: z.string({ required_error: '급여 종류를 선택해주세요.' }), //수정필요
-  salary: z.number({ required_error: '급여를 입력해주세요.' }),//수정필요
+  count: countSchema(),
+  salary_type: z.string({ required_error: '필수선택' }), //수정필요
+  salary: SalarySchema(),
   work_type: z.string({ required_error: '근무 형태를 선택해주세요.' }),
   work_period: z.object({
     from: z.date({ required_error: '시작일을 선택해주세요.' }),
@@ -45,8 +74,8 @@ export const jobPostingFormSchema2 = z.object({
   work_days: availableWorkDaysSchema(),
   work_start_hour: z.string({ required_error: '근로 시작 시간을 선택해주세요.' }),
   work_end_hour: z.string({ required_error: '근로 마감 시간을 선택해주세요.' }),
-  is_worktime_flexible: z.boolean(),
-  is_workperiod_flexible: z.boolean(),
+  is_worktime_flexible: z.coerce.boolean(),
+  is_workperiod_flexible: z.coerce.boolean(),
   work_location: z.string({ required_error: '근무 장소를 입력해주세요.' }),
 })
 

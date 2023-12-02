@@ -30,7 +30,7 @@ export default function page({ params: { locale } }: { params: { locale: string 
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+    console.log(values.visa)
   }
   if (!tl.current) return null
 

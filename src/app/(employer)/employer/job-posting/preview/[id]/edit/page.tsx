@@ -123,7 +123,7 @@ const formSchema = jobPostingFormPreview
 
 function Detail({ type, value, className }: { type: string; value: any; className?: string }) {
   return (
-    <span className="flex w-full justify-between">
+    <span className="flex justify-between w-full">
       <p className={`font-semibold text-sm ${className}`}>{type}</p>
       <p className="text-sm text-base-secondary-dark">{value}</p>
     </span>
@@ -174,7 +174,7 @@ export default function EmpoyerJobPostingPreviewEditPage() {
             src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"
             alt="Photo by Drew Beamer"
             fill
-            className="rounded-md object-cover shadow-lg"
+            className="object-cover rounded-md shadow-lg"
           />
         </AspectRatio>
       </div>
@@ -188,7 +188,7 @@ export default function EmpoyerJobPostingPreviewEditPage() {
                 <FormItem className="space-y-0">
                   <FormControl>
                     <Input
-                      className="font-bold text-xl border-none focus-visible:ring-opacity-0 p-0 h-auto"
+                      className="h-auto p-0 text-xl font-bold border-none focus-visible:ring-opacity-0"
                       placeholder="공고 제목을 입력해주세요."
                       {...field}
                     />
@@ -205,7 +205,7 @@ export default function EmpoyerJobPostingPreviewEditPage() {
                   <FormItem>
                     <FormControl>
                       <Input
-                        className="text-base-secondary-light font-semibold text-sm border-none focus-visible:ring-opacity-0 h-0 px-0"
+                        className="h-0 px-0 text-sm font-semibold border-none text-base-secondary-light focus-visible:ring-opacity-0"
                         placeholder="기업명을 입력해주세요."
                         {...field}
                       />
@@ -221,7 +221,7 @@ export default function EmpoyerJobPostingPreviewEditPage() {
                   <FormItem>
                     <FormControl>
                       <Input
-                        className="border-none focus-visible:ring-opacity-0 h-0 text-right px-0"
+                        className="h-0 px-0 text-right border-none focus-visible:ring-opacity-0"
                         placeholder="공고 마감일을 입력해주세요."
                         {...field}
                       />
@@ -236,14 +236,14 @@ export default function EmpoyerJobPostingPreviewEditPage() {
             control={form.control}
             name="job"
             render={({ field }) => (
-              <FormItem className="flex justify-between items-center space-y-0">
+              <FormItem className="flex items-center justify-between space-y-0">
                 <span className="flex gap-2">
                   <BriefcaseIcon />
-                  <FormLabel className="font-semibold text-sm pl-3 text-brand-primary-normal px-0">제조업</FormLabel>
+                  <FormLabel className="px-0 pl-3 text-sm font-semibold text-brand-primary-normal">제조업</FormLabel>
                 </span>
                 <FormControl>
                   <Input
-                    className="inline-block w-fit border-none focus-visible:ring-opacity-0 h-0 text-right px-0"
+                    className="inline-block h-0 px-0 text-right border-none w-fit focus-visible:ring-opacity-0"
                     placeholder="직무를 입력해주세요."
                     {...field}
                   />
@@ -257,14 +257,14 @@ export default function EmpoyerJobPostingPreviewEditPage() {
             control={form.control}
             name="visa_type"
             render={({ field }) => (
-              <FormItem className="flex justify-between items-center space-y-0">
+              <FormItem className="flex items-center justify-between space-y-0">
                 <span className="flex gap-2">
                   <VisaIcon />
-                  <FormLabel className="font-semibold text-sm pl-3 text-brand-primary-normal px-0">비자</FormLabel>
+                  <FormLabel className="px-0 pl-3 text-sm font-semibold text-brand-primary-normal">비자</FormLabel>
                 </span>
                 <FormControl>
                   <Input
-                    className="inline-block w-fit border-none focus-visible:ring-opacity-0 h-0 text-right px-0"
+                    className="inline-block h-0 px-0 text-right border-none w-fit focus-visible:ring-opacity-0"
                     placeholder="비자를 입력해주세요."
                     {...field}
                   />
@@ -278,10 +278,10 @@ export default function EmpoyerJobPostingPreviewEditPage() {
             control={form.control}
             name="isVisa_transform"
             render={({ field }) => (
-              <FormItem className="flex justify-between items-center space-y-0">
+              <FormItem className="flex items-center justify-between space-y-0">
                 <span className="flex gap-2">
                   <ReloadIcon />
-                  <FormLabel className="font-semibold text-sm pl-3 text-brand-primary-normal px-0">비자 전환</FormLabel>
+                  <FormLabel className="px-0 pl-3 text-sm font-semibold text-brand-primary-normal">비자 전환</FormLabel>
                 </span>
                 <FormControl>
                   <RadioGroup
@@ -322,14 +322,14 @@ export default function EmpoyerJobPostingPreviewEditPage() {
               control={form.control}
               name="salary"
               render={({ field }) => (
-                <FormItem className="flex justify-between items-center space-y-0 w-full">
+                <FormItem className="flex items-center justify-between w-full space-y-0">
                   <span className="flex gap-2">
                     <KRWIcon />
-                    <FormLabel className="font-semibold text-sm pl-3 text-brand-primary-normal px-0">급여</FormLabel>
+                    <FormLabel className="px-0 pl-3 text-sm font-semibold text-brand-primary-normal">급여</FormLabel>
                   </span>
                   <FormControl>
                     <Input
-                      className="inline-block w-fit border-none focus-visible:ring-opacity-0 h-0 text-right"
+                      className="inline-block h-0 text-right border-none w-fit focus-visible:ring-opacity-0"
                       placeholder="급여를 입력해주세요."
                       {...field}
                     />
@@ -361,13 +361,13 @@ export default function EmpoyerJobPostingPreviewEditPage() {
               )}
             />
           </span>
-          <p className="font-semibold mt-8">근무 조건</p>
+          <p className="mt-8 font-semibold">근무 조건</p>
           <div className="flex flex-col">
             <FormField
               control={form.control}
               name="work_period"
               render={({ field }) => (
-                <FormItem className="flex justify-between items-center w-full space-y-0">
+                <FormItem className="flex items-center justify-between w-full space-y-0">
                   <FormLabel className="text-sm font-semibold text-brand-primary-normal">기간</FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
@@ -431,7 +431,7 @@ export default function EmpoyerJobPostingPreviewEditPage() {
               return (
                 <FormItem>
                   <span className="flex items-center justify-between">
-                    <FormLabel className="font-semibold pt-1 text-brand-primary-normal">요일</FormLabel>
+                    <FormLabel className="pt-1 font-semibold text-brand-primary-normal">요일</FormLabel>
                     <p>주 {field.value.length}일</p>
                   </span>
 
@@ -544,7 +544,7 @@ export default function EmpoyerJobPostingPreviewEditPage() {
             control={form.control}
             name="prefered_nationality"
             render={({ field }) => (
-              <FormItem className="flex justify-between items-center">
+              <FormItem className="flex items-center justify-between">
                 <FormLabel className="font-semibold text-brand-primary-normal">희망 국적</FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>
@@ -595,7 +595,7 @@ export default function EmpoyerJobPostingPreviewEditPage() {
             control={form.control}
             name="gender"
             render={({ field }) => (
-              <FormItem className="space-y-0 flex items-center justify-between">
+              <FormItem className="flex items-center justify-between space-y-0">
                 <FormLabel className="font-semibold text-brand-primary-normal">모집 성별</FormLabel>
                 <FormControl>
                   <RadioGroup
@@ -632,11 +632,11 @@ export default function EmpoyerJobPostingPreviewEditPage() {
             control={form.control}
             name="count"
             render={({ field }) => (
-              <FormItem className="flex justify-between items-center space-y-0">
+              <FormItem className="flex items-center justify-between space-y-0">
                 <FormLabel className="font-semibold min-w-[60px] text-brand-primary-normal">모집 인원</FormLabel>
                 <FormControl>
                   <Input
-                    className="border-none focus-visible:ring-opacity-0 h-0 text-right"
+                    className="h-0 text-right border-none focus-visible:ring-opacity-0"
                     placeholder="모집인원 수를 입력해주세요."
                     {...field}
                   />
@@ -650,11 +650,11 @@ export default function EmpoyerJobPostingPreviewEditPage() {
             control={form.control}
             name="work_location"
             render={({ field }) => (
-              <FormItem className="flex justify-between items-center space-y-0">
+              <FormItem className="flex items-center justify-between space-y-0">
                 <FormLabel className="font-semibold min-w-[60px] text-brand-primary-normal">위치</FormLabel>
                 <FormControl>
                   <Input
-                    className="border-none focus-visible:ring-opacity-0 h-0 text-right"
+                    className="h-0 text-right border-none focus-visible:ring-opacity-0"
                     placeholder="지번, 도로명, 건물명을 입력해주세요."
                     {...field}
                   />
@@ -665,12 +665,12 @@ export default function EmpoyerJobPostingPreviewEditPage() {
           />
           <hr />
           <div className="flex flex-col">
-            <h2 className="font-bold text-lg text-base-primary-normal">Job Description</h2>
+            <h2 className="text-lg font-bold text-base-primary-normal">Job Description</h2>
             <p>{jobData.content}</p>
           </div>
           <span className="flex justify-center gap-2">
             <Button
-              className="w-2/3 h-12 rounded-lg font-bold text-base text-base-bright-light bg-brand-primary-normal shadow-md"
+              className="w-2/3 h-12 text-base font-bold rounded-lg shadow-md text-base-bright-light bg-brand-primary-normal"
               type="submit"
               size="lg"
             >

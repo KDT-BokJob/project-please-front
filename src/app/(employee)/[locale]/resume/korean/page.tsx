@@ -127,7 +127,7 @@ export default function page({ params: { locale } }: { params: { locale: string 
           {/* Visa */}
           <FormLabel>{tl.current('Topik number')}</FormLabel>
           {/* <div className="flex gap-1 items-center [&>*:not(:first-child)]:before:content-['-']"> */}
-          <div className="flex gap-1 items-center justify-start">
+          <div className="flex items-center justify-start gap-1">
             {Object.keys(formSchema._def.options[0]._def.schema.shape)
               .slice(0, 4)
               .map((key, index: number) => (
@@ -156,7 +156,7 @@ export default function page({ params: { locale } }: { params: { locale: string 
             <Button
               type="button"
               variant={'outline'}
-              className="px-2 w-full"
+              className="w-full px-2"
               size={'mini'}
               onClick={() => !isTopik && setIsNoToplk(!isNoToplk)}
             >
