@@ -1,6 +1,7 @@
+import React from 'react'
+
 import { Card } from '@/components/ui/card'
 import { CheckedBookmarkIcon, NextIcon, OutlineBookmarkIcon } from '@/lib/icons'
-import React from 'react'
 
 const getAge = (birth: any) => {
   const currentYear = new Date().getFullYear()
@@ -24,7 +25,9 @@ function RecruitCard({ recruit }: { recruit: any }) {
         <div className="flex items-center mt-1 text-sm">
           <p className="mr-1 px-[0.5rem] py-[0.1rem] text-xs border-2 rounded-full border-brand-primary-normal">국적</p>
           <p className="">{recruit.nationality}</p>
-          <p className="mr-1 ml-2 px-[0.5rem] py-[0.1rem] text-xs border-2 rounded-full border-brand-primary-normal">비자</p>
+          <p className="mr-1 ml-2 px-[0.5rem] py-[0.1rem] text-xs border-2 rounded-full border-brand-primary-normal">
+            비자
+          </p>
           <p> {recruit.visa_type}</p>
         </div>
       </div>

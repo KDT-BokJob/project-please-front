@@ -1,8 +1,8 @@
-import { KRWIcon, CheckedBookmarkIcon, OutlineBookmarkIcon, MapIcon, BriefcaseIcon, JobFactoryIcon } from '@/lib/icons'
+import { BriefcaseIcon, CheckedBookmarkIcon, JobFactoryIcon, KRWIcon, MapIcon, OutlineBookmarkIcon } from '@/lib/icons'
 
 export default function JobCard({ recruit, children }: { recruit: any; children?: React.ReactNode }) {
   return (
-    <div className="relative flex flex-col gap-1 bg-base-bright-normal p-5 rounded-xl shadow-md">
+    <div className="relative flex flex-col gap-1 p-5 shadow-md bg-base-bright-normal rounded-xl">
       {recruit.bookmark ? (
         <CheckedBookmarkIcon className="absolute top-0 right-3" color="#3CB371" size="20" />
       ) : (
@@ -24,11 +24,11 @@ export default function JobCard({ recruit, children }: { recruit: any; children?
         <MapIcon size="18" />
         <p className="text-xs ">{recruit.work_location}</p>
       </span>
-      <span className="w-3/4 grid grid-cols-3 gap-1 mt-2">
+      <span className="grid w-3/4 grid-cols-3 gap-1 mt-2">
         {recruit.visa_type.map((type: any) => (
           <p
             key={type}
-            className="inline-block py-1 border-2 text-xs text-center bg-base-bright-light border-brand-secondary-light rounded-full"
+            className="inline-block py-1 text-xs text-center border-2 rounded-full bg-base-bright-light border-brand-secondary-light"
           >
             {type}
           </p>

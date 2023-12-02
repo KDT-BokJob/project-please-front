@@ -1,7 +1,7 @@
-import { cn } from '@/lib/utils'
 import { Card, CardHeader, CardTitle } from '@/components/ui/card'
 import { NextIcon } from '@/lib/icons'
 import { AlarmDot } from '@/lib/icons'
+import { cn } from '@/lib/utils'
 
 const jobPosting = [
   { title: '복잡한코딩 프론트엔드 개발자 모집', deadline: 12 },

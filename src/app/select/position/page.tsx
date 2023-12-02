@@ -1,5 +1,5 @@
-import { EmployeeIcon, EmployerIcon, ChevronRight } from '@/lib/icons'
 import { Button } from '@/components/ui/button'
+import { ChevronRight, EmployeeIcon, EmployerIcon } from '@/lib/icons'
 
 export default function SelectPositionPage() {
   return (

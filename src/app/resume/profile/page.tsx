@@ -1,20 +1,21 @@
 'use client'
-import { Button } from '@/components/ui/button'
-import { CalendarIcon, Camera, DefaultProfile } from '@/lib/icons'
-import { cn } from '@/lib/utils'
-import React, { useState } from 'react'
-import { format } from 'date-fns'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { format } from 'date-fns'
+import Image from 'next/image'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+
+import { Button } from '@/components/ui/button'
+import { Calendar } from '@/components/ui/calendar'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { Calendar } from '@/components/ui/calendar'
-import { resumeProfileFormSchema } from '@/lib/zod-schema/resume/profile'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { Checkbox } from '@/components/ui/checkbox'
-import Image from 'next/image'
+import { CalendarIcon, Camera, DefaultProfile } from '@/lib/icons'
+import { cn } from '@/lib/utils'
+import { resumeProfileFormSchema } from '@/lib/zod-schema/resume/profile'
 
 const formSchema = resumeProfileFormSchema
 
@@ -76,7 +77,7 @@ export default function page() {
                 <FormItem>
                   <FormLabel
                     htmlFor="avatar-image-file"
-                    className="inline-block absolute right-0 bottom-0 bg-base-secondary-dark h-6 rounded-full p-1 cursor-pointer"
+                    className="absolute bottom-0 right-0 inline-block h-6 p-1 rounded-full cursor-pointer bg-base-secondary-dark"
                   >
                     <Camera size={'1rem'} className={cn('text-base-bright-light ')} />
                   </FormLabel>

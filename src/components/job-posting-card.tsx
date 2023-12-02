@@ -1,14 +1,4 @@
-import { Button } from '@/components/ui/button'
-import {
-  KRWIcon,
-  CheckedBookmarkIcon,
-  OutlineBookmarkIcon,
-  MapIcon,
-  BriefcaseIcon,
-  JobFactoryIcon,
-  NextIcon,
-  Xmark,
-} from '@/lib/icons'
+import { BriefcaseIcon, KRWIcon, MapIcon, NextIcon, Xmark } from '@/lib/icons'
 
 export default function JobPostingCard({ recruit, activateDelete }: { recruit: any; activateDelete?: boolean }) {
   return (

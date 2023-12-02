@@ -1,6 +1,6 @@
-import Header from '@/components/ui/Header'
 import JobCard from '@/components/job-card'
 import { Button } from '@/components/ui/button'
+import Header from '@/components/ui/Header'
 import { PencilIcon } from '@/lib/icons'
 
 const jobData = [
@@ -82,11 +82,11 @@ export default function ApplicationPage() {
   return (
     <>
       <Header headline="Application" />
-      <div className="flex flex-col justify-center gap-4 mt-14 mb-20 px-8 pb-20">
+      <div className="flex flex-col justify-center gap-4 px-8 pb-20 mb-20 mt-14">
         {jobData.map((recruit) => (
           <div key={recruit.recruit_id}>
             <JobCard recruit={recruit}>
-              <Button className="absolute right-1 bottom-5 rounded-full text-xs px-0 font-normal h-7 w-20 gap-1">
+              <Button className="absolute w-20 gap-1 px-0 text-xs font-normal rounded-full right-1 bottom-5 h-7">
                 Review
                 <PencilIcon />
               </Button>

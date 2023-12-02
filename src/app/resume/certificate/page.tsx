@@ -1,17 +1,17 @@
 'use client'
-import { Button } from '@/components/ui/button'
-import { CalendarIcon, CloseIcon, PlusIcon } from '@/lib/icons'
-import { resumeWorkExperienceFormSchema } from '@/lib/zod-schema/resume/work-experience'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { format } from 'date-fns'
 import React from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { format } from 'date-fns'
+
+import { Button } from '@/components/ui/button'
+import { Calendar } from '@/components/ui/calendar'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { CalendarIcon, CloseIcon, PlusIcon } from '@/lib/icons'
 import { cn } from '@/lib/utils'
-import { Calendar } from '@/components/ui/calendar'
 import { resumeCertificationFormSchema } from '@/lib/zod-schema/resume/certification'
 
 const formSchema = resumeCertificationFormSchema
@@ -54,7 +54,7 @@ export default function page() {
               <Button
                 variant={'delete'}
                 size={'mini'}
-                className="absolute right-0 top-0"
+                className="absolute top-0 right-0"
                 onClick={() => removeWorkExperience(field)}
               >
                 <CloseIcon size={'1.25rem'} />

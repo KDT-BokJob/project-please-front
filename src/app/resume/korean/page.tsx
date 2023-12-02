@@ -1,14 +1,14 @@
 'use client'
-import { Button } from '@/components/ui/button'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { cn } from '@/lib/utils'
-import { resumeKoreanSkillFormSchema } from '@/lib/zod-schema/resume/korean-skill'
 import { zodResolver } from '@hookform/resolvers/zod'
 import React, { useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+
+import { Button } from '@/components/ui/button'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { resumeKoreanSkillFormSchema } from '@/lib/zod-schema/resume/korean-skill'
 
 const formSchema = resumeKoreanSkillFormSchema
 
@@ -113,7 +113,7 @@ export default function page() {
           {/* Visa */}
           <FormLabel>Topik number</FormLabel>
           {/* <div className="flex gap-1 items-center [&>*:not(:first-child)]:before:content-['-']"> */}
-          <div className="flex gap-1 items-center justify-start">
+          <div className="flex items-center justify-start gap-1">
             {Object.keys(formSchema._def.options[0]._def.schema.shape)
               .slice(0, 4)
               .map((key, index: number) => (
@@ -142,13 +142,13 @@ export default function page() {
             <Button
               type="button"
               variant={'outline'}
-              className="px-2 w-full"
+              className="w-full px-2"
               size={'mini'}
               onClick={() => !isTopik && setIsNoToplk(!isNoToplk)}
             >
               Don't have Topick
             </Button>
-            <Button variant={'outline'} className="px-2 w-full" size={'mini'}>
+            <Button variant={'outline'} className="w-full px-2" size={'mini'}>
               Get Confirm
             </Button>
           </div>

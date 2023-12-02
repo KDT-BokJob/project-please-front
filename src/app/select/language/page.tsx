@@ -1,5 +1,5 @@
-import { Button } from '@/components/ui/button'
 import Country from '@/components/country'
+import { Button } from '@/components/ui/button'
 
 const languageArr = [
   {
@@ -32,7 +32,7 @@ export default function SelectLanguage() {
   return (
     <>
       <section>
-        <h1 className="font-semibold text-2xl text-center">Select Language</h1>
+        <h1 className="text-2xl font-semibold text-center">Select Language</h1>
         <div className="grid grid-cols-2 gap-4 mt-10">
           {languageArr.map((data) => (
             <Button

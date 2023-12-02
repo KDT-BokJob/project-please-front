@@ -1,6 +1,6 @@
-import White from '#/white-handshake.svg'
-import Please from '#/please.svg'
 import Google from '#/google.svg'
+import Please from '#/please.svg'
+import White from '#/white-handshake.svg'
 
 export default function SigninPage() {
   return (
@@ -9,9 +9,9 @@ export default function SigninPage() {
         <White />
         <Please />
       </div>
-      <div className="flex items-center gap-4 bg-base-bright-light py-3 px-4 rounded-xl w-72 shadow-md cursor-pointer">
+      <div className="flex items-center gap-4 px-4 py-3 shadow-md cursor-pointer bg-base-bright-light rounded-xl w-72">
         <Google />
-        <h1 className="font-semibold text-lg opacity-60">Log In with Google</h1>
+        <h1 className="text-lg font-semibold opacity-60">Log In with Google</h1>
       </div>
     </>
   )

@@ -1,9 +1,10 @@
-import { DefaultProfile, FilledProfile, OutlineBookmarkIcon, OutlineBellIcon, LanguageIcon } from '@/lib/icons'
-import { Button } from '@/components/ui/button'
-import Header from '@/components/ui/Header'
 import Link from 'next/link'
-import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTrigger } from '@/components/ui/dialog'
+
 import Country from '@/components/country'
+import { Button } from '@/components/ui/button'
+import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTrigger } from '@/components/ui/dialog'
+import Header from '@/components/ui/Header'
+import { DefaultProfile, FilledProfile, LanguageIcon, OutlineBellIcon, OutlineBookmarkIcon } from '@/lib/icons'
 
 const languageArr = [
   {
@@ -40,7 +41,7 @@ export default function MyProfile() {
         <span className="flex gap-6 ml-6 b">
           <FilledProfile size="60" color="#3CB371" />
           <div className="flex flex-col justify-center">
-            <h2 className="font-medium text-2xl text-brand-primary-dark">Tony</h2>
+            <h2 className="text-2xl font-medium text-brand-primary-dark">Tony</h2>
             <p className="label-m text-base-secondary-light">Employee</p>
           </div>
         </span>
@@ -48,16 +49,16 @@ export default function MyProfile() {
           {/* 이력서 */}
           <Link
             href="/resume/profile"
-            className="block w-full rounded-none p-0 h-auto border-b border-base-secondary-normal cursor-pointer hover:text-brand-primary-normal"
+            className="block w-full h-auto p-0 border-b rounded-none cursor-pointer border-base-secondary-normal hover:text-brand-primary-normal"
           >
-            <span className="flex ml-10 py-3 items-center gap-9">
+            <span className="flex items-center py-3 ml-10 gap-9">
               <DefaultProfile size="30" />
               <p>Resume</p>
             </span>
           </Link>
           {/* 푸쉬 알람 */}
-          <div className="block w-full rounded-none p-0 h-auto border-b border-base-secondary-normal cursor-pointer hover:text-brand-primary-normal">
-            <span className="flex ml-10 py-3 items-center gap-9">
+          <div className="block w-full h-auto p-0 border-b rounded-none cursor-pointer border-base-secondary-normal hover:text-brand-primary-normal">
+            <span className="flex items-center py-3 ml-10 gap-9">
               <OutlineBellIcon size="30" />
               <p>Push Notifications</p>
             </span>
@@ -65,9 +66,9 @@ export default function MyProfile() {
           {/* 북마크 */}
           <Link
             href="bookmarks"
-            className="block w-full rounded-none p-0 h-auto border-b border-base-secondary-normal cursor-pointer hover:text-brand-primary-normal"
+            className="block w-full h-auto p-0 border-b rounded-none cursor-pointer border-base-secondary-normal hover:text-brand-primary-normal"
           >
-            <span className="flex ml-10 py-3 items-center gap-9">
+            <span className="flex items-center py-3 ml-10 gap-9">
               <OutlineBookmarkIcon size="30" />
               <p>Bookmarks</p>
             </span>
@@ -75,8 +76,8 @@ export default function MyProfile() {
           {/* 언어 선택 */}
           <Dialog>
             <DialogTrigger asChild>
-              <div className="block w-full rounded-none p-0 h-auto border-b border-base-secondary-normal cursor-pointer hover:text-brand-primary-normal">
-                <span className="flex ml-10 py-3 items-center gap-9">
+              <div className="block w-full h-auto p-0 border-b rounded-none cursor-pointer border-base-secondary-normal hover:text-brand-primary-normal">
+                <span className="flex items-center py-3 ml-10 gap-9">
                   <LanguageIcon size="30" />
                   <p>Language</p>
                 </span>
@@ -99,14 +100,14 @@ export default function MyProfile() {
                   </p>
                 ))}
               </div>
-              <DialogFooter className="flex flex-row justify-center sm:justify-center gap-8">
+              <DialogFooter className="flex flex-row justify-center gap-8 sm:justify-center">
                 <DialogClose asChild>
-                  <Button className="w-24 h-12 rounded-lg font-bold text-base border border-brand-primary-normal text-brand-primary-normal bg-base-bright-light shadow-md">
+                  <Button className="w-24 h-12 text-base font-bold border rounded-lg shadow-md border-brand-primary-normal text-brand-primary-normal bg-base-bright-light">
                     취소
                   </Button>
                 </DialogClose>
                 <DialogClose asChild>
-                  <Button className="w-24 h-12 rounded-lg font-bold text-base text-base-bright-light bg-brand-primary-normal shadow-md">
+                  <Button className="w-24 h-12 text-base font-bold rounded-lg shadow-md text-base-bright-light bg-brand-primary-normal">
                     확인
                   </Button>
                 </DialogClose>
@@ -115,8 +116,8 @@ export default function MyProfile() {
           </Dialog>
         </div>
       </div>
-      <div className="flex flex-col justify-end px-7 mb-10 gap-4">
-        <Button className="w-full h-12 rounded-full font-bold text-base text-base-bright-light bg-brand-primary-normal shadow-md">
+      <div className="flex flex-col justify-end gap-4 mb-10 px-7">
+        <Button className="w-full h-12 text-base font-bold rounded-full shadow-md text-base-bright-light bg-brand-primary-normal">
           Log out
         </Button>
         <span className="flex justify-around paragraph text-base-secondary-light">
