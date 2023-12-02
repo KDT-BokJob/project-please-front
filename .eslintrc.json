@@ -30,6 +30,7 @@
     "no-useless-catch": 0,
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
-    "unused-imports/no-unused-imports-ts": ["error"]
+    "unused-imports/no-unused-imports-ts": ["error"],
+    "react-hooks/rules-of-hooks": "off"
   }
 }

@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import JobPostingCard from '@/components/job-posting-card'
 import { Button } from '@/components/ui/button'
@@ -40,6 +40,23 @@ const recruits = [
 ]
 function page() {
   const [activateDeleteBtn, setActivateDeleteBtn] = useState(false)
+  const [recruitList, setRecruitList] = useState([])
+
+  const getRecruitList = async (companyId: number) => {
+    try {
+      const res = await fetch(`http://localhost:3000/api/recruit/company/list/${companyId}`)
+      const response = await res.json()
+      setRecruitList(response.data)
+    } catch (error) {
+      console.error('기업 공고 데이터 요청에러:', error)
+    }
+  }
+  useEffect(() => {
+    getRecruitList(1)
+  }, [])
+  useEffect(() => {
+    console.log(recruitList)
+  }, recruitList)
   return (
     <>
       <Header headline={'채용공고 관리'} />
@@ -68,9 +85,11 @@ function page() {
           </Button>
 
           <TabsContent className="space-y-4" value="all">
-            {recruits.map((recruit) => {
-              return <JobPostingCard key={recruit.title} recruit={recruit} activateDelete={activateDeleteBtn} />
-            })}
+            {recruitList !== null &&
+              recruitList.map((recruit) => {
+                console.log(recruit)
+                return <JobPostingCard key={recruit.title} recruit={recruit} activateDelete={activateDeleteBtn} />
+              })}
           </TabsContent>
           <TabsContent value="ongoing"></TabsContent>
           <TabsContent value="closed"></TabsContent>

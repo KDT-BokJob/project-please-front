@@ -27,8 +27,19 @@ function Page() {
     }
   }
 
-  getData(1)
+  // getData(1)
 
+  const getApply = async (applyId: number) => {
+    try {
+      const res = await fetch(`http://localhost:3000/api/apply/${applyId}`)
+      const response = await res.json()
+      console.log('applyResponse', JSON.stringify(response.data))
+    } catch (error) {
+      console.log('데이터 에러:', error)
+    }
+  }
+
+  getApply(2)
   return <div>api-test</div>
 }
 

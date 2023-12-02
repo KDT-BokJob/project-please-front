@@ -19,7 +19,7 @@ export async function POST(request: Request) {
   const workType = data.get('workType')
 
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/recruit`, {
+    const res = await fetch('http://kdt-please.store/recruit', {
       headers: { Accept: 'application/json' },
       body: JSON.stringify({
         companyId: companyId,
