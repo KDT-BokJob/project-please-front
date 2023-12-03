@@ -40,6 +40,7 @@ function Page() {
   }
 
   getApply(2)
+
   return <div>api-test</div>
 }
 

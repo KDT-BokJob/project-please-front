@@ -1,6 +1,6 @@
 'use client'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { addDays, format, startOfDay } from 'date-fns'
+import { format } from 'date-fns'
 import { useState } from 'react'
 import React from 'react'
 import { useForm } from 'react-hook-form'
@@ -58,26 +58,31 @@ const prefered_nationality = [
   { label: 'Cambodia', value: 'KH' },
 ]
 const formSchema = jobPostingFormSchema2
-const today = startOfDay(new Date())
 
-function Step2({ ...props }) {
+function Step2({ setFormData, setFormState, formData }: { setFormData: any; setFormState: any; formData: any }) {
   const [isRegularWorker, setIsRegularWorker] = useState(false)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      work_period: {
-        from: today,
-        to: addDays(today, 7),
-      },
-      work_days: [],
-      is_worktime_flexible: false,
-      is_workperiod_flexible: false,
+      prefered_nationality: formData.prefered_nationality,
+      count: formData.count, //모집인원수
+      work_type: formData.work_type, //근무형태
+      salary_type: formData.salary_type,
+      salary: formData.salary,
+      work_start_hour: formData.work_start_hour,
+      work_end_hour: formData.work_end_hour,
+      is_worktime_flexible: formData.is_worktime_flexible,
+      is_workperiod_flexible: formData.is_workperiod_flexible,
+      work_days: formData.work_days,
+      work_period: formData.work_period,
+      work_location: formData.work_location,
     },
   })
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
-    props.setFormState(3)
+    setFormData((prevData: any) => ({ ...prevData, ...values }))
+    setFormState(3)
   }
   return (
     <section>
@@ -87,7 +92,7 @@ function Step2({ ...props }) {
             control={form.control}
             name="prefered_nationality"
             render={({ field }) => (
-              <div className="h-[95px]">
+              <div className="h-[110px]">
                 <FormItem className="flex flex-col">
                   <FormLabel className="font-semibold">근로자 희망국적</FormLabel>
                   <FormDescription>채용하려는 근로자의 국적을 선택해주세요.</FormDescription>
@@ -143,7 +148,6 @@ function Step2({ ...props }) {
             control={form.control}
             name="count"
             render={({ field }) => {
-              console.log(typeof field.value)
               return (
                 <div className="h-[95px]">
                   <FormItem>
@@ -161,7 +165,7 @@ function Step2({ ...props }) {
             control={form.control}
             name="work_type"
             render={({ field }) => (
-              <div className="h-[95px]">
+              <div className="h-[110px]">
                 <FormItem>
                   <FormLabel className="font-semibold ">근무 형태 *</FormLabel>
                   <Select
@@ -200,11 +204,11 @@ function Step2({ ...props }) {
                   <FormItem>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
-                        <SelectTrigger>
+                        <SelectTrigger className="w-[110px]">
                           <SelectValue placeholder="급여 종류" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
+                      <SelectContent className="w-[110px]">
                         <SelectItem value="hour">시급</SelectItem>
                         <SelectItem value="week">주급</SelectItem>
                         <SelectItem value="month">월급</SelectItem>
@@ -219,7 +223,6 @@ function Step2({ ...props }) {
                 control={form.control}
                 name="salary"
                 render={({ field }) => {
-                  console.log(field.value)
                   return (
                     <FormItem>
                       <FormControl>
@@ -237,61 +240,63 @@ function Step2({ ...props }) {
           </div>
           <div className="flex flex-col">
             <p className="mb-3 text-sm font-semibold">근무 시간</p>
-            <div className="flex items-center gap-3">
-              <p className="text-sm font-semibold ">시작</p>
-              <FormField
-                control={form.control}
-                name="work_start_hour"
-                render={({ field }) => (
-                  <FormItem>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger className="w-[8rem] ">
-                          <SelectValue placeholder="시작 시간" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent className="h-60">
-                        {timeOptions.map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <p className="text-sm font-semibold ">마감</p>
-              <FormField
-                control={form.control}
-                name="work_end_hour"
-                render={({ field }) => (
-                  <FormItem>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger className="w-[8rem]">
-                          <SelectValue placeholder="마감 시간" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent className="h-60">
-                        {timeOptions.map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            <div className="h-[70px]">
+              <div className="flex justify-around gap-3">
+                <FormField
+                  control={form.control}
+                  name="work_start_hour"
+                  render={({ field }) => (
+                    <FormItem>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger className="w-[8rem] ">
+                            <SelectValue placeholder="시작 시간" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent className="h-60">
+                          {timeOptions.map((option) => (
+                            <SelectItem key={option.value} value={option.value}>
+                              {option.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <p className="translate-y-2">-</p>
+                <FormField
+                  control={form.control}
+                  name="work_end_hour"
+                  render={({ field }) => (
+                    <FormItem>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger className="w-[8rem]">
+                            <SelectValue placeholder="마감 시간" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent className="h-60">
+                          {timeOptions.map((option) => (
+                            <SelectItem key={option.value} value={option.value}>
+                              {option.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              {/* FormMessage위치 */}
             </div>
             <FormField
               control={form.control}
               name="is_worktime_flexible"
               render={({ field }) => (
-                <FormItem className="flex flex-row items-end gap-2">
+                <FormItem className="flex flex-row items-end gap-2 mb-4 ">
                   <FormControl>
                     <Checkbox checked={field.value} onCheckedChange={field.onChange} />
                   </FormControl>
@@ -307,7 +312,7 @@ function Step2({ ...props }) {
               control={form.control}
               name="work_period"
               render={({ field }) => (
-                <FormItem className="flex flex-col">
+                <FormItem className="flex flex-col h-[80px]">
                   <FormLabel className="font-semibold">근무 기간</FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
@@ -351,7 +356,7 @@ function Step2({ ...props }) {
               control={form.control}
               name="is_workperiod_flexible"
               render={({ field }) => (
-                <FormItem className="flex flex-row items-end gap-2">
+                <FormItem className="flex flex-row items-end gap-2 mb-4">
                   <FormControl>
                     <Checkbox checked={field.value} onCheckedChange={field.onChange} />
                   </FormControl>
@@ -367,7 +372,7 @@ function Step2({ ...props }) {
             control={form.control}
             name="work_days"
             render={() => (
-              <FormItem>
+              <FormItem className="h-[120px]">
                 <div className="mb-4">
                   <FormLabel className="font-semibold ">근무 요일</FormLabel>
                   <FormDescription>근무 요일을 선택해주세요.</FormDescription>
@@ -408,7 +413,7 @@ function Step2({ ...props }) {
             control={form.control}
             name="work_location"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="h-[100px]">
                 <FormLabel className="font-semibold ">근무 장소 *</FormLabel>
                 <FormControl>
                   <Input placeholder="지번, 도로명, 건물명을 입력해주세요." {...field} />
@@ -419,7 +424,7 @@ function Step2({ ...props }) {
             )}
           />
           <div className="flex justify-between">
-            <Button variant={'outline'} onClick={() => props.setFormState(1)} className="w-2/6">
+            <Button variant={'outline'} onClick={() => setFormState(1)} className="w-2/6">
               이전
             </Button>
             <Button type="submit" className="w-3/5">
