@@ -5,14 +5,13 @@ export async function GET(request: NextRequest) {
     // 전체 공고 리스트 조회
     const totalRecruitListRes = await fetch(`http://kdt-please.store/recruit/list?page=1`, {
       headers: {
+        'Content-Type': 'application/json',
         Accept: 'application/json',
       },
     })
     const totalRecruitListData = await totalRecruitListRes.json()
-    console.log(totalRecruitListData)
-    return NextResponse.json({ data: totalRecruitListData, status: 'no' })
+    return NextResponse.json({ data: totalRecruitListData })
   } catch (error) {
-    console.log('??????????', error)
     return NextResponse.error()
   }
 }

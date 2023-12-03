@@ -5,14 +5,13 @@ export async function GET(request: NextRequest, { params }: { params: { recruitI
     const recruitId = params.recruitId
     const applyRecruitListRes = await fetch(`http://kdt-please.store/apply/recruitId/${recruitId}/list?page=1`, {
       headers: {
+        'Content-Type': 'application/json',
         Accept: 'application/json',
       },
     })
     const applyRecruitListData = await applyRecruitListRes.json()
-    console.log(applyRecruitListData)
-    return NextResponse.json({ data: applyRecruitListData, status: 'no' })
+    return NextResponse.json({ data: applyRecruitListData })
   } catch (error) {
-    console.log('??????????', error)
     return NextResponse.error()
   }
 }

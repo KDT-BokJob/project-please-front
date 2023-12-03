@@ -6,14 +6,13 @@ export async function GET(request: NextRequest, { params }: { params: { careerId
     // 경력 상세 조회
     const careerRes = await fetch(`http://kdt-please.store/careers/${careerId}`, {
       headers: {
+        'Content-Type': 'application/json',
         Accept: 'application/json',
       },
     })
     const careerData = await careerRes.json()
-    console.log(careerData)
-    return NextResponse.json({ data: careerData, status: 'no' })
+    return NextResponse.json({ data: careerData })
   } catch (error) {
-    console.log('??????????', error)
     return NextResponse.error()
   }
 }

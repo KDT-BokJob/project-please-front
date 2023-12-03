@@ -6,14 +6,13 @@ export async function GET(request: NextRequest, { params }: { params: { companyI
     // 기업 조회
     const companyRes = await fetch(`http://kdt-please.store/company/${companyId}`, {
       headers: {
+        'Content-Type': 'application/json',
         Accept: 'application/json',
       },
     })
     const companyData = await companyRes.json()
-    console.log(companyData)
-    return NextResponse.json({ data: companyData, status: 'no' })
+    return NextResponse.json({ data: companyData })
   } catch (error) {
-    console.log('??????????', error)
     return NextResponse.error()
   }
 }

@@ -10,10 +10,8 @@ export async function GET(request: NextRequest, { params }: { params: { keyword:
       },
     })
     const searchRecruitData = await searchRecruitRes.json()
-    console.log(searchRecruitData)
-    return NextResponse.json({ data: searchRecruitData, status: 'no' })
+    return NextResponse.json({ data: searchRecruitData })
   } catch (error) {
-    console.log('??????????', error)
     return NextResponse.error()
   }
 }

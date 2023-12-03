@@ -6,11 +6,12 @@ export async function GET(request: NextRequest, { params }: { params: { userId: 
     // 이력서 상세 조회
     const resumeDraftRes = await fetch(`http://kdt-please.store/resumes/draft/${userId}`, {
       headers: {
+        'Content-Type': 'application/json',
         Accept: 'application/json',
       },
     })
     const resumeDraftData = await resumeDraftRes.json()
-    return NextResponse.json({ data: resumeDraftData, status: 'no' })
+    return NextResponse.json({ data: resumeDraftData })
   } catch (error) {
     return NextResponse.error()
   }

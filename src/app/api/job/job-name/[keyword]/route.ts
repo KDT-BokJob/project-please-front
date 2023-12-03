@@ -6,14 +6,13 @@ export async function GET(request: NextRequest, { params }: { params: { keyword:
     // 특정 비자로 취업할 수 있는 업종 리스트 조회 - 최대 5개
     const visaToJobRes = await fetch(`http://kdt-please.store/job/jobName/${keyword}`, {
       headers: {
+        'Content-Type': 'application/json',
         Accept: 'application/json',
       },
     })
     const visaToJobData = await visaToJobRes.json()
-    console.log(visaToJobData)
-    return NextResponse.json({ data: visaToJobData, status: 'no' })
+    return NextResponse.json({ data: visaToJobData })
   } catch (error) {
-    console.log('??????????', error)
     return NextResponse.error()
   }
 }

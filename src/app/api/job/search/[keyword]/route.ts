@@ -6,14 +6,13 @@ export async function GET(request: NextRequest, { params }: { params: { keyword:
     // 업종명 검색 - ex) 서비스
     const searchJobRes = await fetch(`http://kdt-please.store/job/search/${keyword}`, {
       headers: {
+        'Content-Type': 'application/json',
         Accept: 'application/json',
       },
     })
     const searchJobData = await searchJobRes.json()
-    console.log(searchJobData)
-    return NextResponse.json({ data: searchJobData, status: 'no' })
+    return NextResponse.json({ data: searchJobData })
   } catch (error) {
-    console.log('??????????', error)
     return NextResponse.error()
   }
 }

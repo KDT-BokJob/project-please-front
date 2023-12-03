@@ -6,14 +6,13 @@ export async function GET(request: NextRequest, { params }: { params: { recruitI
     // 공고 조회
     const recruitRes = await fetch(`http://kdt-please.store/recruit/${recruitId}`, {
       headers: {
+        'Content-Type': 'application/json',
         Accept: 'application/json',
       },
     })
     const recruitData = await recruitRes.json()
-    console.log(recruitData)
-    return NextResponse.json({ data: recruitData, status: 'no' })
+    return NextResponse.json({ data: recruitData })
   } catch (error) {
-    console.log('??????????', error)
     return NextResponse.error()
   }
 }
