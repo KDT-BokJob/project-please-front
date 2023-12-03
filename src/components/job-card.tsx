@@ -14,25 +14,27 @@ export default function JobCard({ recruit, children }: { recruit: any; children?
       </span>
       <span className="flex gap-2">
         <BriefcaseIcon size="18" />
-        <p className="text-xs ">{recruit.work_type}</p>
+        <p className="text-xs ">{recruit.jobName}</p>
       </span>
       <span className="flex gap-2">
         <KRWIcon size="18" />
-        <p className="text-xs ">{recruit.salary.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} / month</p>
+        <p className="text-xs ">{recruit.salary.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} / month</p>
       </span>
       <span className="flex gap-2">
         <MapIcon size="18" />
-        <p className="text-xs ">{recruit.work_location}</p>
+        <p className="text-xs ">{recruit.workLocation}</p>
       </span>
       <span className="grid w-3/4 grid-cols-3 gap-1 mt-2">
-        {recruit.visa_type.map((type: any) => (
-          <p
-            key={type}
-            className="inline-block py-1 text-xs text-center border-2 rounded-full bg-base-bright-light border-brand-secondary-light"
-          >
-            {type}
-          </p>
-        ))}
+        {String(recruit.visa)
+          .split(',')
+          .map((type: any) => (
+            <p
+              key={type}
+              className="inline-block py-1 text-xs text-center border-2 rounded-full bg-base-bright-light border-brand-secondary-light"
+            >
+              {type}
+            </p>
+          ))}
       </span>
       {children}
     </div>

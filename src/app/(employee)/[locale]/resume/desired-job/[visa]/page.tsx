@@ -69,6 +69,7 @@ export default function page({ params: { locale, visa } }: { params: { locale: s
       setCurrentLang(language)
       console.log(visa)
     }
+
     translate()
   }, [])
 

@@ -1,5 +1,6 @@
 'use client'
 import { TFunction } from 'i18next'
+import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 
 import initTranslations from '@/app/i18n'
@@ -12,81 +13,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ChevronDown, LocationtIcon, SearchIcon, VisaIcon } from '@/lib/icons'
 import location from '#/location.json'
 import Logo from '#/please-logo.svg'
-
-const jobData = [
-  {
-    recruit_id: 1,
-    company_id: 123,
-    job_code: 'a123',
-    title: '공고명1',
-    content: '세부 내용',
-    create_at: '작성 날짜',
-    expired_at: '마감일',
-    salary: '3000000',
-    work_type: '제조업',
-    work_location: 'Gwangjin-gu/dddd/dddd',
-    visa_type: ['E-7', 'E-9'],
-    work_period: '근무기간',
-    work_days_week: '주총근무일수',
-    work_start_hour: '근무시작시간',
-    work_end_hour: '근무종료시간',
-    bookmark: false,
-  },
-  {
-    recruit_id: 2,
-    company_id: 124,
-    job_code: 'a1231',
-    title: '공고명2',
-    content: '세부 내용',
-    create_at: '작성 날짜',
-    expired_at: '마감일',
-    salary: '3000000',
-    work_type: '제조업',
-    work_location: 'Gwangjin-gu/dddd/dddd',
-    visa_type: ['E-7', 'E-9'],
-    work_period: '근무기간',
-    work_days_week: '주총근무일수',
-    work_start_hour: '근무시작시간',
-    work_end_hour: '근무종료시간',
-    bookmark: true,
-  },
-  {
-    recruit_id: 3,
-    company_id: 125,
-    job_code: 'a1232',
-    title: '공고명3',
-    content: '세부 내용',
-    create_at: '작성 날짜',
-    expired_at: '마감일',
-    salary: '3000000',
-    work_type: '제조업',
-    work_location: 'Gwangjin-gu/dddd/dddd',
-    visa_type: ['E-7', 'E-9'],
-    work_period: '근무기간',
-    work_days_week: '주총근무일수',
-    work_start_hour: '근무시작시간',
-    work_end_hour: '근무종료시간',
-    bookmark: false,
-  },
-  {
-    recruit_id: 4,
-    company_id: 126,
-    job_code: 'a12334',
-    title: '공고명4',
-    content: '세부 내용',
-    create_at: '작성 날짜',
-    expired_at: '마감일',
-    salary: '3000000',
-    work_type: '제조업',
-    work_location: 'Gwangjin-gu/dddd/dddd',
-    visa_type: ['E-7', 'E-9'],
-    work_period: '근무기간',
-    work_days_week: '주총근무일수',
-    work_start_hour: '근무시작시간',
-    work_end_hour: '근무종료시간',
-    bookmark: true,
-  },
-]
 
 const visaType = [
   {
@@ -143,13 +69,32 @@ interface Jobs {
 interface Detail {
   value: string
 }
+
+interface RecruitList {
+  companyName: string
+  jobName: string
+  salary: number
+  title: string
+  visa: Array<string>
+  workLocation: string
+}
+interface SelectVisa {
+  visa: string
+  jobs: string[]
+}
+interface SelectLocation {
+  location: string
+  details: string[]
+}
 export default function JobsPage({ params: { locale } }: { params: { locale: string } }) {
-  const [selectVisa, setSelectVisa] = useState<string>()
+  const [selectVisa, setSelectVisa] = useState<SelectVisa>()
   const [selectJobs, setSelectJobs] = useState<Jobs[]>([])
-  const [selectLocation, setSelectLocation] = useState<string>()
+  const [selectLocation, setSelectLocation] = useState<SelectLocation>()
   const [selectDetail, setSelectDetail] = useState<Detail[]>([])
   let tl = useRef<TFunction<['translation', ...string[]], undefined>>()
   const [currentLang, setCurrentLang] = useState('')
+  const [job, setJob] = useState<RecruitList[]>([])
+  const router = useRouter()
 
   useEffect(() => {
     const translate = async () => {
@@ -157,7 +102,14 @@ export default function JobsPage({ params: { locale } }: { params: { locale: str
       tl.current = t
       setCurrentLang(language)
     }
+
+    const getData = async () => {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/recruit/list`)
+      const job = await res.json()
+      setJob(() => job.data)
+    }
     translate()
+    getData()
   }, [])
   if (!tl.current) return null
   return (
@@ -192,10 +144,15 @@ export default function JobsPage({ params: { locale } }: { params: { locale: str
                     <p
                       key={type.visa}
                       className={`border-b block border-base-bright-dark w-24 xs:w-16 py-3 text-center hover:text-brand-primary-normal ${
-                        selectVisa === type.visa && 'text-brand-primary-normal'
+                        selectVisa?.visa === type.visa && 'text-brand-primary-normal'
                       }`}
                       onClick={() => {
-                        setSelectVisa(() => type.visa)
+                        setSelectVisa(() => {
+                          return {
+                            visa: type.visa,
+                            jobs: [],
+                          }
+                        })
                         setSelectJobs(() => type.jobs)
                       }}
                     >
@@ -203,12 +160,28 @@ export default function JobsPage({ params: { locale } }: { params: { locale: str
                     </p>
                   ))}
                 </nav>
-                <div className="flex flex-wrap gap-4 ml-20 xs:ml-4 h-[330px] overflow-y-scroll pb-4">
+                <div className="flex flex-wrap gap-4 ml-20 ss:ml-4 xs:ml-4 h-[330px] overflow-y-scroll pb-4">
                   {selectJobs.length ? (
                     selectJobs.map((job) => (
                       <Button
                         key={job.jobCode}
-                        className={`w-32 h-12 rounded-lg text-black p-2 text-sm font-semibold justify-evenly bg-[#f5f5f5] shadow-md hover:bg-[#DDDDDD]`}
+                        className={`w-28 h-12 rounded-lg text-black p-2 text-sm font-semibold justify-evenly bg-[#f5f5f5] shadow-md hover:bg-[#DDDDDD]
+                        ${selectVisa!.jobs.includes(job.job) && 'bg-[#DDDDDD]'}`}
+                        onClick={() =>
+                          setSelectVisa(() => {
+                            if (selectVisa!.jobs.includes(job.job)) {
+                              return {
+                                visa: selectVisa!.visa,
+                                jobs: selectVisa!.jobs.filter((v) => v !== job.job),
+                              }
+                            } else {
+                              return {
+                                visa: selectVisa!.visa,
+                                jobs: [...selectVisa!.jobs, job.job],
+                              }
+                            }
+                          })
+                        }
                       >
                         {job.job}
                       </Button>
@@ -219,11 +192,19 @@ export default function JobsPage({ params: { locale } }: { params: { locale: str
                 </div>
               </div>
               <DialogFooter className="flex flex-row justify-center gap-8 pl-6 sm:justify-center">
-                <DialogClose asChild>
-                  <Button className="h-12 rounded-lg font-bold text-base border border-brand-primary-normal text-brand-primary-normal bg-base-bright-light shadow-md">
-                    {tl.current('Reset')}
-                  </Button>
-                </DialogClose>
+                <Button
+                  className="h-12 rounded-lg font-bold text-base border border-brand-primary-normal text-brand-primary-normal bg-base-bright-light shadow-md"
+                  onClick={() =>
+                    setSelectVisa(() => {
+                      return {
+                        visa: selectVisa!.visa,
+                        jobs: [],
+                      }
+                    })
+                  }
+                >
+                  {tl.current('Reset')}
+                </Button>
                 <DialogClose asChild>
                   <Button className="h-12 px-16 rounded-lg font-bold text-base text-base-bright-light bg-brand-primary-normal shadow-md">
                     {tl.current('Complete')}
@@ -251,10 +232,15 @@ export default function JobsPage({ params: { locale } }: { params: { locale: str
                     <p
                       key={local.location}
                       className={`border-b block border-base-bright-dark w-24 xs:w-16 py-3 text-center hover:text-brand-primary-normal ${
-                        selectLocation === local.location && 'text-brand-primary-normal'
+                        selectLocation?.location === local.location && 'text-brand-primary-normal'
                       }`}
                       onClick={() => {
-                        setSelectLocation(() => local.location)
+                        setSelectLocation(() => {
+                          return {
+                            location: local.location,
+                            details: [],
+                          }
+                        })
                         setSelectDetail(() => local.detail)
                       }}
                     >
@@ -264,12 +250,34 @@ export default function JobsPage({ params: { locale } }: { params: { locale: str
                 </nav>
                 <div className="flex flex-wrap content-start gap-4 ml-20 xs:ml-4 w-[273px] h-[330px] overflow-y-scroll pb-4">
                   {selectDetail.length ? (
-                    selectDetail.map((job) => (
+                    selectDetail.map((details) => (
                       <Button
-                        key={job.value}
-                        className={`w-32 h-12 rounded-lg text-black p-2 text-sm font-semibold justify-evenly bg-[#f5f5f5] shadow-md hover:bg-[#DDDDDD]`}
+                        key={details.value}
+                        className={`w-32 h-12 rounded-lg text-black p-2 text-sm font-semibold justify-evenly bg-[#f5f5f5] shadow-md hover:bg-[#DDDDDD]
+                        ${selectLocation!.details.includes(details.value) && 'bg-[#DDDDDD]'}`}
+                        onClick={() =>
+                          setSelectLocation(() => {
+                            if (selectLocation!.details.includes(details.value)) {
+                              return {
+                                location: selectLocation!.location,
+                                details:
+                                  details.value === '전체'
+                                    ? []
+                                    : selectLocation!.details.filter((v) => v !== details.value && v !== '전체'),
+                              }
+                            } else {
+                              return {
+                                location: selectLocation!.location,
+                                details:
+                                  details.value === '전체'
+                                    ? [...selectDetail.map((v) => Object.values(v)).flat()]
+                                    : [...selectLocation!.details, details.value],
+                              }
+                            }
+                          })
+                        }
                       >
-                        {tl.current && tl.current(`${job.value}`)}
+                        {tl.current && tl.current(`${details.value}`)}
                       </Button>
                     ))
                   ) : (
@@ -278,11 +286,19 @@ export default function JobsPage({ params: { locale } }: { params: { locale: str
                 </div>
               </div>
               <DialogFooter className="flex flex-row justify-center gap-8 pl-6 sm:justify-center">
-                <DialogClose asChild>
-                  <Button className="h-12 rounded-lg font-bold text-base border border-brand-primary-normal text-brand-primary-normal bg-base-bright-light shadow-md">
-                    {tl.current('Reset')}
-                  </Button>
-                </DialogClose>
+                <Button
+                  className="h-12 rounded-lg font-bold text-base border border-brand-primary-normal text-brand-primary-normal bg-base-bright-light shadow-md"
+                  onClick={() =>
+                    setSelectLocation(() => {
+                      return {
+                        location: selectLocation!.location,
+                        details: [],
+                      }
+                    })
+                  }
+                >
+                  {tl.current('Reset')}
+                </Button>
                 <DialogClose asChild>
                   <Button className="h-12 px-16 rounded-lg font-bold text-base text-base-bright-light bg-brand-primary-normal shadow-md">
                     {tl.current('Complete')}
@@ -292,7 +308,13 @@ export default function JobsPage({ params: { locale } }: { params: { locale: str
             </DialogContent>
           </Dialog>
         </div>
-        <Button className="w-full h-10 rounded-full font-bold text-base text-base-bright-light bg-[#3CB371] shadow-md">
+        <Button
+          className="w-full h-10 rounded-full font-bold text-base text-base-bright-light bg-[#3CB371] shadow-md"
+          onClick={() => {
+            console.log(selectVisa)
+            console.log(selectLocation)
+          }}
+        >
           {tl.current('Search')}
         </Button>
       </section>
@@ -303,16 +325,16 @@ export default function JobsPage({ params: { locale } }: { params: { locale: str
             <TabsTrigger value="bookmark">{tl.current('Book Marked')}</TabsTrigger>
           </TabsList>
           <TabsContent value="recentlyView">
-            <SlickSlider total={jobData.length}>
-              {jobData.map((recruit) => (
-                <div className="py-2" key={recruit.recruit_id}>
+            <SlickSlider total={job.length}>
+              {job?.map((recruit, index) => (
+                <div onClick={() => router.push(`jobs/detail/${index}`)} className="py-2" key={recruit.companyName}>
                   <JobCard recruit={recruit} />
                 </div>
               ))}
             </SlickSlider>
           </TabsContent>
           <TabsContent value="bookmark">
-            <SlickSlider total={jobData.filter((recruit) => recruit.bookmark).length}>
+            {/* <SlickSlider total={jobData.filter((recruit) => recruit.bookmark).length}>
               {jobData
                 .filter((recruit) => recruit.bookmark)
                 .map((recruit) => (
@@ -320,16 +342,16 @@ export default function JobsPage({ params: { locale } }: { params: { locale: str
                     <JobCard recruit={recruit} />
                   </div>
                 ))}
-            </SlickSlider>
+            </SlickSlider> */}
           </TabsContent>
         </Tabs>
         <div>
           <span className="flex justify-between">
             <h1 className="font-semibold text-lg text-brand-primary-light">{tl.current('E9 VISA Recommended Job')}</h1>
           </span>
-          <SlickSlider total={jobData.length}>
-            {jobData.map((recruit) => (
-              <div className="py-2" key={recruit.recruit_id}>
+          <SlickSlider total={job.length}>
+            {job.map((recruit) => (
+              <div className="py-2" key={recruit.companyName}>
                 <JobCard recruit={recruit} />
               </div>
             ))}
