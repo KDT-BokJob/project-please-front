@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 import initTranslations from '@/app/i18n'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
@@ -16,36 +17,6 @@ import {
   VisaIcon,
 } from '@/lib/icons'
 
-const jobData = {
-  recruit_id: 1,
-  company_id: 123,
-  job_code: 'a123',
-  title: 'HDC labs',
-  content: '세부 내용',
-  create_at: '작성 날짜',
-  expired_at: '1월13일',
-  salary: '3000000',
-  work_type: '제조업',
-  work_location: '서울특별시/마포구',
-  work_start_data: '근무시작일',
-  work_end_data: '근무종료일',
-  visa_type: ['E-7', 'E-9'],
-  work_period: '6개월',
-  work_days_week: '주 5일',
-  is_work_week_agreement: true,
-  work_start_hour: '근무시작시간',
-  work_end_hour: '근무종료시간',
-  is_work_time_agreement: true,
-  gender: '여성',
-  salary_type: '월급',
-  contry: '베트남',
-  recruited_number: 3,
-  is_visa_transform: true,
-  bookmark: true,
-  employee_count: 10,
-  foreign_employee_count: 3,
-}
-
 function Detail({ type, value, className }: { type: string; value: any; className?: string }) {
   return (
     <span className="flex justify-between w-full">
@@ -55,13 +26,20 @@ function Detail({ type, value, className }: { type: string; value: any; classNam
   )
 }
 
-export default async function EmpoyerJobPostingPreviewPage({ params: { locale } }: { params: { locale: string } }) {
+export default async function EmpoyerJobPostingPreviewPage({
+  params: { locale, id },
+}: {
+  params: { locale: string; id: string }
+}) {
   const { t } = await initTranslations(locale, ['jobsDetail'])
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/recruit/${id}`)
+  const jobDetail = await res.json()
+  const jobData = jobDetail.data
   return (
     <>
-      <div className="px-2 mb-2">
+      <Link href={`/${locale}/jobs`} className="px-2 mb-2">
         <ChevronLeft size="2rem" />
-      </div>
+      </Link>
       <div className="w-full mb-4">
         <AspectRatio ratio={16 / 9}>
           <Image
@@ -75,17 +53,21 @@ export default async function EmpoyerJobPostingPreviewPage({ params: { locale } 
       <div className="flex flex-col gap-8 px-6 mb-8">
         <div>
           <h1 className="text-xl font-bold">{jobData.title}</h1>
-          <Detail className="text-base-secondary-light" type="복잡한 코딩" value={`~${jobData.expired_at}`} />
+          <Detail
+            className="text-base-secondary-light"
+            type={jobData.companyResponse.name}
+            value={`~${jobData.expiredAt}`}
+          />
         </div>
         <div className="flex flex-col gap-2">
           <span className="flex gap-2">
             <BriefcaseIcon />
-            <Detail className="text-brand-primary-normal" type={t('Job Type')} value={jobData.work_type} />
+            <Detail className="text-brand-primary-normal" type={t('Job Type')} value={jobData.workType} />
           </span>
           <hr />
           <span className="flex gap-2">
             <VisaIcon />
-            <Detail className="text-brand-primary-normal" type={t('Visa')} value={jobData.visa_type.join(' ')} />
+            <Detail className="text-brand-primary-normal" type={t('Visa')} value={jobData.visa.join(', ')} />
           </span>
           <hr />
           <span className="flex gap-2">
@@ -93,7 +75,7 @@ export default async function EmpoyerJobPostingPreviewPage({ params: { locale } 
             <Detail
               className="text-brand-primary-normal"
               type={t('Change of Visa')}
-              value={jobData.is_visa_transform ? t('Possible') : t('Impossible')}
+              value={jobData.companyResponse.isVisaTransform ? t('Possible') : t('Impossible')}
             />
           </span>
           <hr />
@@ -102,7 +84,9 @@ export default async function EmpoyerJobPostingPreviewPage({ params: { locale } 
             <Detail
               className="text-brand-primary-normal"
               type={t('Foreigner ratio')}
-              value={`${(jobData.foreign_employee_count / jobData.employee_count) * 100}%`}
+              value={`${Math.floor(
+                (jobData.companyResponse.foreignEmployeeCount / jobData.companyResponse.employeeCount) * 100,
+              )}%`}
             />
           </span>
           <hr />
@@ -111,15 +95,15 @@ export default async function EmpoyerJobPostingPreviewPage({ params: { locale } 
             <Detail
               className="text-brand-primary-normal"
               type={t('Pay')}
-              value={`${jobData.salary.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}/${jobData.salary_type}`}
+              value={`${jobData.salary.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}/월급`}
             />
           </span>
         </div>
         <div className="flex flex-col gap-2">
           <h2 className="font-semibold">{t('Working Conditions')}</h2>
-          <Detail className="text-brand-primary-normal" type={t('Period')} value={jobData.work_period} />
+          <Detail className="text-brand-primary-normal" type={t('Period')} value={'6개월'} />
           <hr />
-          <Detail className="text-brand-primary-normal" type={t('days')} value={jobData.work_days_week} />
+          <Detail className="text-brand-primary-normal" type={t('days')} value={jobData.workDaysWeek} />
           {jobData.is_work_week_agreement ? (
             <p className="text-xs text-base-secondary-light text-right">*{t('To be determined')}</p>
           ) : (
@@ -129,7 +113,7 @@ export default async function EmpoyerJobPostingPreviewPage({ params: { locale } 
           <Detail
             className="text-brand-primary-normal"
             type={t('time')}
-            value={`${jobData.work_start_hour} - ${jobData.work_end_hour}`}
+            value={`${jobData.workStartHour} - ${jobData.workEndHour}`}
           />
           {jobData.is_work_time_agreement ? (
             <p className="text-xs text-base-secondary-light text-right">*{t('To be determined')}</p>
@@ -137,13 +121,13 @@ export default async function EmpoyerJobPostingPreviewPage({ params: { locale } 
             <></>
           )}
           <hr />
-          <Detail className="text-brand-primary-normal" type={t('희망 국적')} value={jobData.contry} />
+          <Detail className="text-brand-primary-normal" type={t('희망 국적')} value={'베트남'} />
           <hr />
           <Detail className="text-brand-primary-normal" type={t('Gender')} value={jobData.gender} />
           <hr />
-          <Detail className="text-brand-primary-normal" type={t('모집 인원')} value={`${jobData.recruited_number}명`} />
+          <Detail className="text-brand-primary-normal" type={t('To')} value={`${jobData.recruited_number}명`} />
           <hr />
-          <Detail className="text-brand-primary-normal" type={t('Location')} value={jobData.work_location} />
+          <Detail className="text-brand-primary-normal" type={t('Location')} value={jobData.workLocation} />
           <hr />
         </div>
         <div className="flex flex-col">
@@ -180,7 +164,7 @@ export default async function EmpoyerJobPostingPreviewPage({ params: { locale } 
               <DialogFooter className="flex flex-row justify-center sm:justify-center gap-8">
                 <DialogClose asChild>
                   <Button className=" h-12 rounded-lg font-bold text-base border border-brand-primary-normal text-brand-primary-normal bg-base-bright-light shadow-md">
-                    {t('Go Edit')}
+                    <Link href={`/${locale}/resume/profile`}>{t('Go Edit')}</Link>
                   </Button>
                 </DialogClose>
                 <DialogClose asChild>
