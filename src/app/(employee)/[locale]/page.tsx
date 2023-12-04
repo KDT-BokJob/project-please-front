@@ -1,15 +1,23 @@
 'use client'
-import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 import Please from '#/please.svg'
 import PleaseLeft from '#/please-left.svg'
 import PleaseRight from '#/please-right.svg'
 import White from '#/white-handshake.svg'
 
-export default function Landig() {
+export default function Landig({ params: { locale } }: { params: { locale: string } }) {
   let [loading, setLoading] = useState(false)
-  setTimeout(() => setLoading(true), 2500)
-
+  const router = useRouter()
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(true)
+    }, 2500)
+    setTimeout(() => {
+      router.push(`/${locale}/select/language`)
+    }, 4000)
+  }, [locale])
   return (
     <div className="w-[23.4375rem] h-screen bg-[#44CD81] px-6 py-6  flex flex-col justify-around m-auto">
       <div className="relative group">
