@@ -66,7 +66,7 @@ export default function SelectLanguage({ params: { locale } }: { params: { local
       </section>
       <Button
         className="w-full h-12 rounded-full font-bold text-base text-base-bright-light bg-[#3CB371] shadow-md"
-        onClick={() => router.push(`/${current}/select/position`)}
+        onClick={() => router.push(`/${current}/signin`)}
       >
         <Translate locale={current} ns="selectLanguage" text="startBtn" />
       </Button>
