@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+}
+
+input[type='file']::file-selector-button {
+  width: 100px;
+  height: 23px;
+  background: #44cd81;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #fff;
+}
+.dots_custom {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.dots_custom li {
+  list-style: none;
+  cursor: pointer;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin: 0 6px;
+  padding: 0;
+}
+
+.dots_custom li button {
+  border: none;
+  background: #d9d9d9;
+  color: transparent;
+  cursor: pointer;
+  display: block;
+  height: 8px;
+  width: 8px;
+  border-radius: 100%;
+  padding: 0;
+}
+
+.dots_custom li.slick-active button {
+  background-color: #3cb371;
+}
+
+/* 스크롤바 제거 chrom, edge, safari */
+*::-webkit-scrollbar {
+  display: none;
+}
