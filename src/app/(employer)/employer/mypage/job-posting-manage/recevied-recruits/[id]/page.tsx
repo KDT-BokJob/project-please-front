@@ -1,8 +1,6 @@
-import JobPostingCard from '@/components/job-posting-card'
 import RecruitCard from '@/components/recruitCard'
 import Header from '@/components/ui/Header'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import Link from 'next/link'
 
 const recruits = [
   {
@@ -45,16 +43,16 @@ function page({ params }: { params: { id: string } }) {
         <hr />
         <div className="flex flex-col mt-3">
           <TabsContent className="space-y-4" value="all">
-            {recruits.map((recruit) => {
-              return <RecruitCard recruit={recruit} />
+            {recruits.map((recruit, index) => {
+              return <RecruitCard recruit={recruit} key={index} />
               {
                 /*이력서 상세페이지 link */
               }
             })}
           </TabsContent>
           <TabsContent className="space-y-4" value="unexamined">
-            {recruits.map((recruit) => {
-              return <RecruitCard recruit={recruit} />
+            {recruits.map((recruit, index) => {
+              return <RecruitCard recruit={recruit} key={index} />
               {
                 /*이력서 상세페이지 link */
               }

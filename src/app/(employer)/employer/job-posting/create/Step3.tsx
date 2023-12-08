@@ -1,14 +1,15 @@
 'use client'
-import React, { useRef } from 'react'
-import * as z from 'zod'
-import { jobPostingFormSchema3 } from '@/lib/zod-schema/jop-posting'
 import { zodResolver } from '@hookform/resolvers/zod'
+import React, { useRef } from 'react'
 import { useForm } from 'react-hook-form'
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import { Textarea } from '@/components/ui/textarea'
+import * as z from 'zod'
+
 import { Button } from '@/components/ui/button'
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
 import { cn } from '@/lib/utils'
+import { jobPostingFormSchema3 } from '@/lib/zod-schema/jop-posting'
 
 const formSchema = jobPostingFormSchema3
 
@@ -66,7 +67,7 @@ function Step3({ ...props }) {
               </FormItem>
             )}
           />
-          <Button onClick={() => props.setFormStep(2)} variant={'outline'} className="w-2/6">
+          <Button onClick={() => props.setFormState(2)} variant={'outline'} className="w-2/6 mr-2">
             이전
           </Button>
           <Button className="w-3/5" type="submit" size="lg">

@@ -53,11 +53,11 @@ export default function SlickSlider({
       {options?.dots ? (
         // 마지막 공고에 도달하면 Reload 아이콘, 아니면 ArrowDown 아이콘 노출
         count !== total ? (
-          <div className="animate-bounce m-auto fixed bottom-16 right-1/2 cursor-pointer" onClick={next}>
+          <div className="fixed m-auto cursor-pointer animate-bounce bottom-16 right-1/2" onClick={next}>
             <ChevronDown size="20" />
           </div>
         ) : (
-          <div className="m-auto fixed bottom-16 right-1/2 cursor-pointer">
+          <div className="fixed m-auto cursor-pointer bottom-16 right-1/2">
             <ReloadIcon size="20" />
           </div>
         )

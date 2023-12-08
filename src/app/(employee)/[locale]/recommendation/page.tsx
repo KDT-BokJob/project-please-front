@@ -1,7 +1,7 @@
 'use client'
-import Header from '@/components/ui/Header'
 import JobCard from '@/components/job-card'
 import SlickSlider from '@/components/slider'
+import Header from '@/components/ui/Header'
 
 const jobData = [
   {
@@ -231,7 +231,7 @@ export default function ApplicationPage() {
   return (
     <>
       <Header headline="Recommendation" />
-      <div className="flex flex-col justify-center mt-3 px-8">
+      <div className="flex flex-col justify-center px-8 mt-3">
         <div>
           <span className="flex gap-1 font-bold text-brand-primary-normal">
             <p>#New comer</p>

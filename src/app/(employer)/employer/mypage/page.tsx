@@ -1,12 +1,12 @@
 import { JobPostingManage } from '@/app/(employer)/employer/mypage/JobPostingManage'
-import Header from '@/components/ui/Header'
+import EmployerFooter from '@/components/employer-footer'
 import { Button } from '@/components/ui/button'
-import { Card, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card } from '@/components/ui/card'
+import Header from '@/components/ui/Header'
 import { DefaultProfile } from '@/lib/icons'
 import { Camera } from '@/lib/icons'
-import { cn } from '@/lib/utils'
 import { NextIcon } from '@/lib/icons'
-import EmployerFooter from '@/components/employer-footer'
+import { cn } from '@/lib/utils'
 
 function page() {
   return (

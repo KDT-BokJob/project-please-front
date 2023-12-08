@@ -1,19 +1,20 @@
 import Image from 'next/image'
+
+import initTranslations from '@/app/i18n'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTrigger } from '@/components/ui/dialog'
 import {
-  ChevronLeft,
-  PercentIcon,
-  KRWIcon,
   BriefcaseIcon,
-  VisaIcon,
-  ReloadIcon,
   CheckCircleIcon,
   CheckedBookmarkIcon,
+  ChevronLeft,
+  KRWIcon,
   OutlineBookmarkIcon,
+  PercentIcon,
+  ReloadIcon,
+  VisaIcon,
 } from '@/lib/icons'
-import initTranslations from '@/app/i18n'
 
 const jobData = {
   recruit_id: 1,
@@ -47,7 +48,7 @@ const jobData = {
 
 function Detail({ type, value, className }: { type: string; value: any; className?: string }) {
   return (
-    <span className="flex w-full justify-between">
+    <span className="flex justify-between w-full">
       <p className={`font-semibold text-sm ${className}`}>{type}</p>
       <p className="text-sm text-base-secondary-dark">{value}</p>
     </span>
@@ -67,13 +68,13 @@ export default async function EmpoyerJobPostingPreviewPage({ params: { locale } 
             src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"
             alt="Photo by Drew Beamer"
             fill
-            className="rounded-md object-cover shadow-lg"
+            className="object-cover rounded-md shadow-lg"
           />
         </AspectRatio>
       </div>
-      <div className="px-6 flex flex-col gap-8 mb-8">
+      <div className="flex flex-col gap-8 px-6 mb-8">
         <div>
-          <h1 className="font-bold text-xl">{jobData.title}</h1>
+          <h1 className="text-xl font-bold">{jobData.title}</h1>
           <Detail className="text-base-secondary-light" type="복잡한 코딩" value={`~${jobData.expired_at}`} />
         </div>
         <div className="flex flex-col gap-2">
@@ -151,12 +152,12 @@ export default async function EmpoyerJobPostingPreviewPage({ params: { locale } 
         </div>
         <span className="flex justify-center gap-2">
           {jobData.bookmark ? (
-            <Button className="w-full h-12 rounded-full font-bold text-base border border-brand-primary-normal text-brand-primary-normal bg-base-bright-light shadow-md">
+            <Button className="w-full h-12 text-base font-bold border rounded-full shadow-md border-brand-primary-normal text-brand-primary-normal bg-base-bright-light">
               <CheckedBookmarkIcon size="18" />
               {t('Marked')}
             </Button>
           ) : (
-            <Button className="w-full h-12 rounded-full font-bold text-base border border-brand-primary-normal text-brand-primary-normal bg-base-bright-light shadow-md">
+            <Button className="w-full h-12 text-base font-bold border rounded-full shadow-md border-brand-primary-normal text-brand-primary-normal bg-base-bright-light">
               <OutlineBookmarkIcon size="18" />
               {t('Mark')}
             </Button>
