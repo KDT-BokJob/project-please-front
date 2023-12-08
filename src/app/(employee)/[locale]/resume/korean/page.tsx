@@ -1,6 +1,7 @@
 'use client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { TFunction } from 'i18next'
+import { useRouter } from 'next/navigation'
 import React, { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -11,9 +12,10 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { resumeKoreanSkillFormSchema } from '@/lib/zod-schema/resume/korean-skill'
-
+import useResumeFormStore from '@/store/client/useResumeFormStore'
 const formSchema = resumeKoreanSkillFormSchema
 
+//
 type Name = 'block1' | 'block2' | 'block3' | 'block4'
 interface TopikResult {
   data: {
@@ -85,6 +87,16 @@ const SELF_DIAGNOSIS_DATA = [
 ]
 
 export default function page({ params: { locale } }: { params: { locale: string } }) {
+  const router = useRouter()
+  const { visaStep, koreanStep, setResumeFormData } = useResumeFormStore()
+  const topikResult = useRef<TopikResult>()
+  const [isTopik, setIsTopik] = useState(false)
+  const [isNoToplk, setIsNoToplk] = useState(false)
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+  })
+
   let tl = useRef<TFunction<['translation', ...string[]], undefined>>()
   const [currentLang, setCurrentLang] = useState('')
 
@@ -96,27 +108,59 @@ export default function page({ params: { locale } }: { params: { locale: string 
     }
     translate()
   }, [])
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-  })
-  const topikResult = useRef<TopikResult>()
-  const [isTopik, setIsTopik] = useState(false)
-  const [isNoToplk, setIsNoToplk] = useState(false)
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    if (!('selfDiagnosis' in values)) {
-      const searchIssuDocNo = values.block1 + values.block2 + values.block3 + values.block4
 
-      ;('use server')
-      const getData = async (topik: string) => {
-        const res = await fetch(`http://localhost:3000/api/topik?topik=${topik}`)
-        topikResult.current = await res.json()
-        if (topikResult.current?.status === 'ok') setIsTopik(true)
-      }
-      getData(searchIssuDocNo)
-    } else {
-      console.log(values)
-    }
+  function isSelfDiagnosis(value: z.infer<typeof formSchema>): value is {
+    selfDiagnosis?: string | undefined
+  } {
+    return 'selfDiagnosis' in value
   }
+
+  function handleConfirm() {
+    const block1 = form.watch('block1')
+    const block2 = form.watch('block2')
+    const block3 = form.watch('block3')
+    const block4 = form.watch('block4')
+    const values = {
+      block1,
+      block2,
+      block3,
+      block4,
+    }
+    const searchIssuDocNo = values.block1! + values.block2! + values.block3! + values.block4!
+
+    ;('use server')
+    const getData = async (topik: string) => {
+      const res = await fetch(`http://localhost:3000/api/topik?topik=${topik}`)
+      topikResult.current = await res.json()
+      if (topikResult.current?.status === 'ok') setIsTopik(true)
+    }
+    getData(searchIssuDocNo)
+  }
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    if (!topikResult.current && !isSelfDiagnosis(values)) return
+
+    if (!isSelfDiagnosis(values)) {
+      const data = {
+        issuDt: topikResult.current?.data.DATA_LIST[0].issuDt,
+        gradNm: topikResult.current?.data.DATA_LIST[0].gradNm,
+        levelCodeNm: topikResult.current?.data.DATA_LIST[0].levelCodeNm,
+        fluency: undefined,
+      }
+      setResumeFormData({ step: 4, data })
+      // router.push('/resume/work-experience-check')
+    } else {
+      const data = {
+        issuDt: undefined,
+        gradNm: undefined,
+        levelCodeNm: undefined,
+        fluency: !values.selfDiagnosis ? parseInt(SELF_DIAGNOSIS_DATA[0].levelCode) : parseInt(values.selfDiagnosis),
+      }
+      setResumeFormData({ step: 4, data })
+    }
+    router.push(`/${locale}/resume/work-experience-check`)
+  }
+  // 7421 - 8422 - 6337 - 4896
+
   if (!tl.current) return null
 
   return (
@@ -127,7 +171,7 @@ export default function page({ params: { locale } }: { params: { locale: string 
           {/* Visa */}
           <FormLabel>{tl.current('Topik number')}</FormLabel>
           {/* <div className="flex gap-1 items-center [&>*:not(:first-child)]:before:content-['-']"> */}
-          <div className="flex items-center justify-start gap-1">
+          <div className="flex gap-1 items-center justify-start">
             {Object.keys(formSchema._def.options[0]._def.schema.shape)
               .slice(0, 4)
               .map((key, index: number) => (
@@ -151,18 +195,17 @@ export default function page({ params: { locale } }: { params: { locale: string 
                 />
               ))}
           </div>
-
           <div className="flex justify-between gap-4 btn-semi">
             <Button
               type="button"
               variant={'outline'}
-              className="w-full px-2"
+              className="px-2 w-full"
               size={'mini'}
               onClick={() => !isTopik && setIsNoToplk(!isNoToplk)}
             >
               {tl.current("Don't have Topick")}
             </Button>
-            <Button variant={'outline'} className="px-2 w-full" size={'mini'}>
+            <Button variant={'outline'} type={'button'} className="px-2 w-full" size={'mini'} onClick={handleConfirm}>
               {tl.current('Get Confirm')}
             </Button>
           </div>
@@ -233,7 +276,16 @@ export default function page({ params: { locale } }: { params: { locale: string 
       </Form>
       {/* Submit button */}
       <div className="flex justify-between gap-4 mt-auto">
-        <Button type="button" variant={'innerLine'} size={'lg'}>
+        <Button
+          type="button"
+          variant={'innerLine'}
+          size={'lg'}
+          onClick={() => {
+            !visaStep
+              ? router.push(`/${locale}/resume/visa`)
+              : router.push(`/${locale}/resume/desired-job/${visaStep.visa}`)
+          }}
+        >
           {tl.current('common:Back')}
         </Button>
         <Button type="submit" variant={'primary'} size={'lg'} onClick={form.handleSubmit(onSubmit)}>

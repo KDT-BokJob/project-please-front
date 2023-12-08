@@ -2,6 +2,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { format } from 'date-fns'
 import { TFunction } from 'i18next'
+import { useRouter } from 'next/navigation'
 import React, { useEffect, useRef, useState } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -15,12 +16,25 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { CalendarIcon, CloseIcon, PlusIcon } from '@/lib/icons'
 import { cn } from '@/lib/utils'
 import { resumeWorkExperienceFormSchema } from '@/lib/zod-schema/resume/work-experience'
+import useResumeFormStore from '@/store/client/useResumeFormStore'
 
 const formSchema = resumeWorkExperienceFormSchema
 const currentYear = new Date().getFullYear()
 export default function page({ params: { locale } }: { params: { locale: string } }) {
   let tl = useRef<TFunction<['translation', ...string[]], undefined>>()
   const [currentLang, setCurrentLang] = useState('')
+
+  const router = useRouter()
+  const { workExperienceStep, setResumeFormData } = useResumeFormStore()
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues:
+      workExperienceStep?.workexp === null ? { workExperience: [] } : { workExperience: workExperienceStep?.workexp },
+  })
+  const fieldArray = useFieldArray({
+    control: form.control,
+    name: 'workExperience',
+  })
 
   useEffect(() => {
     const translate = async () => {
@@ -30,13 +44,7 @@ export default function page({ params: { locale } }: { params: { locale: string 
     }
     translate()
   }, [])
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-  })
-  const fieldArray = useFieldArray({
-    control: form.control,
-    name: 'workExperience',
-  })
+
   const removeWorkExperience = (item: { id: string }) => {
     const idx = fieldArray.fields.map((item) => item.id).indexOf(item.id)
     idx !== -1 && fieldArray.remove(idx)
@@ -48,6 +56,12 @@ export default function page({ params: { locale } }: { params: { locale: string 
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
+    const data = {
+      readyMadeResume: workExperienceStep?.readyMadeResume,
+      workexp: values.workExperience,
+    }
+    setResumeFormData({ step: 5, data })
+    router.push(`/${locale}/resume/certificate`)
   }
 
   if (!tl.current) return null
@@ -206,7 +220,12 @@ export default function page({ params: { locale } }: { params: { locale: string 
         {tl.current('common:add_work_experience')}
       </Button>
       <div className="flex justify-between gap-4 mt-auto">
-        <Button variant={'outline'} size={'lg'}>
+        <Button
+          type={'button'}
+          variant={'outline'}
+          size={'lg'}
+          onClick={() => router.push(`/${locale}/resume/work-experience-file`)}
+        >
           {tl.current('common:Back')}
         </Button>
         <Button type="submit" variant={'primary'} size={'lg'} onClick={form.handleSubmit(onSubmit)}>

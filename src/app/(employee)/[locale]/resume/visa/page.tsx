@@ -1,6 +1,7 @@
 'use client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { TFunction } from 'i18next'
+import { useRouter } from 'next/navigation'
 import React, { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -10,10 +11,20 @@ import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { resumeVisaFormSchema } from '@/lib/zod-schema/resume/visa'
+import useResumeFormStore from '@/store/client/useResumeFormStore'
 
 const formSchema = resumeVisaFormSchema
-const VISA_LIST = ['E7', 'E9', 'D2', 'H2']
+const VISA_LIST = ['E9', 'D2', 'H2']
+
 export default function page({ params: { locale } }: { params: { locale: string } }) {
+  const router = useRouter()
+  const { visaStep, setResumeFormData } = useResumeFormStore()
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: visaStep === null ? undefined : visaStep,
+  })
+
   let tl = useRef<TFunction<['translation', ...string[]], undefined>>()
   const [currentLang, setCurrentLang] = useState('')
 
@@ -25,12 +36,12 @@ export default function page({ params: { locale } }: { params: { locale: string 
     }
     translate()
   }, [])
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-  })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values.visa)
+    console.log(values)
+    setResumeFormData({ step: 2, data: values })
+    // router.push('/resume/required-job')
+    router.push(`/${locale}/resume/desired-job/${values.visa}`)
   }
   if (!tl.current) return null
 
@@ -46,7 +57,7 @@ export default function page({ params: { locale } }: { params: { locale: string 
             render={({ field }) => (
               <FormItem className="space-y-3">
                 <FormControl>
-                  <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex flex-col gap-4">
+                  <RadioGroup onValueChange={field.onChange} className="flex flex-col gap-4">
                     {VISA_LIST.map((visaName, index: number) => (
                       <FormItem
                         key={`${visaName}_${index}`}
@@ -55,7 +66,6 @@ export default function page({ params: { locale } }: { params: { locale: string 
                         <FormControl>
                           <RadioGroupItem
                             value={`${visaName}`}
-                            // className="text-base-bright-normal checked:border-slate-200"
                             className="text-base-bright-normal border-base-bright-normal"
                           />
                         </FormControl>
@@ -72,7 +82,12 @@ export default function page({ params: { locale } }: { params: { locale: string 
           />
           {/* Submit button */}
           <div className="flex justify-between gap-4 mt-auto">
-            <Button variant={'innerLine'} size={'lg'}>
+            <Button
+              type={'button'}
+              variant={'innerLine'}
+              size={'lg'}
+              onClick={() => router.push(`/${locale}/resume/profile`)}
+            >
               {tl.current('common:Back')}
             </Button>
             <Button type="submit" variant={'primary'} size={'lg'}>

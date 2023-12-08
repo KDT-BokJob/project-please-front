@@ -1,6 +1,7 @@
 'use client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { TFunction } from 'i18next'
+import { useRouter } from 'next/navigation'
 import React, { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -25,12 +26,18 @@ export default function page({ params: { locale } }: { params: { locale: string 
     }
     translate()
   }, [])
+
+  const router = useRouter()
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
+    values.isExperienced === 'true'
+      ? router.push(`/${locale}/resume/work-experience-file`)
+      : router.push(`/${locale}/resume/certificate`)
   }
   if (!tl.current) return null
   return (
@@ -71,7 +78,7 @@ export default function page({ params: { locale } }: { params: { locale: string 
         </form>
       </Form>
       <div className="flex justify-between gap-4 mt-auto">
-        <Button variant={'innerLine'} size={'lg'}>
+        <Button variant={'innerLine'} size={'lg'} type="button" onClick={() => router.push('/resume/korean')}>
           {tl.current('common:Back')}
         </Button>
         <Button type="submit" variant={'primary'} size={'lg'} onClick={form.handleSubmit(onSubmit)}>

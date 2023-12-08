@@ -75,11 +75,14 @@ export const resumeWorkExperienceFormSchema = z.object({
       ),
   ),
 })
-
+const pdfSchema = () => {
+  return z
+    .custom<FileList>()
+    .refine((file) => {
+      return file === undefined || (file[0]?.size ?? 0) <= MAX_FILE_SIZE
+    }, `Max file size is ${FILE_SIZE_OFFSET}MB.`)
+    .optional()
+}
 export const resumeWorkExperienceFileFormSchema = z.object({
-  readyMadeResume: z
-    .any()
-    .refine((file) => file?.length == 1, 'File is required.')
-    .refine((file) => file[0]?.type === ACCEPTED_PDF_MIME_TYPES, 'Must be a PDF.')
-    .refine((file) => file[0]?.size <= MAX_FILE_SIZE, `Max file size is ${FILE_SIZE_OFFSET}MB.`),
+  readyMadeResume: pdfSchema(),
 })

@@ -1,13 +1,18 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { TFunction } from 'i18next'
+import { useRouter } from 'next/navigation'
+import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 
+import initTranslations from '@/app/i18n'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { resumeTagAboutYou } from '@/lib/zod-schema/resume/tag-about-you'
+import useResumeFormStore from '@/store/client/useResumeFormStore'
 
 const tags = [
   {
@@ -88,17 +93,34 @@ const tags = [
 
 const FormSchema = resumeTagAboutYou
 
-export default function page() {
+export default function page({ params: { locale } }: { params: { locale: string } }) {
+  const router = useRouter()
+  const { tagAboutMeStep, setResumeFormData } = useResumeFormStore()
+
+  let tl = useRef<TFunction<['translation', ...string[]], undefined>>()
+  const [currentLang, setCurrentLang] = useState('')
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
-    defaultValues: {
-      tags: [],
-    },
+    defaultValues: tagAboutMeStep === null ? undefined : { tags: tagAboutMeStep.tags },
   })
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data)
+  useEffect(() => {
+    const translate = async () => {
+      const { t, language } = await initTranslations(locale, ['resumeTagAboutYou', 'common'])
+      tl.current = t
+      setCurrentLang(language)
+    }
+    translate()
+  }, [])
+
+  function onSubmit(values: z.infer<typeof FormSchema>) {
+    console.log(values)
+    setResumeFormData({ step: 7, data: values })
+    router.push(`/${locale}/resume/cover-letter`)
   }
+
+  if (!tl.current) return null
 
   return (
     <>
@@ -144,7 +166,12 @@ export default function page() {
         </form>
       </Form>
       <div className="flex justify-between gap-4 mt-auto">
-        <Button variant={'outline'} size={'lg'}>
+        <Button
+          type={'button'}
+          variant={'outline'}
+          size={'lg'}
+          onClick={() => router.push(`/${locale}/resume/certificate`)}
+        >
           Back
         </Button>
         <Button type="submit" variant={'primary'} size={'lg'} onClick={form.handleSubmit(onSubmit)}>

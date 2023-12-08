@@ -1,6 +1,7 @@
 'use client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { TFunction } from 'i18next'
+import { useRouter } from 'next/navigation'
 import React, { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -10,6 +11,7 @@ import { Button } from '@/components/ui/button'
 import { CheckboxButton } from '@/components/ui/checkboxButton'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { resumeDesiredJobFormSchema } from '@/lib/zod-schema/resume/resume-desiredJob'
+import useResumeFormStore from '@/store/client/useResumeFormStore'
 
 const visaType = [
   {
@@ -58,19 +60,10 @@ const visaType = [
   },
 ]
 const formSchema = resumeDesiredJobFormSchema
-export default function page({ params: { locale, visa } }: { params: { locale: string; visa: string } }) {
-  let tl = useRef<TFunction<['translation', ...string[]], undefined>>()
-  const [currentLang, setCurrentLang] = useState('')
 
-  useEffect(() => {
-    const translate = async () => {
-      const { t, language } = await initTranslations(locale, ['desired', 'common'])
-      tl.current = t
-      setCurrentLang(language)
-      console.log(visa)
-    }
-    translate()
-  }, [])
+export default function page({ params: { locale, visa } }: { params: { locale: string; visa: string } }) {
+  const router = useRouter()
+  const { desiredJobStep, setResumeFormData } = useResumeFormStore()
 
   let targetJobs: any[] = []
   visaType.forEach((obj) => {
@@ -80,19 +73,34 @@ export default function page({ params: { locale, visa } }: { params: { locale: s
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      desiredjobs: [],
+      desiredjobs: desiredJobStep === null ? [] : desiredJobStep.desiserdJob,
     },
   })
 
+  let tl = useRef<TFunction<['translation', ...string[]], undefined>>()
+  const [currentLang, setCurrentLang] = useState('')
+
+  useEffect(() => {
+    const translate = async () => {
+      const { t, language } = await initTranslations(locale, ['resumeDesiredJob', 'common'])
+      tl.current = t
+      setCurrentLang(language)
+    }
+    translate()
+  }, [])
+
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
+    const data = { desiserdJob: values.desiredjobs }
+    setResumeFormData({ step: 3, data })
+    router.push(`/${locale}/resume/korean`)
   }
 
   if (!tl.current) return null
 
   return (
     <>
-      <h2 className={'title-m mx-auto mt-[135px] mb-[70px]'}>✨{tl.current('Desired_job')}</h2>
+      <h2 className={'title-m mx-auto mt-[135px] mb-[70px]'}>✨Desired job</h2>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
@@ -121,7 +129,12 @@ export default function page({ params: { locale, visa } }: { params: { locale: s
             )}
           />
           <div className="flex justify-between gap-4 mt-auto">
-            <Button variant={'innerLine'} size={'lg'}>
+            <Button
+              type="button"
+              variant={'innerLine'}
+              size={'lg'}
+              onClick={() => router.push(`/${locale}/resume/visa`)}
+            >
               {tl.current('common:Back')}
             </Button>
             <Button type="submit" variant={'primary'} size={'lg'}>

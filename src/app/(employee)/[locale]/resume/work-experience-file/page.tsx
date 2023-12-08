@@ -1,6 +1,7 @@
 'use client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { TFunction } from 'i18next'
+import { useRouter } from 'next/navigation'
 import React, { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -12,11 +13,14 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input'
 import { PlusIcon } from '@/lib/icons'
 import { resumeWorkExperienceFileFormSchema } from '@/lib/zod-schema/resume/work-experience'
-
+import useResumeFormStore from '@/store/client/useResumeFormStore'
 const formSchema = resumeWorkExperienceFileFormSchema
 
 export default function page({ params: { locale } }: { params: { locale: string } }) {
+  const router = useRouter()
   const [pdfUrl, setPdfUrl] = useState<string>('')
+  const { workExperienceStep, setResumeFormData } = useResumeFormStore()
+
   let tl = useRef<TFunction<['translation', ...string[]], undefined>>()
   const [currentLang, setCurrentLang] = useState('')
 
@@ -28,41 +32,47 @@ export default function page({ params: { locale } }: { params: { locale: string 
     }
     translate()
   }, [])
+
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
-      readyMadeResume: undefined,
+      readyMadeResume: workExperienceStep === null ? undefined : workExperienceStep.readyMadeResume,
     },
     resolver: zodResolver(formSchema),
     mode: 'onChange',
   })
+  const resumePdf = form.watch('readyMadeResume')
+  const fileRef = form.register('readyMadeResume')
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.currentTarget.files?.[0]) {
-      const file = e.currentTarget.files[0]
-      const fileReader = new FileReader()
-      fileReader.readAsDataURL(file)
-      fileReader.onloadend = (e) => {
-        setPdfUrl((prev) => e.target?.result as string)
-      }
+  useEffect(() => {
+    if (resumePdf && resumePdf.length > 0) {
+      const file = resumePdf[0]
+      const blobUrl = URL.createObjectURL(file)
+      setPdfUrl(blobUrl)
     }
-  }
-
-  const fileRef = form.register('readyMadeResume', { required: true, onChange: handleChange })
+    return () => {
+      URL.revokeObjectURL(pdfUrl)
+    }
+  }, [resumePdf])
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
+    const data = {
+      readyMadeResume: values.readyMadeResume,
+      workexp: workExperienceStep?.workexp === undefined ? [] : [...workExperienceStep?.workexp],
+    }
+    setResumeFormData({ step: 5, data })
+    router.push(`/${locale}/resume/work-experience`)
   }
   if (!tl.current) return null
+
   return (
     <>
       <h1 className={'title-s mt-[135px] mb-[20px]'}>
         {tl.current('Do you have your own resume?')}
         <br /> {tl.current('If so, just upload it')}
       </h1>
-      {form.getValues('readyMadeResume') && (
-        <span className="my-2 text-base-secondary-light">{form.getValues('readyMadeResume')[0].name}</span>
-      )}
-      <ResumePreview src={pdfUrl} />
+      {resumePdf && pdfUrl && <span className="my-2 text-base-secondary-light">{resumePdf[0].name}</span>}
+      {pdfUrl && <ResumePreview src={pdfUrl} />}
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6 my-4">
           <FormField
@@ -78,7 +88,14 @@ export default function page({ params: { locale } }: { params: { locale: string 
                   {tl.current && tl.current('add work experience')}
                 </FormLabel>
                 <FormControl>
-                  <Input id={'input-file'} className="hidden" type={'file'} accept="application/pdf" {...fileRef} />
+                  <Input
+                    id={'input-file'}
+                    className="hidden"
+                    type={'file'}
+                    accept="application/pdf"
+                    {...fileRef}
+                    defaultValue={undefined}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -87,7 +104,7 @@ export default function page({ params: { locale } }: { params: { locale: string 
         </form>
       </Form>
       <div className="flex justify-between gap-4 mt-auto">
-        <Button variant={'outline'} size={'lg'}>
+        <Button type="button" variant={'outline'} size={'lg'} onClick={() => router.push(`/${locale}/resume/korean`)}>
           {tl.current('common:Back')}
         </Button>
         <Button type="submit" variant={'primary'} size={'lg'} onClick={form.handleSubmit(onSubmit)}>

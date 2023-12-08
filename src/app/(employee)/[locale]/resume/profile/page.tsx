@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { format } from 'date-fns'
 import { TFunction } from 'i18next'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import React, { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
@@ -18,11 +19,24 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { CalendarIcon, Camera, DefaultProfile } from '@/lib/icons'
 import { cn } from '@/lib/utils'
 import { resumeProfileFormSchema } from '@/lib/zod-schema/resume/profile'
+import useResumeFormStore from '@/store/client/useResumeFormStore'
 
 const formSchema = resumeProfileFormSchema
+const currentYear = new Date().getFullYear()
 
 export default function page({ params: { locale } }: { params: { locale: string } }) {
-  const [avatarUrl, setAvatarUrl] = useState<string>('')
+  const router = useRouter()
+  const [avatarPreview, setAvatarPreview] = useState<string>('')
+  const { profileStep, setResumeFormData } = useResumeFormStore()
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: { ...profileStep },
+  })
+
+  const avatarImage = form.watch('avatar')
+  const fileRef = form.register('avatar')
+
   let tl = useRef<TFunction<['translation', ...string[]], undefined>>()
   const [currentLang, setCurrentLang] = useState('')
 
@@ -34,34 +48,25 @@ export default function page({ params: { locale } }: { params: { locale: string 
     }
     translate()
   }, [])
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      avatar: undefined,
-      firstname: '',
-      lastname: '',
-      nationality: '',
-      gender: '',
-      email: 'loginTimeEmail@gmail.com',
-    },
-    mode: 'onChange',
-  })
+
+  useEffect(() => {
+    if (avatarImage && avatarImage.length > 0) {
+      const file = avatarImage[0]
+      const blobUrl = URL.createObjectURL(file)
+      setAvatarPreview(blobUrl)
+    }
+    return () => {
+      URL.revokeObjectURL(avatarPreview)
+    }
+  }, [avatarImage])
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
+
+    setResumeFormData({ step: 1, data: values })
+    router.push(`/${locale}/resume/visa`)
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.currentTarget.files?.[0]) {
-      const file = e.currentTarget.files[0]
-      const fileReader = new FileReader()
-      fileReader.readAsDataURL(file)
-      fileReader.onloadend = (e) => {
-        setAvatarUrl((prev) => e.target?.result as string)
-      }
-    }
-  }
-  const fileRef = form.register('avatar', { required: true, onChange: handleChange })
   if (!tl.current) return null
 
   return (
@@ -69,19 +74,19 @@ export default function page({ params: { locale } }: { params: { locale: string 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <div className="relative w-32 mx-auto ">
-            {form.getValues('avatar') ? (
+            {avatarPreview ? (
               <figure
                 className={
                   'relative w-[125px] h-[125px] rounded-full overflow-hidden border border-4 border-brand-primary-normal'
                 }
               >
-                <Image src={avatarUrl} fill alt={`${form.getValues('avatar')[0].name}`} className={''} />
+                <Image src={avatarPreview} fill alt={'avatar'} className={''} />
               </figure>
             ) : (
               <DefaultProfile className="text-brand-primary-normal" size={'125px'} />
             )}
-            {form.getValues('avatar') && (
-              <span className={'text-base-secondary-normal'}>{form.getValues('avatar')[0].name}</span>
+            {avatarPreview && avatarImage && (
+              <span className={'text-base-secondary-normal'}>{avatarImage[0].name}</span>
             )}
             <FormField
               control={form.control}
@@ -90,7 +95,7 @@ export default function page({ params: { locale } }: { params: { locale: string 
                 <FormItem>
                   <FormLabel
                     htmlFor="avatar-image-file"
-                    className="absolute bottom-0 right-0 inline-block h-6 p-1 rounded-full cursor-pointer bg-base-secondary-dark"
+                    className="inline-block absolute right-0 bottom-0 bg-base-secondary-dark h-6 rounded-full p-1 cursor-pointer"
                   >
                     <Camera size={'1rem'} className={cn('text-base-bright-light ')} />
                   </FormLabel>
@@ -99,6 +104,7 @@ export default function page({ params: { locale } }: { params: { locale: string 
                       id={'avatar-image-file'}
                       type={'file'}
                       className="hidden"
+                      defaultValue={undefined}
                       accept={'image/jpeg, image/jpg, image/png, image/webp'}
                       // {...field}
                       {...fileRef}
@@ -137,20 +143,6 @@ export default function page({ params: { locale } }: { params: { locale: string 
               </FormItem>
             )}
           />
-          {/* Nationality */}
-          <FormField
-            control={form.control}
-            name="nationality"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{tl.current && tl.current('Nationality')} *</FormLabel>
-                <FormControl>
-                  <Input placeholder={tl.current && tl.current('Nationality')} {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
           {/* Gender */}
           <FormField
             control={form.control}
@@ -181,7 +173,7 @@ export default function page({ params: { locale } }: { params: { locale: string 
           {/* Calendar */}
           <FormField
             control={form.control}
-            name="birthday"
+            name={`birthday`}
             render={({ field }) => (
               <FormItem className="flex flex-col">
                 <FormLabel>{tl.current && tl.current('Date of birth')}</FormLabel>
@@ -189,9 +181,9 @@ export default function page({ params: { locale } }: { params: { locale: string 
                   <PopoverTrigger asChild>
                     <FormControl>
                       <Button
-                        variant={'outline'}
+                        variant={'innerLine'}
                         className={cn(
-                          'outline-transparent border ring-slate-200 pl-3 text-left font-normal w-full hover:outline-transparent focus-visible:ring-brand-primary-light',
+                          'pl-3 text-left font-normal w-full shadow-[inset_0_0_0_1px_#e2e8f0] bg-base-bright-light hover:bg-base-bright-normal',
                           !field.value && 'text-muted-foreground ',
                         )}
                       >
@@ -210,10 +202,22 @@ export default function page({ params: { locale } }: { params: { locale: string 
                       selected={field.value}
                       onSelect={field.onChange}
                       disabled={(date) => date > new Date() || date < new Date('1900-01-01')}
+                      captionLayout="dropdown"
+                      fromYear={1980}
+                      toYear={currentYear}
                       initialFocus
+                      labels={{
+                        labelYearDropdown: () => '',
+                        labelMonthDropdown: () => '',
+                      }}
+                      classNames={{
+                        caption_label: 'hidden',
+                        caption_dropdowns: 'flex flex-row-reverse ',
+                      }}
                     />
                   </PopoverContent>
                 </Popover>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -268,7 +272,7 @@ export default function page({ params: { locale } }: { params: { locale: string 
                 <FormControl>
                   <FormItem className="flex items-center space-x-3 space-y-0 ">
                     <FormControl>
-                      <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                      <Checkbox defaultChecked={false} checked={field.value} onCheckedChange={field.onChange} />
                     </FormControl>
                     <FormLabel>{tl.current && tl.current('Have a disability?')} *</FormLabel>
                   </FormItem>

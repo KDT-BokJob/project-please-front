@@ -2,6 +2,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { format } from 'date-fns'
 import { TFunction } from 'i18next'
+import { useRouter } from 'next/navigation'
 import React, { useEffect, useRef, useState } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -15,13 +16,18 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { CalendarIcon, CloseIcon, PlusIcon } from '@/lib/icons'
 import { cn } from '@/lib/utils'
 import { resumeCertificationFormSchema } from '@/lib/zod-schema/resume/certification'
+import useResumeFormStore from '@/store/client/useResumeFormStore'
 
 const formSchema = resumeCertificationFormSchema
 const currentYear = new Date().getFullYear()
 
 export default function page({ params: { locale } }: { params: { locale: string } }) {
+  const router = useRouter()
+  const { certificateStep, setResumeFormData } = useResumeFormStore()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues:
+      certificateStep?.certificate === null ? { certificates: [] } : { certificates: certificateStep?.certificate },
   })
   const fieldArray = useFieldArray({
     control: form.control,
@@ -42,6 +48,9 @@ export default function page({ params: { locale } }: { params: { locale: string 
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
+    const data = { certificate: values.certificates }
+    setResumeFormData({ step: 6, data })
+    router.push(`/${locale}/resume/tag-about-you`)
   }
   let tl = useRef<TFunction<['translation', ...string[]], undefined>>()
   const [currentLang, setCurrentLang] = useState('')
@@ -68,7 +77,7 @@ export default function page({ params: { locale } }: { params: { locale: string 
               <Button
                 variant={'delete'}
                 size={'mini'}
-                className="absolute top-0 right-0"
+                className="absolute right-0 top-0"
                 onClick={() => removeWorkExperience(field)}
               >
                 <CloseIcon size={'1.25rem'} />
@@ -159,7 +168,12 @@ export default function page({ params: { locale } }: { params: { locale: string 
         {tl.current('common:add_work_experience')}
       </Button>
       <div className="flex justify-between gap-4 mt-auto">
-        <Button variant={'outline'} size={'lg'}>
+        <Button
+          type="button"
+          variant={'outline'}
+          size={'lg'}
+          onClick={() => router.push(`/${locale}/resume/work-experience`)}
+        >
           {tl.current('common:Back')}
         </Button>
         <Button type="submit" variant={'primary'} size={'lg'} onClick={form.handleSubmit(onSubmit)}>

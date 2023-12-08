@@ -12,7 +12,7 @@ import { BiWon } from 'react-icons/bi'
 import { BsCheckCircle } from 'react-icons/bs'
 import { BsMap } from 'react-icons/bs'
 import { BsPencil } from 'react-icons/bs'
-import { FaBriefcase } from 'react-icons/fa'
+import { FaBriefcase, FaRegBuilding } from 'react-icons/fa'
 import { FaRegCompass } from 'react-icons/fa'
 import { FaCircle } from 'react-icons/fa'
 import { FaPercentage } from 'react-icons/fa'
@@ -23,10 +23,10 @@ import { HiOutlineBookmark } from 'react-icons/hi'
 import { HiBookmark } from 'react-icons/hi'
 import { HiChevronUpDown } from 'react-icons/hi2'
 import { HiMiniXMark } from 'react-icons/hi2'
-import { IoIosArrowDown } from 'react-icons/io'
+import { IoIosArrowDown, IoIosPhonePortrait } from 'react-icons/io'
 import { IoLanguage } from 'react-icons/io5'
 import { IoReload } from 'react-icons/io5'
-import { MdOutlineCameraAlt, MdOutlineClose } from 'react-icons/md'
+import { MdEdit, MdOutlineCameraAlt, MdOutlineClose, MdOutlineEmail } from 'react-icons/md'
 import { MdSupervisorAccount } from 'react-icons/md'
 import { PiUserCircleFill } from 'react-icons/pi'
 import { PiFactoryLight } from 'react-icons/pi'
@@ -207,4 +207,22 @@ export const PercentIcon: IconType = ({ ...props }) => {
 //글생성버튼
 export const CreateIcon: IconType = ({ ...props }) => {
   return <AiFillPlusCircle {...props} />
+}
+
+// 이메일
+export const EmailIcon: IconType = ({ ...props }) => {
+  return <MdOutlineEmail {...props} />
+}
+
+// 전화번호
+export const CallIcon: IconType = ({ ...props }) => {
+  return <IoIosPhonePortrait {...props} />
+}
+// 주소
+export const AdressIcon: IconType = ({ ...props }) => {
+  return <FaRegBuilding {...props} />
+}
+// 수정
+export const EditIcon: IconType = ({ ...props }) => {
+  return <MdEdit {...props} />
 }

@@ -8,14 +8,9 @@ const ACCEPTED_IMAGE_TYPES = ['jpeg', 'jpg', 'png', 'webp']
 
 const avatarSchema = () => {
   return z
-    .any()
-    .refine((files) => {
-      return files?.[0]?.size <= MAX_FILE_SIZE
-    }, `Max image size is 5MB.`)
-    .refine(
-      (files) => ACCEPTED_IMAGE_MIME_TYPES.includes(files?.[0]?.type),
-      'Only .jpg, .jpeg, .png and .webp formats are supported.',
-    )
+    .custom<FileList>()
+    .refine((file) => file === undefined || (file[0]?.size ?? 0) <= MAX_FILE_SIZE, `Max image size is 5MB.`)
+    .optional()
 }
 // .refine((file) => file?.length == 1, 'File is required.')
 //     .refine((file) => file[0]?.type === ACCEPTED_PDF_MIME_TYPES, 'Must be a PDF.')
@@ -62,17 +57,19 @@ const addressSchema = () => {
 }
 
 const disabilitySchema = () => {
-  return z.boolean({
-    required_error: 'disability field must be required',
-  })
+  return z
+    .boolean({
+      required_error: 'disability field must be required',
+    })
+    .default(false)
   // return z.boolean({
   //   required_error: 'disability field must be required',
   // })
 }
 export const resumeProfileFormSchema = z.object({
   avatar: avatarSchema(),
-  firstname: nameWithMinSchema(2, 'firstname'),
-  lastname: nameWithMinSchema(2, 'lastname'),
+  firstname: nameWithMinSchema(1, 'firstname'),
+  lastname: nameWithMinSchema(1, 'lastname'),
   nationality: nameWithMinSchema(2, 'nationality'),
   gender: genderSchema(),
   birthday: birthDaySchema2(),

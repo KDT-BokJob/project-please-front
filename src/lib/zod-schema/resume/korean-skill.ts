@@ -12,9 +12,10 @@ const topikBlockSchema = z
     },
     { message: '4-digit' },
   )
+  .optional()
 
 const selfDiagnosis = () => {
-  return z.string().trim().min(1)
+  return z.string().trim().min(1).optional()
 }
 
 export const resumeKoreanSkillFormSchema = z

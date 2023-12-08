@@ -1,13 +1,18 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { TFunction } from 'i18next'
+import { useRouter } from 'next/navigation'
+import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 
+import initTranslations from '@/app/i18n'
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { Textarea } from '@/components/ui/textarea'
 import { resumeCoverLetter } from '@/lib/zod-schema/resume/cover-letter'
+import useResumeFormStore from '@/store/client/useResumeFormStore'
 
 const FormSchema = resumeCoverLetter
 
@@ -36,14 +41,35 @@ const tips: TipInterface[] = [
   },
 ]
 
-export default function page() {
+export default function page({ params: { locale } }: { params: { locale: string } }) {
+  const router = useRouter()
+  const { coverLetterStep, setResumeFormData } = useResumeFormStore()
+
+  let tl = useRef<TFunction<['translation', ...string[]], undefined>>()
+  const [currentLang, setCurrentLang] = useState('')
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
+    defaultValues: coverLetterStep === null ? undefined : { coverLetter: coverLetterStep.coverLetter },
   })
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data)
+  useEffect(() => {
+    const translate = async () => {
+      const { t, language } = await initTranslations(locale, ['resumeCoverletter', 'common'])
+      tl.current = t
+      setCurrentLang(language)
+    }
+    translate()
+  }, [])
+
+  function onSubmit(values: z.infer<typeof FormSchema>) {
+    console.log(values)
+    setResumeFormData({ step: 8, data: values })
+    router.push(`/${locale}/resume/preview`)
   }
+
+  if (!tl.current) return null
+
   return (
     <>
       <h1 className="title-m mx-auto mt-[135px] mb-[70px]">📝Cover Letter</h1>
@@ -55,7 +81,7 @@ export default function page() {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Textarea placeholder="자기소개를 작성해주세요." className="h-32 resize-none " {...field} />
+                  <Textarea placeholder="자기소개를 작성해주세요." className=" resize-none h-32" {...field} />
                 </FormControl>
                 <FormDescription className="float-right">
                   {form.watch('coverLetter') ? `${form.watch('coverLetter').length}/1000` : '0/1000'}
@@ -68,7 +94,7 @@ export default function page() {
       </Form>
       <div className="flex flex-col space-y-2">
         <h2 className="text-base text-base-secondary-normal">Tip</h2>
-        <ul className="ml-6 space-y-2 list-disc">
+        <ul className="space-y-2 list-disc ml-6">
           {tips.map((tip) => (
             <li key={tip.id} className="tracking-tighter">
               <span className="label-semi text-base-secondary-dark">{`[${tip.keyword}] `}</span>
@@ -78,8 +104,13 @@ export default function page() {
         </ul>
       </div>
       <div className="flex justify-between gap-4 mt-auto">
-        <Button variant={'outline'} size={'lg'}>
-          Back
+        <Button
+          type="button"
+          variant={'outline'}
+          size={'lg'}
+          onClick={() => router.push(`/${locale}/resume/tag-about-you`)}
+        >
+          {tl.current('common:Back')}
         </Button>
         <Button type="submit" variant={'primary'} size={'lg'} onClick={form.handleSubmit(onSubmit)}>
           Submit
