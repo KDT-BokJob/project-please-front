@@ -15,6 +15,7 @@ import { resumeKoreanSkillFormSchema } from '@/lib/zod-schema/resume/korean-skil
 import useResumeFormStore from '@/store/client/useResumeFormStore'
 const formSchema = resumeKoreanSkillFormSchema
 
+//
 type Name = 'block1' | 'block2' | 'block3' | 'block4'
 interface TopikResult {
   data: {
