@@ -44,11 +44,10 @@ function page() {
     work_period: {
       from: today,
       to: addDays(today, 7),
-      //Todo: 서버로 보낼 때, 2023-08-11 형식으로 startdate, enddate나눠서
     },
     work_location: '',
     work_description: '',
-    work_description_file: null,
+    work_description_file: null, //파일형식으로 들어갈 수 있도록. 
   })
   useEffect(() => {
     console.log('formData', formData)

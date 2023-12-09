@@ -1,5 +1,6 @@
 'use client'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { format } from 'date-fns'
 import React, { useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
@@ -25,6 +26,21 @@ function Step3({ setFormData, setFormState, formData }) {
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
     setFormData((prevData: any) => ({ ...prevData, ...values }))
+
+    //work_period 서버로 보낼 때, 2023-08-11 형식으로 startdate, enddate나눠서
+    const { work_period, ...formDataWithoutWorkPeriod } = formData
+    const {
+      work_period: { from, to },
+    } = work_period
+
+    const formatDate = (date) => format(date, 'yyyy-MM-dd')
+
+    const workStartDate = formatDate(from)
+    const workEndDate = formatDate(to)
+
+    setFormData({ ...formDataWithoutWorkPeriod, workStartDate: workStartDate, workEndDate: workEndDate })
+
+    //현재 시간값은 string으로 전달됨 "02:30" api 데이터 형식과 맞추기.
     //공고등록 api 요청
   }
   return (

@@ -120,7 +120,7 @@ function Step2({ setFormData, setFormState, formData }: { setFormData: any; setF
                       <Command>
                         <CommandInput placeholder="국적 검색..." />
                         <CommandEmpty>해당 국적 없음.</CommandEmpty>
-                        <CommandGroup>
+                        <CommandGroup defaultValue={field.value}>
                           {prefered_nationality.map((item) => (
                             <CommandItem
                               value={item.label}
