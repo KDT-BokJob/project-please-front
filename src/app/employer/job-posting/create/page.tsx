@@ -47,6 +47,8 @@ function page() {
       //Todo: 서버로 보낼 때, 2023-08-11 형식으로 startdate, enddate나눠서
     },
     work_location: '',
+    work_description: '',
+    work_description_file: null,
   })
   useEffect(() => {
     console.log('formData', formData)
@@ -57,7 +59,7 @@ function page() {
       <main className="mt-20 mb-12">
         {formState === 1 && <Step1 setFormState={setFormState} formData={formData} setFormData={setFormData} />}
         {formState === 2 && <Step2 setFormState={setFormState} formData={formData} setFormData={setFormData} />}
-        {formState === 3 && <Step3 setFormState={setFormState} />}
+        {formState === 3 && <Step3 setFormState={setFormState} formData={formData} setFormData={setFormData} />}
       </main>
     </>
   )

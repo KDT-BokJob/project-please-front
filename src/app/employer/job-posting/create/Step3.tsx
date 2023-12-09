@@ -13,14 +13,19 @@ import { jobPostingFormSchema3 } from '@/lib/zod-schema/jop-posting'
 
 const formSchema = jobPostingFormSchema3
 
-function Step3({ ...props }) {
+function Step3({ setFormData, setFormState, formData }) {
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {},
+    defaultValues: {
+      work_description: formData.work_description,
+      work_description_file: formData.work_description_file,
+    },
   })
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
+    setFormData((prevData: any) => ({ ...prevData, ...values }))
+    //공고등록 api 요청
   }
   return (
     <section>
@@ -67,7 +72,7 @@ function Step3({ ...props }) {
               </FormItem>
             )}
           />
-          <Button onClick={() => props.setFormState(2)} variant={'outline'} className="w-2/6 mr-2">
+          <Button onClick={() => setFormState(2)} variant={'outline'} className="w-2/6 mr-2">
             이전
           </Button>
           <Button className="w-3/5" type="submit" size="lg">
