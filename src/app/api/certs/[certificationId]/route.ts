@@ -4,7 +4,7 @@ export async function GET(request: NextRequest, { params }: { params: { certific
   try {
     const certificationId = params.certificationId
     // 자격증 상세 조회
-    const certRes = await fetch(`http://kdt-please.store/certs/${certificationId}`, {
+    const certRes = await fetch(`http://kdt-please.store/spring/certs/${certificationId}`, {
       headers: {
         Accept: 'application/json',
       },

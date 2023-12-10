@@ -4,7 +4,7 @@ export async function GET(request: NextRequest, { params }: { params: { keyword:
   try {
     const keyword = params.keyword
     // 해당 업종에 취업할 수 있는 비자 목록 조회 - ex) 농업
-    const jobToVisaRes = await fetch(`http://kdt-please.store/job/visa/${keyword}`, {
+    const jobToVisaRes = await fetch(`http://kdt-please.store/spring/job/visa/${keyword}`, {
       headers: {
         Accept: 'application/json',
       },

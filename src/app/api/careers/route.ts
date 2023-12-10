@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server'
 export async function POST(request: Request) {
   try {
     const res = await request.json()
-    const companyRes = await fetch(`http://kdt-please.store/careers`, {
+    const companyRes = await fetch(`http://kdt-please.store/spring/careers`, {
       headers: {
         Accept: 'application/json',
       },

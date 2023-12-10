@@ -19,7 +19,7 @@ export async function POST(request: Request) {
   const workType = data.get('workType')
 
   try {
-    const res = await fetch('http://kdt-please.store/recruit', {
+    const res = await fetch('http://kdt-please.store/spring/recruit', {
       headers: { Accept: 'application/json' },
       body: JSON.stringify({
         companyId: companyId,

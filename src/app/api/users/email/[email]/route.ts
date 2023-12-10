@@ -4,7 +4,7 @@ export async function GET(request: NextRequest, { params }: { params: { email: s
   try {
     const email = params.email
     // Email로 내 정보 조회
-    const userEmailRes = await fetch(`http://kdt-please.store/users/email/${email}`, {
+    const userEmailRes = await fetch(`http://kdt-please.store/spring/users/email/${email}`, {
       headers: {
         Accept: 'application/json',
       },

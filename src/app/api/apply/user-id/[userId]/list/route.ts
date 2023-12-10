@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 export async function GET(request: NextRequest, { params }: { params: { userId: string } }) {
   try {
     const userId = params.userId
-    const applyUserListRes = await fetch(`http://kdt-please.store/apply/userId/${userId}/list?page=1`, {
+    const applyUserListRes = await fetch(`http://kdt-please.store/spring/apply/userId/${userId}/list?page=1`, {
       headers: {
         Accept: 'application/json',
       },

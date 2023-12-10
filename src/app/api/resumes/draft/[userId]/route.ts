@@ -4,7 +4,7 @@ export async function GET(request: NextRequest, { params }: { params: { userId: 
   try {
     const userId = params.userId
     // 이력서 상세 조회
-    const resumeDraftRes = await fetch(`http://kdt-please.store/resumes/draft/${userId}`, {
+    const resumeDraftRes = await fetch(`http://kdt-please.store/spring/resumes/draft/${userId}`, {
       headers: {
         Accept: 'application/json',
       },

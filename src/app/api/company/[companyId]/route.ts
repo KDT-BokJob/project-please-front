@@ -4,7 +4,7 @@ export async function GET(request: NextRequest, { params }: { params: { companyI
   try {
     const companyId = params.companyId
     // 기업 조회
-    const companyRes = await fetch(`http://kdt-please.store/company/${companyId}`, {
+    const companyRes = await fetch(`http://kdt-please.store/spring/company/${companyId}`, {
       headers: {
         Accept: 'application/json',
       },

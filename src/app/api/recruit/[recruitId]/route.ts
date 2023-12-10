@@ -4,7 +4,7 @@ export async function GET(request: NextRequest, { params }: { params: { recruitI
   try {
     const recruitId = params.recruitId
     // 공고 조회
-    const recruitRes = await fetch(`http://kdt-please.store/recruit/${recruitId}`, {
+    const recruitRes = await fetch(`http://kdt-please.store/spring/recruit/${recruitId}`, {
       headers: {
         Accept: 'application/json',
       },

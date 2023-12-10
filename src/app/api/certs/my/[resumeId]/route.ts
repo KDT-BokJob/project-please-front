@@ -4,7 +4,7 @@ export async function GET(request: NextRequest, { params }: { params: { resumeId
   try {
     const resumeId = params.resumeId
     // 내 자격증 리스트 조회
-    const certMyListRes = await fetch(`http://kdt-please.store/certs/my/${resumeId}`, {
+    const certMyListRes = await fetch(`http://kdt-please.store/spring/certs/my/${resumeId}`, {
       headers: {
         Accept: 'application/json',
       },
