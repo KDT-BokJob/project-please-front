@@ -1,4 +1,6 @@
-import Google from '#/google.svg'
+'use client'
+
+import SigninButton from '@/components/ui/SigninButton'
 import Please from '#/please.svg'
 import White from '#/white-handshake.svg'
 
@@ -9,10 +11,7 @@ export default function SigninPage() {
         <White />
         <Please />
       </div>
-      <div className="flex items-center gap-4 px-4 py-3 shadow-md cursor-pointer bg-base-bright-light rounded-xl w-72">
-        <Google />
-        <h1 className="text-lg font-semibold opacity-60">Log In with Google</h1>
-      </div>
+      <SigninButton />
     </>
   )
 }
