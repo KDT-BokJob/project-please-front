@@ -1,4 +1,6 @@
+'use client'
 import Link from 'next/link'
+import { signOut, useSession } from 'next-auth/react'
 
 import Country from '@/components/country'
 import { Button } from '@/components/ui/button'
@@ -34,6 +36,7 @@ const languageArr = [
 ]
 
 export default function MyProfile() {
+  const { data: session } = useSession()
   return (
     <>
       <Header headline="Profile Page" />
@@ -117,9 +120,15 @@ export default function MyProfile() {
         </div>
       </div>
       <div className="flex flex-col justify-end gap-4 mb-10 px-7">
-        <Button className="w-full h-12 text-base font-bold rounded-full shadow-md text-base-bright-light bg-brand-primary-normal">
-          Log out
-        </Button>
+        {session && session.user && (
+          <Button
+            onClick={() => signOut({ callbackUrl: '/' })}
+            className="w-full h-12 text-base font-bold rounded-full shadow-md cursor-pointer text-base-bright-light bg-brand-primary-normal"
+          >
+            Log out
+          </Button>
+        )}
+
         <span className="flex justify-around paragraph text-base-secondary-light">
           <p className="cursor-pointer">이용약관</p>
           <p>|</p>
