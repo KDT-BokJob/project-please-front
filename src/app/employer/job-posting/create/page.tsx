@@ -47,7 +47,7 @@ function page() {
     },
     work_location: '',
     work_description: '',
-    work_description_file: null, //파일형식으로 들어갈 수 있도록. 
+    work_description_file: '', //파일형식으로 들어갈 수 있도록.
   })
   useEffect(() => {
     console.log('formData', formData)

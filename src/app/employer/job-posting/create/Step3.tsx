@@ -14,6 +14,29 @@ import { jobPostingFormSchema3 } from '@/lib/zod-schema/jop-posting'
 
 const formSchema = jobPostingFormSchema3
 
+const form_dummy = {
+  companyId: 0,
+  content: 'string',
+  count: 0,
+  expiredAt: '2023-12-12',
+  gender: 'string',
+  isPeriodFlexible: true,
+  isTimeFlexible: true,
+  jobName: 'string',
+  preferredNationality: 'string',
+  salary: 0,
+  salaryType: 'string',
+  tags: ['string'],
+  title: 'string',
+  workDays: ['string'],
+  workEndDate: '2023-12-12',
+  workEndHour: 0,
+  workLocation: 'string',
+  workStartDate: '2023-12-12',
+  workStartHour: 0,
+  workType: 'string',
+}
+
 function Step3({ setFormData, setFormState, formData }) {
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
   const form = useForm<z.infer<typeof formSchema>>({
@@ -23,8 +46,23 @@ function Step3({ setFormData, setFormState, formData }) {
       work_description_file: formData.work_description_file,
     },
   })
+
+  const postRecruit = async (form: any) => {
+    try {
+      const res = await fetch(`http://localhost:3000/api/recruit`, {
+        method: 'POST',
+        body: JSON.stringify(form),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      const response = await res.json()
+    } catch (error) {
+      console.error('기업 공고 포스팅 에러')
+    }
+  }
+
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
     setFormData((prevData: any) => ({ ...prevData, ...values }))
 
     //work_period 서버로 보낼 때, 2023-08-11 형식으로 startdate, enddate나눠서
@@ -52,6 +90,8 @@ function Step3({ setFormData, setFormState, formData }) {
       workStartHour: workStartTime,
       workEndHour: workEndTime,
     })
+
+    postRecruit(form_dummy)
 
     //현재 시간값은 string으로 전달됨 "02:30" api 데이터 형식과 맞추기.
     //공고등록 api 요청
