@@ -4,7 +4,7 @@ export async function GET(request: NextRequest, { params }: { params: { keyword:
   try {
     const keyword = params.keyword
     // 특정 비자로 취업할 수 있는 업종 리스트 조회 - 최대 5개
-    const visaToJobRes = await fetch(`http://kdt-please.store/job/jobName/${keyword}`, {
+    const visaToJobRes = await fetch(`http://kdt-please.store/spring/job/jobName/${keyword}`, {
       headers: {
         Accept: 'application/json',
       },

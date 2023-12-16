@@ -4,7 +4,7 @@ export async function GET(request: NextRequest, { params }: { params: { keyword:
   try {
     const keyword = params.keyword
     // 업종명 검색 - ex) 서비스
-    const searchJobRes = await fetch(`http://kdt-please.store/job/search/${keyword}`, {
+    const searchJobRes = await fetch(`http://kdt-please.store/spring/job/search/${keyword}`, {
       headers: {
         Accept: 'application/json',
       },

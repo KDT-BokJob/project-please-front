@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 
-export async function GET(request: NextRequest, { params }: { params: { companyId: string } }) {
+// 경력 등록
+export async function POST(request: Request) {
   try {
-    const companyId = params.companyId
-    // 기업 조회
-    const companyRes = await fetch(`http://kdt-please.store/spring/company/${companyId}`, {
+    const res = await request.json()
+    const companyRes = await fetch(`http://kdt-please.store/spring/careers`, {
       headers: {
         Accept: 'application/json',
       },

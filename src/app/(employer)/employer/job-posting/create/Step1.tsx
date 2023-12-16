@@ -10,18 +10,6 @@ import { Input } from '@/components/ui/input'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { jobPostingFormSchema } from '@/lib/zod-schema/jop-posting'
 
-const profileData = {
-  company_id: 1234,
-  user_id: 12345,
-  name: 'please company',
-  employee_count: 6,
-  foreign_employee_count: 2,
-  phone: '010-6501-7742',
-  category: 'Web Programming',
-  email: 'seunghyo7742@naver.com',
-  address: 'Gwanak gu - bongcheon-dong',
-  profile_image: '/test_img/company_profile_img.png',
-}
 const visas = [
   {
     id: '1',
@@ -37,18 +25,30 @@ const visas = [
 
 const formSchema = jobPostingFormSchema
 
-export default function Step1({ ...props }) {
+export default function Step1({
+  setFormData,
+  setFormState,
+  formData,
+}: {
+  setFormData: any
+  setFormState: any
+  formData: any
+}) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: profileData.name,
-      phone: profileData.phone,
-      availableVisa: [],
+      name: formData.name,
+      title: formData.title,
+      phone: formData.phone,
+      gender: formData.gender,
+      availableVisa: formData.availableVisa,
+      isVisaTransform: formData.isVisaTransform,
     },
   })
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
-    props.setFormState(2)
+    setFormData((prevData: any) => ({ ...prevData, ...values }))
+    setFormState(2)
   }
 
   return (
@@ -108,7 +108,11 @@ export default function Step1({ ...props }) {
                 <FormItem className="space-y-3">
                   <FormLabel className="font-semibold ">채용 성별</FormLabel>
                   <FormControl>
-                    <RadioGroup onValueChange={field.onChange} className="flex items-center gap-4">
+                    <RadioGroup
+                      defaultValue={field.value}
+                      onValueChange={field.onChange}
+                      className="flex items-center gap-4"
+                    >
                       <FormItem className="flex items-center space-x-3 space-y-0">
                         <FormControl>
                           <RadioGroupItem value="male" />
@@ -151,11 +155,11 @@ export default function Step1({ ...props }) {
                           <FormItem key={item.id} className="flex flex-row items-start space-x-3 space-y-0">
                             <FormControl>
                               <Checkbox
-                                checked={field.value?.includes(item.id)}
+                                checked={field.value?.includes(item.label)}
                                 onCheckedChange={(checked) => {
                                   return checked
-                                    ? field.onChange([...field.value, item.id])
-                                    : field.onChange(field.value?.filter((value) => value !== item.id))
+                                    ? field.onChange([...field.value, item.label])
+                                    : field.onChange(field.value?.filter((value) => value !== item.label))
                                 }}
                               />
                             </FormControl>
@@ -174,19 +178,23 @@ export default function Step1({ ...props }) {
             control={form.control}
             name="isVisaTransform"
             render={({ field }) => (
-              <FormItem className="space-y-3">
+              <FormItem className="space-y-3 h-[100px]">
                 <FormLabel className="font-semibold ">비자 취득 및 전환 지원 여부</FormLabel>
                 <FormControl>
-                  <RadioGroup onValueChange={field.onChange} className="flex items-center gap-4">
+                  <RadioGroup
+                    defaultValue={field.value}
+                    onValueChange={field.onChange}
+                    className="flex items-center gap-4"
+                  >
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value={'possible'} />
+                        <RadioGroupItem value="true" />
                       </FormControl>
                       <FormLabel className="font-normal">지원</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value={'impossible'} />
+                        <RadioGroupItem value="false" />
                       </FormControl>
                       <FormLabel className="font-normal">미지원</FormLabel>
                     </FormItem>

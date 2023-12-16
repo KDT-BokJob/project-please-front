@@ -4,7 +4,7 @@ export async function GET(request: NextRequest, { params }: { params: { userId: 
   try {
     const userId = params.userId
     // ID로 내 정보 조회
-    const userIdRes = await fetch(`http://kdt-please.store/users/userId/${userId}`, {
+    const userIdRes = await fetch(`http://kdt-please.store/spring/users/userId/${userId}`, {
       headers: {
         Accept: 'application/json',
       },

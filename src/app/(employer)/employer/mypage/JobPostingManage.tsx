@@ -28,7 +28,7 @@ export function JobPostingManage({ className, ...props }: CardProps) {
         <p className="mt-2 font-bold">진행중인 공고</p>
         {jobPosting.map((post, index) => {
           return (
-            <div className="flex items-center p-2 mt-2 border rounded-md" key={index}>
+            <div key={index} className="flex items-center p-2 mt-2 border rounded-md">
               <p className="w-10 text-sm font-semibold text-brand-primary-normal">D-{post.deadline}</p>
               <p className="ml-4">{post.title}</p>
             </div>
@@ -37,12 +37,9 @@ export function JobPostingManage({ className, ...props }: CardProps) {
       </div>
       <div className="">
         <p className="mt-2 font-bold">최근 신청자 이력서</p>
-        {resumes.map((resume, index) => {
+        {resumes.map((resume,index) => {
           return (
-            <button
-              className="flex flex-col w-full p-2 mt-2 border rounded-md ring-1 ring-offset-1 ring-white hover:ring-offset-brand-primary-light"
-              key={index}
-            >
+            <button key={index} className="flex flex-col w-full p-2 mt-2 border rounded-md ring-1 ring-offset-1 ring-white hover:ring-offset-brand-primary-light">
               <AlarmDot className="absolute translate-x-[16.5rem] text-brand-point-light" size={'8'} />
               <p className="text-sm font-semibold text-base-primary-light">{resume.title}</p>
               <div className="flex">

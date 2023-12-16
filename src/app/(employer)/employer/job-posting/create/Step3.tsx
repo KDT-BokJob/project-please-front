@@ -1,5 +1,6 @@
 'use client'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { format } from 'date-fns'
 import React, { useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
@@ -13,14 +14,87 @@ import { jobPostingFormSchema3 } from '@/lib/zod-schema/jop-posting'
 
 const formSchema = jobPostingFormSchema3
 
-function Step3({ ...props }) {
+const form_dummy = {
+  companyId: 0,
+  content: 'string',
+  count: 0,
+  expiredAt: '2023-12-12',
+  gender: 'string',
+  isPeriodFlexible: true,
+  isTimeFlexible: true,
+  jobName: 'string',
+  preferredNationality: 'string',
+  salary: 0,
+  salaryType: 'string',
+  tags: ['string'],
+  title: 'string',
+  workDays: ['string'],
+  workEndDate: '2023-12-12',
+  workEndHour: 0,
+  workLocation: 'string',
+  workStartDate: '2023-12-12',
+  workStartHour: 0,
+  workType: 'string',
+}
+
+function Step3({ setFormData, setFormState, formData }) {
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {},
+    defaultValues: {
+      work_description: formData.work_description,
+      work_description_file: formData.work_description_file,
+    },
   })
+
+  const postRecruit = async (form: any) => {
+    try {
+      const res = await fetch(`http://localhost:3000/api/recruit`, {
+        method: 'POST',
+        body: JSON.stringify(form),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      const response = await res.json()
+    } catch (error) {
+      console.error('기업 공고 포스팅 에러')
+    }
+  }
+
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+    setFormData((prevData: any) => ({ ...prevData, ...values }))
+
+    //work_period 서버로 보낼 때, 2023-08-11 형식으로 startdate, enddate나눠서
+    const { work_period, work_start_hour, work_end_hour, ...formDataWithoutWorkPeriod } = formData
+
+    const formatDate = (date: any) => format(date, 'yyyy-MM-dd')
+    const workStartDate = formatDate(work_period.from)
+    const workEndDate = formatDate(work_period.to)
+
+    //시간 포맷 변경
+    const formatTime = (time: any) => {
+      const [hour, minutes] = time.split(':')
+      const Hour = hour.padStart(2, '0')
+      const Minute = minutes.padStart(2, '0')
+      return parseInt(Hour + Minute, 10)
+    }
+
+    const workStartTime = formatTime(work_start_hour)
+    const workEndTime = formatTime(work_end_hour)
+
+    setFormData({
+      ...formDataWithoutWorkPeriod,
+      workStartDate: workStartDate,
+      workEndDate: workEndDate,
+      workStartHour: workStartTime,
+      workEndHour: workEndTime,
+    })
+
+    postRecruit(form_dummy)
+
+    //현재 시간값은 string으로 전달됨 "02:30" api 데이터 형식과 맞추기.
+    //공고등록 api 요청
   }
   return (
     <section>
@@ -67,7 +141,7 @@ function Step3({ ...props }) {
               </FormItem>
             )}
           />
-          <Button onClick={() => props.setFormState(2)} variant={'outline'} className="w-2/6 mr-2">
+          <Button onClick={() => setFormState(2)} variant={'outline'} className="w-2/6 mr-2">
             이전
           </Button>
           <Button className="w-3/5" type="submit" size="lg">

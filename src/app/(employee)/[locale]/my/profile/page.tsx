@@ -1,8 +1,10 @@
 import Link from 'next/link'
+import { useSession } from 'next-auth/react'
+import { Button } from 'react-day-picker'
 
+import Logout from '@/app/(employee)/[locale]/my/profile/Logout'
 import initTranslations from '@/app/i18n'
 import Country from '@/components/country'
-import { Button } from '@/components/ui/button'
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTrigger } from '@/components/ui/dialog'
 import Header from '@/components/ui/Header'
 import { DefaultProfile, FilledProfile, LanguageIcon, OutlineBellIcon, OutlineBookmarkIcon } from '@/lib/icons'
@@ -36,7 +38,7 @@ const languageArr = [
 
 export default async function MyProfile({ params: { locale } }: { params: { locale: string } }) {
   const { t } = await initTranslations(locale, ['myProfile'])
-
+  const { data: session } = useSession()
   return (
     <>
       <Header headline={t('Profile Page')} />
@@ -44,7 +46,7 @@ export default async function MyProfile({ params: { locale } }: { params: { loca
         <span className="flex gap-6 ml-6 b">
           <FilledProfile size="60" color="#3CB371" />
           <div className="flex flex-col justify-center">
-            <h2 className="font-medium text-2xl text-brand-primary-dark">Tony</h2>
+            <h2 className="text-2xl font-medium text-brand-primary-dark">Tony</h2>
             <p className="label-m text-base-secondary-light">{t('Employee')}</p>
           </div>
         </span>
@@ -105,12 +107,12 @@ export default async function MyProfile({ params: { locale } }: { params: { loca
               </div>
               <DialogFooter className="flex flex-row justify-center gap-8 sm:justify-center">
                 <DialogClose asChild>
-                  <Button className="w-24 h-12 rounded-lg font-bold text-base border border-brand-primary-normal text-brand-primary-normal bg-base-bright-light shadow-md">
+                  <Button className="w-24 h-12 text-base font-bold border rounded-lg shadow-md border-brand-primary-normal text-brand-primary-normal bg-base-bright-light">
                     {t('Cancle')}
                   </Button>
                 </DialogClose>
                 <DialogClose asChild>
-                  <Button className="w-24 h-12 rounded-lg font-bold text-base text-base-bright-light bg-brand-primary-normal shadow-md">
+                  <Button className="w-24 h-12 text-base font-bold rounded-lg shadow-md text-base-bright-light bg-brand-primary-normal">
                     {t('Confirm')}
                   </Button>
                 </DialogClose>
@@ -119,10 +121,9 @@ export default async function MyProfile({ params: { locale } }: { params: { loca
           </Dialog>
         </div>
       </div>
-      <div className="flex flex-col justify-end px-7 mb-10 gap-4">
-        <Button className="w-full h-12 rounded-full font-bold text-base text-base-bright-light bg-brand-primary-normal shadow-md">
-          {t('Log out')}
-        </Button>
+      <div className="flex flex-col justify-end gap-4 mb-10 px-7">
+        {session && session.user && <Logout />}
+
         <span className="flex justify-around paragraph text-base-secondary-light">
           <p className="cursor-pointer">이용약관</p>
           <p>|</p>

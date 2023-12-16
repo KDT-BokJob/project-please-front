@@ -43,16 +43,16 @@ function page({ params }: { params: { id: string } }) {
         <hr />
         <div className="flex flex-col mt-3">
           <TabsContent className="space-y-4" value="all">
-            {recruits.map((recruit, index) => {
-              return <RecruitCard recruit={recruit} key={index} />
+            {recruits.map((recruit) => {
+              return <RecruitCard recruit={recruit} />
               {
                 /*이력서 상세페이지 link */
               }
             })}
           </TabsContent>
           <TabsContent className="space-y-4" value="unexamined">
-            {recruits.map((recruit, index) => {
-              return <RecruitCard recruit={recruit} key={index} />
+            {recruits.map((recruit) => {
+              return <RecruitCard recruit={recruit} />
               {
                 /*이력서 상세페이지 link */
               }
