@@ -30,7 +30,7 @@ function page() {
     gender: 'any',
     availableVisa: [],
     title: '',
-    isVisaTransform: false,
+    isVisaTransform: '',
     prefered_nationality: '',
     count: 0, //모집인원수
     work_type: '', //근무형태
@@ -38,8 +38,8 @@ function page() {
     salary: 9820,
     work_start_hour: '',
     work_end_hour: '',
-    is_worktime_flexible: false,
-    is_workperiod_flexible: false,
+    is_worktime_flexible: 'false',
+    is_workperiod_flexible: 'false',
     work_days: [],
     work_period: {
       from: today,
@@ -47,7 +47,7 @@ function page() {
     },
     work_location: '',
     work_description: '',
-    work_description_file: null, //파일형식으로 들어갈 수 있도록. 
+    work_description_file: '', //파일형식으로 들어갈 수 있도록.
   })
   useEffect(() => {
     console.log('formData', formData)

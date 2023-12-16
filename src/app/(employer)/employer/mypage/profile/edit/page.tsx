@@ -1,9 +1,8 @@
+import Header from '@/components/ui/Header'
 import Image from 'next/image'
-import { BiEditAlt } from 'react-icons/bi'
-
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Button } from '@/components/ui/button'
-import Header from '@/components/ui/Header'
+import { BiEditAlt } from 'react-icons/bi'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 

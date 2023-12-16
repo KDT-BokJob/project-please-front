@@ -181,16 +181,20 @@ export default function Step1({
               <FormItem className="space-y-3 h-[100px]">
                 <FormLabel className="font-semibold ">비자 취득 및 전환 지원 여부</FormLabel>
                 <FormControl>
-                  <RadioGroup defaultValue={field.value} onValueChange={field.onChange} className="flex items-center gap-4">
+                  <RadioGroup
+                    defaultValue={field.value}
+                    onValueChange={field.onChange}
+                    className="flex items-center gap-4"
+                  >
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value={true} />
+                        <RadioGroupItem value="true" />
                       </FormControl>
                       <FormLabel className="font-normal">지원</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value={false} />
+                        <RadioGroupItem value="false" />
                       </FormControl>
                       <FormLabel className="font-normal">미지원</FormLabel>
                     </FormItem>
