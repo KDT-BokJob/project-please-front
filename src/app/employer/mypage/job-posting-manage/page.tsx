@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button'
 import Header from '@/components/ui/Header'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { CreateIcon } from '@/lib/icons'
-
 const recruits = [
   {
     title: 'Frontend Developer',
@@ -85,6 +84,9 @@ function page() {
           </Button>
 
           <TabsContent className="space-y-4" value="all">
+            {recruits.map((recruit) => {
+              return <JobPostingCard key={recruit.title} recruit={recruit} activateDelete={activateDeleteBtn} />
+            })}
             {recruitList !== null &&
               recruitList.map((recruit) => {
                 console.log(recruit)
@@ -101,10 +103,8 @@ function page() {
           className="hover:text-brand-primary-light w-[23.4375rem] fixed bottom-6 right-[26rem] text-brand-primary-normal"
         />
       </Link>
-
       <main className="mt-20"></main>
     </>
   )
 }
-
 export default page

@@ -1,6 +1,8 @@
+import JobPostingCard from '@/components/job-posting-card'
 import RecruitCard from '@/components/recruitCard'
 import Header from '@/components/ui/Header'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import Link from 'next/link'
 
 const recruits = [
   {
